@@ -1,0 +1,73 @@
+<HomeTile>:
+    elevation: 5
+    size_hint_y: None
+    height: 260
+    orientation: 'vertical'
+    radius: 12
+    padding: [1,0]
+    md_bg_color: app.theme_cls.bg_light
+    title: 'Chicken'
+    discount_price: "₦2100"
+    price: "₦2200"
+    slug: ''
+    on_press:print(root.slug)
+        
+
+        # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)
+    RelativeLayout:
+        FitImage:
+            id: home_tile_image
+            source: 'assets/images/cate-1.jpg'
+            radius: [10,10,15,15]
+        MDIconButton:
+            icon: "heart-outline"
+            pos_hint: {'center_x': 0.82,'center_y': 0.82}
+            theme_text_color: "Error"
+            md_bg_color: get_color_from_hex(colors['Gray']['50'])
+        MDIconButton:
+            icon: "cart-plus"
+            pos_hint: {'center_x': 0.82,'center_y': 0.05}
+            md_bg_color: app.theme_cls.bg_normal
+    RelativeLayout:
+        padding: 15
+        size_hint_y: None
+        height: self.parent.height/3.8
+        MDLabel:
+            text: root.title
+            font_style: 'H6'
+            pos_hint: {'center_x': 0.53,'center_y': 0.83}
+        MDLabel:
+            id: price
+            text: root.price
+            font_style: 'Body2'
+            pos_hint: {'center_x': 0.54,'center_y': 0.5}
+            MDBoxLayout:
+                padding:[10,0]
+                MDFloatLayout:
+                    adaptive_height: True
+                    adaptive_width: True
+                    height: 2.5 if root.discount_price!='null' else 0
+                    width: len(price.text)*7
+                    pos_hint: {'top': .35}
+                    md_bg_color: get_color_from_hex(colors['Gray']['300'])
+        MDLabel:
+            text: root.discount_price if root.discount_price!='null' else ''
+            font_style: 'Body2'
+            theme_text_color: "Error"
+            pos_hint: {'center_x': .955,'center_y': 0.5}
+        MDLabel:
+            text: "Rating :"
+            font_style: "Overline"
+            halign: 'right'
+            pos_hint: {'center_x': 0.24,'center_y': 0.23}
+        MDLabel:
+            text: "4.5"
+            font_style: "Overline"
+            halign: 'right'
+            pos_hint: {'center_x': 0.35,'center_y': 0.23}
+        MDIconButton:
+            icon: 'star'
+            icon_size: '12sp'
+            pos_hint: {'center_x': 0.9,'center_y': 0.233}
+            theme_text_color: 'Custom'
+            icon_color: get_color_from_hex('#ffd747')

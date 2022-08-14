@@ -36,7 +36,8 @@
                                 text: "welcome to our store"
                                 font_style: "Caption"
                         MDIconButton:
-                            icon: "moon-waning-crescent"
+                            icon: "moon-waning-crescent" if app.theme_cls.theme_style == 'Light' else 'weather-sunny'
+                            on_release: app.theme_cls.theme_style = 'Dark' if self.icon == "moon-waning-crescent" else 'Light'
                             md_bg_color: app.theme_cls.bg_darkest
                     MDBoxLayout:
                         adaptive_height: True
@@ -48,9 +49,14 @@
                         md_bg_color: app.theme_cls.primary_color
                         MDTextField:
                             id: search_field
-                            mode: "round"
+                            mode: "fill"
                             icon_left: "magnify"
                             hint_text: "Search Products Categories"
+                            multiline: False
+                            font_size: '18sp'
+                            coursor_width: '1.5sp'
+                            # background_color: get_color_from_hex('#ffd747')
+                            # foreground_color: get_color_from_hex('#ffd747')
                     MDBoxLayout:
                         padding: [10,10,0,10]
                         adaptive_height: True
@@ -80,11 +86,12 @@
                             id: view_1
                             do_scroll_y: False
                             do_scroll_x: False
-                            md_bg_color: get_color_from_hex(colors['Brown']['400'])
                             RecycleGridLayout:
                                 spacing: 20
-                                padding: 5
+                                padding: 10
                                 size_hint_y: None
-                                default_size: None, 200
+                                default_size: None, None
                                 default_size_hint: .1, None
+                                height: self.minimum_height
                                 cols: 2
+                                md_bg_color: get_color_from_hex(colors['Brown']['400'])
