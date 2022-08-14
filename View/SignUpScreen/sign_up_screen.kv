@@ -37,9 +37,14 @@
             font_style: 'Body2'
             pos_hint: {'center_x': 0.54,'center_y': 0.5}
             MDBoxLayout:
-                height: 3
-                pos_hint: {'center_y': 0.5}
-                md_bg_color: get_color_from_hex(colors['Gray']['100'])
+                padding:[15,0]
+                MDFloatLayout:
+                    adaptive_height: True
+                    adaptive_width: True
+                    height: 2.5
+                    width: self.parent.width/1.8
+                    pos_hint: {'center_x': 1,'center_y': .33}
+                    md_bg_color: get_color_from_hex(colors['Gray']['400'])
         MDLabel:
             text: "₦2100"
             font_style: 'Body2'
