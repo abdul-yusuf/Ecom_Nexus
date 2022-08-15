@@ -25,6 +25,7 @@
                         spacing: 8
                         padding: [10,14,10,4]
                         md_bg_color: app.theme_cls.primary_color
+                        Avatar:
                         MDBoxLayout:
                             padding: 10
                             spacing: 10
@@ -58,10 +59,10 @@
                             # background_color: get_color_from_hex('#ffd747')
                             # foreground_color: get_color_from_hex('#ffd747')
                     MDBoxLayout:
-                        padding: [10,10,0,10]
+                        padding: [10,0,0,0]
                         adaptive_height: True
                         MDBoxLayout:
-                            height: root.height/12
+                            height: 90
                             size_hint_y: None
                             ScrollView:
                                 do_scroll_y: False
@@ -72,7 +73,10 @@
                                     adaptive_width: True
                                     spacing: 10
                                     padding: [5,0,0,0]
-                                    md_bg_color: get_color_from_hex(colors['Red']['400'])
+                                    StoryWithIcon:
+                                    StroyWithImage:
+                                    StroyWithImage:
+                                    StroyWithImage:
                     MDBoxLayout:
                         size_hint_y: None
                         height: 190
@@ -95,3 +99,62 @@
                                 height: self.minimum_height
                                 cols: 2
                                 md_bg_color: get_color_from_hex(colors['Brown']['400'])
+
+
+<Avatar@MDFloatLayout+RoundedRectangularElevationBehavior>
+    size_hint: None, None
+    size: 55,55
+    elevation:5
+    radius: self.width/2
+    md_bg_color: app.theme_cls.primary_light
+    source: 'assets/images/man-1.png'
+    FitImage:
+        size: root.size[0]-3, root.size[1]-3
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+        radius: 30
+        source: root.source
+
+<StoryWithIcon@MDBoxLayout>
+    orientation: 'vertical'
+    size_hint: None, None
+    width: 60
+    spacing: 5
+    MDIconButton:
+        icon: 'menu'
+        theme_text_color: 'Custom'
+        pos_hint: {'center_x': 0.5, 'center_y': .5}
+        text_color: [1,1,1,1]
+        md_bg_color: app.theme_cls.primary_dark
+        icon_size: '35sp'
+    MDLabel:
+        text: "Categories"
+        size: self.texture_size
+        theme_text_color: 'Primary'
+        size_hint_y: None
+        halign: 'center'
+        font_size: 12
+        bold: True
+
+<StroyWithImage@MDBoxLayout>
+    orientation: 'vertical'
+    size_hint: None, None
+    spacing: 5
+    width: avatar.width
+    source: 'assets/images/cate-5.jpg'
+    text: 'Grains'
+    Avatar: 
+        id: avatar
+        source: root.source
+        size: 65,65
+        pos_hint: {'center_x':.5}
+    MDLabel:
+        text: root.text
+        theme_text_color: 'Primary'
+        size_hint_y: None
+        size: self.texture_size
+        font_size: 12
+        shorten: True
+        shorten_from: 'right'
+        halign: 'center'
+        bold: True

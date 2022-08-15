@@ -11,6 +11,10 @@ from Model.item_detail_screen import ItemDetailScreenModel
 from Controller.item_detail_screen import ItemDetailScreenController
 
 screen = {
+    'item detail screen': {
+        'model': ItemDetailScreenModel,
+        'controller': ItemDetailScreenController,
+    },
     'home screen': {
         'model': HomeScreenModel,
         'controller': HomeScreenController,
@@ -23,8 +27,4 @@ screen = {
         'model': SignUpScreenModel,
         'controller': SignUpScreenController,
     },    
-    'item detail screen': {
-        'model': ItemDetailScreenModel,
-        'controller': ItemDetailScreenController,
-    },
 }
