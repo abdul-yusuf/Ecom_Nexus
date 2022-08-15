@@ -1,0 +1,66 @@
+#:import Animation kivy.animation.Animation
+
+<CartTile>
+    anchor: 'right'
+    SwipeLayerBoxShadow:
+        elevation:5
+        MDRelativeLayout:
+            IconRightWidget:
+                icon: 'trash-can'
+                pos_hint: {'right':1, 'center_y':.5}
+
+    MDCardSwipeFrontBox:
+        md_bg_color: app.theme_cls.bg_light
+        on_press: 
+            (Animation(\
+            x=-50,\
+            t='out_quad',\
+            d=0.02/1,\
+            )+\
+            Animation(\
+            x=0,\   
+            t='in_quad',\
+            d=0.5/1,\
+            )).start(self)
+        MDRelativeLayout:
+            ImageLeftWidget:
+                size_hint: None, None
+                width: 80
+                radius: 8
+                height: self.parent.height-6
+                source: 'assets/images/cate-1.jpg'                    
+                pos_hint: {'center_x': .12,'center_y': 0.5}
+            
+            MDBoxLayout:
+                adaptive_width:True
+                pos_hint: {'center_x': .42,'center_y': 0.5}
+                orientation: 'vertical'
+                MDLabel:
+                    text: "Chicken"
+                    shorten: True
+                    shorten_from: 'right'
+                    font_style: 'H6'
+                
+                MDLabel:
+                    text: "₦12000.00"
+                    font_style: 'Body2'
+                MDLabel:
+                    text: "₦12000.00"
+                    font_style: 'Body2'
+            MDBoxLayout:
+                adaptive_width: True
+                pos_hint: {'right': 1,'center_y': 0.5} 
+                IconRightWidget: 
+                    icon: 'minus'
+                    on_release:
+                        qty.text = str(int(qty.text)-1) if int(qty.text)>1 else qty.text
+                MDLabel:
+                    id: qty
+                    text: "1"
+                IconRightWidget:
+                    icon: 'plus'
+                    on_release:
+                        qty.text = str(int(qty.text)+1)
+
+<SwipeLayerBoxShadow@MDCardSwipeFrontBox+RoundedRectangularElevationBehavior>
+    md_bg_color: app.theme_cls.bg_darkest

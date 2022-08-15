@@ -2,9 +2,10 @@
     md_bg_color: app.theme_cls.bg_normal
     MDBoxLayout:
         orientation: 'vertical'
-        FitImage:
+        CarouselSlide:
             size_hint_y: .42
-            source: 'assets/images/cate-12.jpg'
+            source1: 'assets/images/cate-12.jpg'
+            
         ScrollView:
             size_hint_y: .58
             MDList:
@@ -15,9 +16,17 @@
                     spacing: 12
                     padding: 0,0,0,12
                     Avatar:
-                    ChipLabel:
-                        text: 'Div Farm'
-                        font_style: 'Body1'
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_height: True
+                        ChipLabel:
+                            adaptive_height: True
+                            text: 'Div Farm'
+                            font_style: 'Body1'
+                        ChipLabel: 
+                            adaptive_height: True
+                            text: 'Vendor'
+                            font_style: 'Caption'
                     ChipLabel:
                         text: '₦12000.00/kg'
                         halign: 'right'
@@ -58,6 +67,9 @@
                         text: 'Suya'
                         md_bg_color: app.theme_cls.primary_light
                         _no_ripple_effect: True
+                # ExpansionPanel:
+                    # panel_cls: MDExpansionPanelOneLine(text='Review')
+
         MDBoxLayout:
             # adaptive_height: True
             size_hint_y: None
@@ -71,7 +83,13 @@
                 rounded_button: False
                 size_hint: .8, None
                 size_hint_y: .8
-                # pos_hint: {'center_x': 0.6,'center_y': 0.1}
+                font_style: 'Button'        
+    MDIconButton:
+        icon: 'arrow-left'
+        y: root.height-(self.height+dp(12))
+        x: 6
+        md_bg_color: app.theme_cls.bg_light
+        on_release: app.onBackBtnx()
 
                     
 <ChipLabel@MDLabel>
@@ -83,14 +101,15 @@
     height: 52
     elevation: 2
     md_bg_color: app.theme_cls.bg_light
-    radius: 20
+    radius: 15
     MDLabel
         text: 'Qty'
         pos_hint: {'center_x': 0.55,'center_y': 0.5}
-    MDIconButton:
+    Btnqty:
         icon: 'minus'
         pos_hint: {'center_x': 0.45,'center_y': 0.5}
-    MDIconButton:
+        on_release: qty.text = str(int(qty.text)-1) if int(qty.text)>1 else qty.text 
+    Btnqty:
         icon: 'plus'
         pos_hint: {'center_x': 0.87,'center_y': 0.5}
         on_release: qty.text = str(int(qty.text)+1) 
@@ -104,3 +123,11 @@
         pos_hint: {'center_x': 0.67,'center_y': 0.55}
         theme_text_color: 'Primary'
         color: [0,0,0,0]
+<Btnqty@MDIconButton>
+    size_hint: .1,.1
+
+# <Content>:
+#     adaptive_height: True
+#     TwoLineIconListItem:
+#         text: 'Abdulbari'
+#         secondary_text: 'A good Product'

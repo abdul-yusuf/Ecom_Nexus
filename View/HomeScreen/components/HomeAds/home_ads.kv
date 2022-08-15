@@ -1,0 +1,43 @@
+<HomeAds>
+    orientation: 'vertical'
+    spacing: 5
+    # elevation:10
+    ShadowCarousel:
+        size_hint_y: .9
+        pos_hint: {'top':1}
+        spacing:10
+        ShadowImage:
+            source: 'assets/images/cate-6.jpg'
+        ShadowImage:
+            source: 'assets/images/cate-7.jpg'
+    CountBox2:
+
+<CountBox2@MDBoxLayout>
+    md_bg_color: get_color_from_hex('#1e1e1e')
+    size: 45,15
+    size_hint: None, None
+    current: '1'
+    total: '2'
+    radius: 8
+    padding:5
+    adaptive_width:True
+    spacing:10
+    pos_hint: {'center_x': 0.5,'center_y': 0.03}
+    Dot:
+        md_bg_color: app.theme_cls.primary_dark
+    Dot:
+
+<Dot@MDBoxLayout>
+    adaptive_width: True
+    # size_hint_x: .1
+    width:6
+    radius: self.width/2
+    md_bg_color: get_color_from_hex(colors['Gray']['100'])
+
+<ShadowImage@FitImage+RoundedRectangularElevationBehavior>
+    size_hint: .98, .92
+    radius: 15
+    elevation: 5
+    pos_hint: {'center_x': .5,'center_y': 0.5}
+
+<ShadowCarousel@MDCarousel>

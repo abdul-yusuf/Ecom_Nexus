@@ -1,0 +1,33 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<CarouselSlide>
+    source1: ''
+    source2: 'assets/images/cate-1.jpg'
+    MDCarousel:
+        id: carousel
+        loop: True
+        FitImage:
+            source: root.source1
+            radius: [0,0,20,20]
+        FitImage:
+            source: root.source2
+            radius: [0,0,20,20]
+        
+    CountBox:
+        current: str(carousel.index+1) 
+        total: str(len(carousel.slides ))
+        md_bg_color: get_color_from_hex('#1e1e1e')
+        pos_hint: {'center_x': 0.85,'center_y': 0.08}
+
+<CountBox@MDBoxLayout>
+    # md_bg_color: app.theme_cls.primary_dark
+    size: 45,20
+    size_hint: None, None
+    current: '1'
+    total: '2'
+    radius: 8
+    padding:5
+    MDLabel:
+        text: f'{root.current}/{root.total}'
+        color: get_color_from_hex('#ffffff')
+        halign: 'center'
+        # theme_text_color: 'Custom'

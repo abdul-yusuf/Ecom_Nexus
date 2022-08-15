@@ -10,7 +10,7 @@
     discount_price: "₦2100"
     price: "₦2200"
     slug: ''
-    on_press:print(root.slug)
+    on_press: app.onNextScreen('home screen', 'item detail screen', root.slug, root.title)
         
 
         # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)
@@ -24,6 +24,8 @@
             pos_hint: {'center_x': 0.82,'center_y': 0.82}
             theme_text_color: "Error"
             md_bg_color: get_color_from_hex(colors['Gray']['50'])
+            on_release: 
+                self.icon = 'heart' if self.icon == 'heart-outline' else 'heart-outline'
         MDIconButton:
             icon: "cart-plus"
             pos_hint: {'center_x': 0.82,'center_y': 0.05}

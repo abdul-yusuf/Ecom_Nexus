@@ -72,9 +72,11 @@ class Ecom_Nexus(MDApp):
         if "meta" in modifiers or "ctrl" in modifiers and text == "r":
             self.rebuild()
 
-    def onNextScreen(self,btn,next_screen):
+    def onNextScreen(self,btn,next_screen,*args):
         print(btn)
         self.list_of_prev_screens.append(btn)
+        self.screen_args = [*args]
+        print(self.screen_args)
         self.manager_screens.current = next_screen
 
     def onBackBtnx(self):

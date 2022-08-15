@@ -1,5 +1,5 @@
 from View.base_screen import BaseScreenView
-from .components import HomeTile
+from .components import HomeTile, HomeAds, CartTile, FavouriteTile
 
 class HomeScreenView(BaseScreenView):
 
@@ -17,7 +17,7 @@ class HomeScreenView(BaseScreenView):
                     {
                         "quantity": "2",
                         "title": "Cow",
-                        "price": "₦140000.00",
+                        "price": "₦14000.00",
                         "discount_price": "₦35000.00",
                         "slug": "cow",
                         "description": "Big",
@@ -53,7 +53,14 @@ class HomeScreenView(BaseScreenView):
                 ]
         self.ids.view_1.data = data
         self.ids.view_1.viewclass = HomeTile
-        return super().on_enter(*args)
+        
+        self.ids.view_2.data = data
+        self.ids.view_2.viewclass = CartTile
+
+        self.ids.view_3.data = data
+        self.ids.view_3.viewclass = FavouriteTile
+        
+        # return super().on_enter(*args)
 
     def model_is_changed(self) -> None:
         """
