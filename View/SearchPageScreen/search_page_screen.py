@@ -1,15 +1,6 @@
 from View.base_screen import BaseScreenView
-from .components import HomeTile, HomeAds, CartTile, FavouriteTile
-from kivy.core.window import Window
-class HomeScreenView(BaseScreenView):
-    def __init__(self, **kw):
-        Window.bind(on_key_down=self.onTextFieldEnterKey)
-        super().__init__(**kw)
 
-    def onTextFieldEnterKey(self, instance, key, keycode, text, modifiers):
-        if self.ids.search_field.focus and keycode==40:
-            self.app.onNextScreen('home screen', 'search page screen', self.ids.search_field.text)
-    
+class SearchPageScreenView(BaseScreenView):
     def on_enter(self, *args):
         data = [
                     {
@@ -59,16 +50,8 @@ class HomeScreenView(BaseScreenView):
                     },
                 ]
         self.ids.view_1.data = data
-        self.ids.view_1.viewclass = HomeTile
-        
-        self.ids.view_2.data = data
-        self.ids.view_2.viewclass = CartTile
-
-        self.ids.view_3.data = data
-        self.ids.view_3.viewclass = FavouriteTile
-        
-        # return super().on_enter(*args)
-
+        self.ids.search_fiel.text = self.app.screen_args[0]
+        # print(self.app.screen_args[0])
     def model_is_changed(self) -> None:
         """
         Called whenever any change has occurred in the data model.

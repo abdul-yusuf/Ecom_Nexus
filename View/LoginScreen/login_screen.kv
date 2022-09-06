@@ -1,1 +1,149 @@
 <LoginScreenView>
+    username: username
+    password: password
+    ScrollView:
+        MDFloatLayout:
+            size_hint_y: None
+            height: dp(860)
+            MDIconButton:
+                icon: 'arrow-left'
+                pos_hint: {'center_y': .95}
+                user_font_size: '30sp'
+                theme_text_color: 'Custom'
+                text_color: get_color_from_hex(colors['Blue']['800'])
+                on_release:
+                    app.onBackBtnx()
+
+
+            MDLabel:
+                text: 'W E L C O M E !'
+                font_size: '26sp'
+                pos_hint: {'center_x': .6, 'center_y': .85}
+                color: rgba(0, 0, 59, 255)
+
+            MDLabel:
+                text: 'Sign in to continue'
+                font_size: '18sp'
+                pos_hint: {'center_x': .6, 'center_y': .8}
+                color: rgba(127, 127, 127, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .63}
+                TextInput:
+                    id: username
+                    size_hint_y: .75
+                    pos_hint: {"center_x": .5, "top": .7}
+                    hint_text: "Email"
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: get_color_from_hex(colors['Blue']['50']) if app.theme_cls.theme_style == 'Dark' else rgba(0, 0, 59,255)
+                    cursor_color: get_color_from_hex(colors['Blue']['50']) if app.theme_cls.theme_style == 'Dark' else rgba(0, 0, 59,255)
+                    opposite_colors: True
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .53}
+                TextInput:
+                    id: password
+                    size_hint_y: .75
+                    pos_hint: {"center_x": .5, "top": .575}
+                    hint_text: "Password"
+                    password: True
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: get_color_from_hex(colors['Blue']['50']) if app.theme_cls.theme_style == 'Dark' else rgba(0, 0, 59,255)
+                    cursor_color: get_color_from_hex(colors['Blue']['50']) if app.theme_cls.theme_style == 'Dark' else rgba(0, 0, 59,255)
+                    opposite_colors: True
+
+                MDIconButton:
+                    icon: "eye"
+                    ripple_scale: .5
+                    pos_hint: {'center_x': 0.85,"center_y": .4}
+                    pos: password.width - self.width + dp(8), 0
+                    on_release:
+                        self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                        password.password = False if password.password is True else True
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            Button:
+                text: 'LOGIN'
+                size_hint: .66, .065
+                background_color: 0, 0, 0, 0
+                pos_hint: {'center_x': .5, 'center_y': .38}
+                on_release:
+                    # app.auth_key = ''
+                    # root.controller.on_tap_button_login(username.text, password.text)
+                canvas.before:
+                    Color:
+                        rgb: rgba(52, 0, 231, 255)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [7]
+
+            MDTextButton:
+                text: 'Forgot Password?'
+                pos_hint: {'center_x': .5, 'center_y': .31}
+                color: rgba(68, 78, 132, 255)
+                font_size: '15sp'
+
+            MDLabel:
+                text: 'or'
+                color: rgba(50, 0, 231, 255)
+                pos_hint: {'center_y': .26}
+                font_size: '15sp'
+                halign: 'center'
+
+            MDFloatLayout:
+                md_bg_color: rgba(168, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .3, 'center_y': .258}
+
+            MDFloatLayout:
+                md_bg_color: rgba(168, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .7, 'center_y': .258}
+
+            MDLabel:
+                text: 'Social Media Login'
+                font_size: '13sp'
+                halign: 'center'
+                pos_hint: {'center_y': .16}
+                color: rgba(135, 133, 193, 255)
+
+            MDBoxLayout:
+                spacing: 10
+                size_hint: .48, .07
+                pos_hint: {'center_x': .5, 'center_y': .1}
+                
+                Image:
+                    source: 'assets/icons/google.png'
+                Image:
+                    source: 'assets/icons/facebook.png'
+                Image:
+                    source: 'assets/icons/twitter.png'
+
+            MDLabel:
+                text: "Don't have an account?"
+                font_size: '11sp'
+                pos_hint: {'center_x': .68, 'center_y': .04}
+                color: rgba(135, 133, 193, 255)
+            MDTextButton:
+                text: "Sign up"
+                font_size: '11sp'
+                pos_hint: {'center_x': .72, 'center_y': .04}
+                color: rgba(135, 133, 193, 255)
+                on_release:
+                    app.onNextScreen(root.name, 'sign up screen')

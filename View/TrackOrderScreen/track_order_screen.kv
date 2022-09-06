@@ -1,0 +1,177 @@
+<TrackOrderScreenView>
+    ScrollView:
+        MDRelativeLayout:
+            size_hint_y: None
+            orientation: 'vertical'
+            height: dp(680)
+
+            MDRelativeLayout:
+                # padding: [15,25,15,15]
+                # orientation: 'vertical'
+                size_hint_y: None
+                height: dp(340)
+                pos_hint: {'top':1}
+
+                
+                BoxWithShadow:
+                    id: top_box
+                    padding: 15
+                    spacing: 20
+                    size_hint: .9, None
+                    height: dp(184)
+                    pos_hint: {'center_x': 0.5,'center_y': 0.35}
+                    MDRelativeLayout:
+                        MDLabel:
+                            text: "Order: #23421"
+                            font_style: 'Body1'
+                            adaptive_height: True
+                            pos_hint: {'center_x': 0.5,'center_y': 0.92}
+                        MDSeparator:
+                            adaptive_height: True
+                            pos_hint: {'center_x': 0.5,'center_y': 0.86}
+                        MDLabel:
+                            text: "Chiken, Beans, Garlic"
+                            font_style: 'Caption'
+                            bold: True
+                            pos_hint: {'center_x': 0.5,'center_y': 0.56}
+                        MDLabel:
+                            text: "₦12000.00"
+                            font_style: 'Body2'
+                            pos_hint: {'center_x': 0.5,'center_y': 0.36}
+                        RatingBox:
+                            size_hint_x: .6
+                            height: dp(5)
+                            pos_hint: {'center_x': 0.35,'center_y': 0.1}
+                        FitImage:
+                            pos_hint: {'center_x': 0.85,'center_y': .46}
+                            size_hint: .2,.4
+                            radius: 8
+                            source: 'assets/images/cate-5.jpg'
+                
+                BoxWithShadow:
+                    id: top_box
+                    padding: 15
+                    spacing: 20
+                    size_hint: .9, None
+                    height: dp(184)
+                    pos_hint: {'center_x': 0.5,'top': 0}
+                    MDRelativeLayout:
+                        Avatar:
+                            pos_hint: {'center_y': 0.8}
+                        ThreeLineListItem:
+                            text: 'Usman Bolaji'
+                            secondary_text: 'Picking up your Order'
+                            size_hint_x: .8
+                            pos_hint: {'center_x': 0.54,'center_y': 0.88}
+                        
+                        MDFillRoundFlatIconButton:
+                            icon: 'phone'
+                            text:'Call'
+                            rounded_button: False
+                            size_hint: .4, .35
+                            pos_hint: {'center_x': .28,'center_y': 0.28}
+
+                        MDFillRoundFlatIconButton:
+                            icon: 'text'
+                            text:'Massage'
+                            rounded_button: False
+                            size_hint: .4, .35
+                            pos_hint: {'center_x': 0.7,'center_y': 0.28}
+                            md_bg_color: app.theme_cls.primary_light
+                            color: 'Custom'
+                            # theme_text_color: 'Secondary' 
+                        
+                        RatingTag:
+                            pos_hint: {'center_x': 0.9,'center_y': 0.87}
+
+
+                    
+                MDIconButton: 
+                    icon: 'arrow-left'
+                    pos_hint: {'center_x': 0.08,'center_y': 0.85}
+                    on_release: app.onBackBtnx()
+
+                MDLabel:
+                    text: "Track Order"
+                    font_style: 'H5'
+                    halign: 'center'
+                    bold: True
+                    pos_hint: {'center_x': 0.3,'center_y': 0.85}
+            MDBoxLayout:
+                adaptive_height: True
+                id: expansion_box
+                padding: 20
+                pos_hint: {'center_x': 0.5,'top': 0.25}
+
+<RatingTag@MDRelativeLayout>:
+    text: '4.5'
+    size_hint: None, None
+    width: dp(40)
+    height: dp(25)
+    
+    StarIcon:
+        pos_hint: {'center_x': 0.0,'center_y': 0.0}
+    MDLabel:
+        # adaptive_height:True
+        text: root.text
+        pos_hint: {'center_x': 1,'center_y': 0.0}
+                
+# <Dropbox@BoxWithShadow>
+#     id: Dropbox
+#     # adaptive_height: True
+#     size_hint: .9, None
+#     height: root.height/2.4
+#     pos_hint: {'center_x': 0.5,'center_y': .4}
+#     padding: 15
+#     orientation: 'vertical'
+#     TrackPad:
+#     TrackPad:
+#         text: 'Order Confirmed'
+#         secondary_text: 'It has been confirmed'
+#         tertiary_text: 'on 28-Dec-22'
+#         # color: app.theme_cls.bg_normal
+#     TrackPad:
+#         text: 'Order Confirmed'
+#         secondary_text: 'Your order is ready for shipping'
+#         tertiary_text: 'on 28-Dec-22'
+#         color: get_color_from_hex(colors['Green']['300'])
+#     TrackPad:
+#         text: 'Out For Delivery'
+#         secondary_text: 'Your order is out fro delivery'
+#         tertiary_text: ''
+#         color: get_color_from_hex(colors['Green']['300'])
+#         seprator_height:0
+
+# <TrackPad@MDRelativeLayout>
+#     adaptive_height: True
+#     color: app.theme_cls.primary_light
+#     text: 'Order Place'
+#     secondary_text: 'We have recieved Your Order'
+#     tertiary_text: 'on 27-Dec-22'
+#     icon: 'point-of-sale'
+#     seprator_height: root.height+dp(10)
+#     MDBoxLayout:
+#         Dot:
+#             id: dot_1
+#             height: 14
+#             width: 14
+#             adaptive_height: True
+#             md_bg_color: root.color
+#             pos_hint: {'center_x': 0.0,'center_y': 0.5}
+#         ThreeLineIconListItem:
+#             adaptive_width:True
+#             text: root.text
+#             secondary_text: root.secondary_text
+#             tertiary_text: root.tertiary_text
+#             divider: None
+#             IconLeftWidget: 
+#                 icon: root.icon
+#                 md_bg_color: root.color
+#     MDSeparator:
+#         orientation: 'vertical'
+#         width: 5
+#         size_hint_y: None
+#         height: root.seprator_height
+#         pos_hint: {'center_x': 0.02,'center_y': 0.}
+#         color: root.color
+        

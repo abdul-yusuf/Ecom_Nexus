@@ -1,62 +1,171 @@
-<SignUpScreenView>
-    md_bg_color: app.theme_cls.bg_darkest
-    RelativeLayout:
+#:import images_path kivymd.images_path
+#:import colors kivymd.color_definitions.colors
+#:import get_color_from_hex kivy.utils.get_color_from_hex
 
-        MDCardSwipe:
-            size_hint:.9, None
-            pos_hint: {'center_x': 0.5,'center_y': 0.5}
-            anchor: 'right'
-            SwipeLayerBoxShadow:
-                elevation:5
-                MDRelativeLayout:
-                    IconRightWidget:
-                        icon: 'trash-can'
-                        pos_hint: {'right':1, 'center_y':.5}
 
-            MDCardSwipeFrontBox:
-                md_bg_color: app.theme_cls.bg_light
-                on_press: 
-                    (Animation(\
-                    x=-50,\
-                    t='out_quad',\
-                    d=0.02/1,\
-                    )+\
-                    Animation(\
-                    x=0,\   
-                    t='in_quad',\
-                    d=0.5/1,\
-                    )).start(self)
-                MDRelativeLayout:
-                    ImageLeftWidget:
-                        size_hint: None, None
-                        width: 80
-                        radius: 8
-                        height: self.parent.height-6
-                        source: 'assets/images/cate-1.jpg'                    
-                        pos_hint: {'center_x': .12,'center_y': 0.5}
-                    
-                    MDBoxLayout:
-                        adaptive_width:True
-                        pos_hint: {'center_x': .42,'center_y': 0.5}
-                        orientation: 'vertical'
-                        MDLabel:
-                            text: "Chicken"
-                            shorten: True
-                            shorten_from: 'right'
-                            font_style: 'H6'
-                        
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'Body2'
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'Body2'
-                    MDBoxLayout:
-                        adaptive_width: True
-                        pos_hint: {'right': 1,'center_y': 0.5} 
-                        IconRightWidget: 
-                            icon: 'heart'
-                            theme_text_color: 'Error'
-                            on_release:
-                                # qty.text = str(int(qty.text)-1) if int(qty.text)>1 else qty.text
-                        
+<SignupScreenView>
+    username: username
+    password: password
+    ScrollView:
+        MDFloatLayout:
+            size_hint_y: None
+            height: dp(860)
+            MDIconButton:
+                icon: 'arrow-left'
+                pos_hint: {'center_y': .95}
+                user_font_size: '30sp'
+                theme_text_color: 'Custom'
+                text_color: rgba(26, 24, 58, 255)
+                on_release:
+                    app.onBackBtnx()
+
+            MDLabel:
+                text: 'H I !'
+                font_size: '26sp'
+                pos_hint: {'center_x': .6, 'center_y': .85}
+                color: rgba(0, 0, 59, 255)
+
+            MDLabel:
+                text: 'Create a new account'
+                font_size: '18sp'
+                pos_hint: {'center_x': .6, 'center_y': .8}
+                color: rgba(127, 127, 127, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .75}
+                TextInput:
+                    id: username
+                    size_hint_y: .75
+                    pos_hint: {"center_x": .5, "top": .7}
+                    hint_text: "Email"
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: rgba(0, 0, 59,255)
+                    cursor_color: rgba(0, 0, 59,255)
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .65}
+                TextInput:
+                    id: fullname
+                    size_hint: .5, .75
+                    pos_hint: {"center_x": .25, "top": .575}
+                    hint_text: "Fullname"
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: rgba(0, 0, 59,255)
+                    cursor_color: rgba(0, 0, 59,255)
+
+                TextInput:
+                    id: lastname
+                    size_hint: .5, .75
+                    pos_hint: {"center_x": .7, "top": .575}
+                    hint_text: "Lastname"
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: rgba(0, 0, 59,255)
+                    cursor_color: rgba(0, 0, 59,255)
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .53}
+                TextInput:
+                    id: password
+                    size_hint_y: .75
+                    pos_hint: {"center_x": .5, "top": .575}
+                    hint_text: "Password"
+                    password: True
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: rgba(0, 0, 59,255)
+                    cursor_color: rgba(0, 0, 59,255)
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            Button:
+                text: 'SIGNUP'
+                size_hint: .66, .065
+                background_color: 0, 0, 0, 0
+                pos_hint: {'center_x': .5, 'center_y': .38}
+                on_release:
+                    on_press: root.controller.on_tap_button_signup(username.text, fullname.text, lastname.text, password.text)
+                canvas.before:
+                    Color:
+                        rgb: rgba(52, 0, 231, 255)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [7]
+
+            MDTextButton:
+                text: 'Forgot Password?'
+                pos_hint: {'center_x': .5, 'center_y': .31}
+                color: rgba(68, 78, 132, 255)
+                font_size: '15sp'
+
+            MDLabel:
+                text: 'or'
+                color: rgba(50, 0, 231, 255)
+                pos_hint: {'center_y': .26}
+                font_size: '15sp'
+                halign: 'center'
+
+            MDFloatLayout:
+                md_bg_color: rgba(168, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .3, 'center_y': .258}
+
+            MDFloatLayout:
+                md_bg_color: rgba(168, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .7, 'center_y': .258}
+
+            MDLabel:
+                text: 'Social Media Login'
+                font_size: '13sp'
+                halign: 'center'
+                pos_hint: {'center_y': .16}
+                color: rgba(135, 133, 193, 255)
+
+            MDBoxLayout:
+                spacing: 10
+                size_hint: .48, .07
+                pos_hint: {'center_x': .5, 'center_y': .1}
+                Image:
+                    source: 'assets/icons/google.png'
+                Image:
+                    source: 'assets/icons/facebook.png'
+                Image:
+                    source: 'assets/icons/twitter.png'
+
+            MDLabel:
+                text: "Have an account?"
+                font_size: '11sp'
+                pos_hint: {'center_x': .68, 'center_y': .04}
+                color: rgba(135, 133, 193, 255)
+            MDTextButton:
+                text: "Login up"
+                font_size: '11sp'
+                pos_hint: {'center_x': .72, 'center_y': .04}
+                color: rgba(135, 133, 193, 255)
+                on_release:
+                    app.onNextScreen(root.name, 'login screen')

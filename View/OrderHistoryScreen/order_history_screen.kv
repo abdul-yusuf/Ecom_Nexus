@@ -1,1 +1,113 @@
 <OrderHistoryScreenView>
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            id: top_title
+            md_bg_color: app.theme_cls.primary_color
+            adaptive_height: True
+            padding: [0,10]
+            MDLabel:
+                adaptive_height: True
+                text: "Order History"
+                font_style: 'H4'
+                halign: 'center'
+        MDTabs:
+            md_bg_color: app.theme_cls.bg_dark
+            tab_hint_x: True
+            MDTabsBase:
+                title: 'In Proces'
+                ScrollView:
+                    size_hint: None, None
+                    height: root.height-top_title.height-dp(45)
+                    width: root.width
+                    pos_hint: {'center_x': 0.0,'center_y': 0.1}
+                    do_scroll_x: False
+                    MDBoxLayout:
+                        padding: 15
+                        size_hint_y: None
+                        adaptive_height: True
+                        orientation: 'vertical'
+                        spacing:20
+                       
+                        CartBoxWithShadow:
+                        CartBoxWithShadow:
+                        CartBoxWithShadow:
+                        
+            MDTabsBase:
+                title: 'Transit'
+
+            MDTabsBase:
+                title: 'Complete'
+
+<CartBoxWithShadow@MDBoxLayout>
+    adaptive_height: True
+    BoxWithShadow:
+        orientation: 'vertical'
+        padding: 10
+        MDRelativeLayout:
+            MDLabel:
+                text: "Order: #23423"
+                font_style: 'H6'
+                pos_hint: {'center_x': 0.5,'center_y': 0.9} 
+            MDLabel:
+                text: "23-Dec-12, 12:04 PM"
+                pos_hint: {'center_x': 0.5,'center_y': 0.6} 
+                font_style: 'Caption'
+
+            MDLabel:
+                text: "Estimated Delivery on 24 Dec"
+                pos_hint: {'center_x': 0.5,'center_y': 0.35} 
+                font_style: 'Caption'
+            RatingBox:
+                size_hint_x: .4
+                pos_hint: {'center_x': .8,'center_y': 0.2}
+
+            MDFillRoundFlatButton:
+                rounded_button: False
+                text: 'Track Order'
+                pos_hint: {'center_x': 0.8,'center_y': 0.8}
+                on_release: app.onNextScreen('order history screen','track order screen')
+            CustomPaymentChip:
+                text: 'Paid'
+                width: 23
+                pos_hint: {'center_x': 0.15,'center_y': 0.08}
+
+<CustomPaymentChip@MDBoxLayout>
+    text: "Not Paid"
+    adaptive_width: True
+    size_hint:.2,.2
+    width: dp(15)
+    md_bg_color: '#66bb6a' # or '#ef5350'
+    radius: 8
+    MDLabel:
+        text: root.text
+        halign: 'center'
+        font_style: 'Caption'
+
+<RatingBox@MDBoxLayout>
+    adaptive_size: True
+    MDLabel:
+        adaptive_size: True
+        text: 'Rating'
+        font_style: 'Caption'
+        valign: 'center'
+
+    StarIcon:
+    StarIcon:
+    StarIcon:
+    StarIcon:
+        icon: 'star-half-full'
+    StarIcon:
+        icon: 'star-outline'    
+    
+<StarIcon@MDIconButton>
+    adaptive_size: True
+    size_hint: .05, .1
+    # width: 2
+    # height: 2
+    icon: 'star' # or 'star-half-full'
+    icon_size: '16sp'
+    pos_hint: {'center_x': 0.9,'center_y': 0.233}
+    theme_text_color: 'Custom'
+    icon_color: get_color_from_hex('#ffd747')
+    

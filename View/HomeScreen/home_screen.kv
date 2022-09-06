@@ -2,11 +2,12 @@
 #:import colors kivymd.color_definitions.colors
 
 <HomeScreenView>
+    md_bg_color: app.theme_cls.primary_color
     MDBottomNavigation:
         # Add a NavigationItem for each Navigation.
         MDBottomNavigationItem:
             md_bg_color: app.theme_cls.primary_color
-            name: "screen 1"
+            name: "home screen"
             text: "Home"
             icon: 'home-outline'
     
@@ -55,6 +56,7 @@
                             multiline: False
                             font_size: '18sp'
                             coursor_width: '1.5sp'
+                            on_focus: True
                             # background_color: get_color_from_hex('#ffd747')
                             # foreground_color: get_color_from_hex('#ffd747')
                     MDBoxLayout:
@@ -103,70 +105,75 @@
             name: 'Cart screen'
             icon: 'cart-outline'
             text: 'Cart'
-            MDBoxLayout:
-                padding: 20
-                spacing: 15
-                orientation: 'vertical'
-                MDLabel:
-                    text: "Cart Summary"
-                    halign: 'center'
-                    font_style: 'H5'
-                    adaptive_height:True
-                BoxWithShadow:
-                    size_hint_y: .3
+            ScrollView:
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: root.height - dp(55)
                     padding: 20
-                    pos_hint: {'top':1}
-                    MDBoxLayout:
-                        orientation: 'vertical'
-                        MDLabel:
-                            text: "Price(2)"
-                            font_style: 'Body2'
-                            halign: 'left'
-                        MDLabel:
-                            text: "Shipping"
-                            font_style: 'Body2'
-                            halign: 'left'
-                        MDSeparator:
-                        MDLabel:
-                            text: "Total"
-                            font_style: 'H6'
-                            halign: 'left'
-                    MDBoxLayout:
-                        orientation: 'vertical'
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'Body2'
-                            halign: 'right'
-                        MDLabel:
-                            text: "FREE"
-                            font_style: 'Body2'
-                            halign: 'right'
-                        MDSeparator:
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'H6'
-                            halign: 'right'
-                RecycleView:
-                    id: view_2
-                    RecycleGridLayout:
-                        cols:1
-                        spacing: 20
-                        adaptive_height: True
-                        default_size: None, None
-                        default_size_hint: .1, None
-                        padding: 5
+                    spacing: 15
+                    orientation: 'vertical'
+                    MDLabel:
+                        text: "Cart Summary"
+                        halign: 'center'
+                        font_style: 'H5'
+                        adaptive_height:True
+                    BoxWithShadow:
                         size_hint_y: None
-                        height: self.minimum_height
-                MDFillRoundFlatButton:
-                    id: checkout_btn
-                    text: 'Checkout'
-                    font_style: 'Button'
-                    font_size: 20
-                    size_hint: .9, .114
-                    rounded_button: False
-                    pos_hint: {'center_x': 0.5,'center_y': 1}
-                    on_release:
-                        app.onNextScreen(root.name, 'checkout screen')
+                        height: 160
+                        padding: 20
+                        pos_hint: {'top':1}
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            MDLabel:
+                                text: "Price(2)"
+                                font_style: 'Body2'
+                                halign: 'left'
+                            MDLabel:
+                                text: "Shipping"
+                                font_style: 'Body2'
+                                halign: 'left'
+                            MDSeparator:
+                            MDLabel:
+                                text: "Total"
+                                font_style: 'H6'
+                                halign: 'left'
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            MDLabel:
+                                text: "₦12000.00"
+                                font_style: 'Body2'
+                                halign: 'right'
+                            MDLabel:
+                                text: "FREE"
+                                font_style: 'Body2'
+                                halign: 'right'
+                            MDSeparator:
+                            MDLabel:
+                                text: "₦12000.00"
+                                font_style: 'H6'
+                                halign: 'right'
+                    RecycleView:
+                        id: view_2
+                        RecycleGridLayout:
+                            cols:1
+                            spacing: 20
+                            adaptive_height: True
+                            default_size: None, None
+                            default_size_hint: .1, None
+                            padding: 5
+                            size_hint_y: None
+                            height: self.minimum_height
+                    MDFillRoundFlatButton:
+                        id: checkout_btn
+                        text: 'Checkout'
+                        font_style: 'Button'
+                        font_size: 20
+                        size_hint: .9, .114
+                        # height: 40
+                        rounded_button: False
+                        pos_hint: {'center_x': 0.5,'center_y': 1}
+                        on_release:
+                            app.onNextScreen(root.name, 'checkout screen')
         
         MDBottomNavigationItem:
             name: 'favourites screen'
@@ -175,6 +182,7 @@
             MDBoxLayout:
                 orientation: 'vertical'
                 padding: 15
+                spacing: 20
                 MDLabel:
                     adaptive_height: True
                     text: "Wishlist"
@@ -196,9 +204,66 @@
             name: 'profile screen'
             icon: 'account-outline'
             text: 'Profile'
+            MDBoxLayout:
+                orientation: 'vertical'
+                FitImage:
+                    opacity: 0.8
+                    size_hint_y: .4
+                    source: 'assets/images/img1.jpg'
+                ScrollView:
+                    size_hint_y: .6
+                    MDList:
+                        AccountItem:
+                            text: 'My Account'
+                            on_release:
+                                app.onNextScreen(root.name, 'my account screen')
+                            IconLeftWidget:
+                                icon: 'account'
+                        AccountItem:
+                            text: 'Orders'
+                            on_release:
+                                app.onNextScreen(root.name, 'order history screen')
+                            IconLeftWidget:
+                                icon: 'cart'
+                        AccountItem:
+                            text: 'Addresses'
+                            on_release:
+                                app.onNextScreen(root.name, 'addresses screen')
+                            IconLeftWidget:
+                                icon: 'map-marker'
+                        AccountItem:
+                            text: 'Feed'
+                            on_release:
+                                app.onNextScreen(root.name, 'feed screen')
+                            IconLeftWidget:
+                                icon: 'phone'
+                        AccountItem:
+                            text: 'Logout'
+                            on_release:
+                                #app.onNextScreen(root.name, '')
+                            IconLeftWidget:
+                                icon: 'account-lock'
+            Avatar:
+                size: 155,155
+                pos_hint: {'center_x': 0.5,'center_y': 0.9}
+                on_press:
+                    app.onNextScreen(root.name, 'login screen')
 
 
-<Avatar@MDFloatLayout+RoundedRectangularElevationBehavior>
+            TwoLineIconListItem:
+                text: 'Hamza Zaid'
+                secondary_text: 'hamza@gmail.com'
+                pos_hint: {'center_x': 0.65,'center_y': 0.77}
+                divider: None
+                
+
+
+<AccountItem@OneLineIconListItem>
+    height: "84dp"
+    _txt_bot_pad: "32dp"
+
+
+<Avatar@MDFloatLayout+ButtonBehavior+RoundedRectangularElevationBehavior>
     size_hint: None, None
     size: 55,55
     elevation:5
@@ -224,6 +289,8 @@
         text_color: [1,1,1,1]
         md_bg_color: app.theme_cls.primary_dark
         icon_size: '35sp'
+        on_release: app.onNextScreen('home screen', 'categories screen')
+
     MDLabel:
         text: "Categories"
         size: self.texture_size

@@ -1,0 +1,46 @@
+<SearchPageScreenView>
+    md_bg_color: app.theme_cls.primary_color
+    MDScrollViewRefreshLayout:
+        id: home_refresh_layout
+        root_layout: root
+        adaptive_height: True
+        MDGridLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            cols:1
+            md_bg_color: app.theme_cls.bg_normal
+            MDBoxLayout:
+                adaptive_height: True
+                padding: [20,20,23,20]
+                size_hint_x: .9
+                pos_hint_y: .8
+                radius: [0,0,23,23]
+                orientation: 'vertical'
+                md_bg_color: app.theme_cls.primary_color
+                MDTextField:
+                    id: search_field
+                    mode: "round"
+                    icon_left: "magnify"
+                    hint_text: "Search Products Categories"
+                    multiline: False
+                    font_size: '18sp'
+                    coursor_width: '1.5sp'
+            MDBoxLayout:
+                adaptive_height: True
+                size_hint_y: None
+                height: root.height
+                RecycleView:
+                    id: view_1
+                    do_scroll_y: False
+                    do_scroll_x: False
+                    viewclass: 'HomeTile'
+                    RecycleGridLayout:
+                        spacing: 20
+                        padding: 10
+                        size_hint_y: None
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        height: self.minimum_height
+                        cols: 2
+                        md_bg_color: get_color_from_hex(colors['Brown']['400'])
+    

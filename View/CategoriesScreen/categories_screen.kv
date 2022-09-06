@@ -1,1 +1,32 @@
 <CategoriesScreenView>
+    MDTopAppBar: 
+        text: 'Categories'
+        pos_hint: {'top':1}
+        left_action_items: [["arrow-left", lambda x: app.onBackBtnx()]]
+    ScrollView:
+        pos_hint: {'top':.93}
+        MDGridLayout:
+            cols:1
+            size_hint_y: None
+            padding: 20
+            spacing: 20
+            CategoriesTile:
+            CategoriesTile:
+            CategoriesTile:
+            CategoriesTile:
+
+<CategoriesTile@MDRelativeLayout>
+    adaptive_height: True
+    radius: 12
+    height: 146
+    source: 'assets/images/cate-7.jpg'
+    FitImage: 
+        source: root.source
+        radius: self.parent.radius
+    MDLabel: 
+        text: 'Poultry'
+        font_style: 'H5'
+        bold: True
+        halign: 'center'
+        theme_text_color: 'Custom'
+        color: '#ffffff'

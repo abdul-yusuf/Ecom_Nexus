@@ -14,46 +14,46 @@ class ItemDetailScreenView(BaseScreenView):
         """
 class Content(MDBoxLayout):
     pass
-class ExpansionPanel(MDExpansionPanel):
-    # content=Content()# panel content
-    content = MDBoxLayout(
-                TwoLineIconListItem(
-                    IconLeftWidget(
-                        icon='assets/images/boy-1.png',
-                        size=(45,45),
-                        size_hint=(None,None)),
-                    text='Abdulbari',
-                    secondary_text='A very good product'
-                    ),
-                TwoLineIconListItem(
-                    IconLeftWidget(
-                        icon='assets/images/boy-1.png',
-                        size=(45,45),
-                        size_hint=(None,None)),
-                    text='Abdulbari',
-                    secondary_text='A very good product'
-                    ),
-                TwoLineIconListItem(
-                    IconLeftWidget(
-                        icon='assets/images/boy-1.png',
-                        size=(45,45),
-                        size_hint=(None,None)),
-                    text='Abdulbari',
-                    secondary_text='A very good product'
-                    ),
-                adaptive_height='True',
-                orientation='vertical',
-                spacing=10
-            )
+# class ExpansionPanel(MDExpansionPanel):
+#     # content=Content()# panel content
+#     # content = MDBoxLayout(
+#     #             TwoLineIconListItem(
+#     #                 IconLeftWidget(
+#     #                     icon='assets/images/boy-1.png',
+#     #                     size=(45,45),
+#     #                     size_hint=(None,None)),
+#     #                 text='Abdulbari',
+#     #                 secondary_text='A very good product'
+#     #                 ),
+#     #             TwoLineIconListItem(
+#     #                 IconLeftWidget(
+#     #                     icon='assets/images/boy-1.png',
+#     #                     size=(45,45),
+#     #                     size_hint=(None,None)),
+#     #                 text='Abdulbari',
+#     #                 secondary_text='A very good product'
+#     #                 ),
+#     #             TwoLineIconListItem(
+#     #                 IconLeftWidget(
+#     #                     icon='assets/images/boy-1.png',
+#     #                     size=(45,45),
+#     #                     size_hint=(None,None)),
+#     #                 text='Abdulbari',
+#     #                 secondary_text='A very good product'
+#     #                 ),
+#     #             adaptive_height='True',
+#     #             orientation='vertical',
+#     #             spacing=10
+#     #         )
 
-    # MDBoxLayout(
-    #             adaptive_height = 'True'
-    #             TwoLineIconListItem(
-    #                 text='Abdulbari',
-    #                 secondary_text = 'A great product'
-    #             )
-    #         ) 
-    panel_cls = MDExpansionPanelTwoLine(
-                    text="Review",
-                    secondary_text='210 Reviews'
-                    )
+#     # MDBoxLayout(
+#     #             adaptive_height = 'True'
+#     #             TwoLineIconListItem(
+#     #                 text='Abdulbari',
+#     #                 secondary_text = 'A great product'
+#     #             )
+#     #         ) 
+#     panel_cls = MDExpansionPanelTwoLine(
+#                     text="Review",
+#                     secondary_text='210 Reviews'
+#                     )

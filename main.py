@@ -44,22 +44,21 @@ class Ecom_Nexus(MDApp):
 
         import View.screens
         self.theme_cls.primary_palette = "Blue"
-        self.manager_screens = MDScreenManager()
-        self.list_of_prev_screens = []
+        self.manager_screen = MDScreenManager()
+        self.list_of_prev_screen = []
         Window.bind(on_key_down=self.on_keyboard_down)
         Window.bind(on_key_down=self.onBackBtn)
         importlib.reload(View.screens)
-        screens = View.screens.screen
-
-        for i, name_screen in enumerate(screens.keys()):
-            model = screens[name_screen]["model"]()
-            controller = screens[name_screen]["controller"](model)
+        screen = View.screens.screen
+        for i, name_screen in enumerate(screen.keys()):
+            model = screen[name_screen]["model"]()
+            controller = screen[name_screen]["controller"](model)
             view = controller.get_view()
-            view.manager_screens = self.manager_screens
+            view.manager_screen = self.manager_screen
             view.name = name_screen
-            self.manager_screens.add_widget(view)
+            self.manager_screen.add_widget(view)
 
-        return self.manager_screens
+        return self.manager_screen
 
     def on_keyboard_down(self, window, keyboard, keycode, text, modifiers) -> None:
         """
@@ -74,21 +73,21 @@ class Ecom_Nexus(MDApp):
 
     def onNextScreen(self,btn,next_screen,*args):
         print(btn)
-        self.list_of_prev_screens.append(btn)
+        self.list_of_prev_screen.append(btn)
         self.screen_args = [*args]
         print(self.screen_args)
-        self.manager_screens.current = next_screen
+        self.manager_screen.current = next_screen
 
     def onBackBtnx(self):
-        if self.list_of_prev_screens:
-            self.manager_screens.current = self.list_of_prev_screens.pop()
+        if self.list_of_prev_screen:
+            self.manager_screen.current = self.list_of_prev_screen.pop()
             return True
         return False
 
     def onBackBtn(self,window,key,*args):
         if key == 27 :
-            if self.list_of_prev_screens:
-                self.manager_screens.current = self.list_of_prev_screens.pop()
+            if self.list_of_prev_screen:
+                self.manager_screen.current = self.list_of_prev_screen.pop()
                 return True
         else:
             return False
@@ -102,52 +101,75 @@ Ecom_Nexus().run()
 
 # """
 # The entry point to the application.
-# 
+
 # The application uses the MVC template. Adhering to the principles of clean
 # architecture means ensuring that your application is easy to test, maintain,
 # and modernize.
-# 
+
 # You can read more about this template at the links below:
-# 
+
 # https://github.com/HeaTTheatR/LoginAppMVC
 # https://en.wikipedia.org/wiki/Model–view–controller
 # """
-# 
+
 # from kivymd.app import MDApp
 # from kivymd.uix.screenmanager import MDScreenManager
-# 
-# from View.screens import screens
-# 
-# 
+# from kivy.core.window import Window
+# from View.screens import screen
+
+
 # class Ecom_Nexus(MDApp):
 #     def __init__(self, **kwargs):
 #         super().__init__(**kwargs)
 #         self.load_all_kv_files(self.directory)
-#         # This is the screen manager that will contain all the screens of your
+#         # This is the screen manager that will contain all the screen of your
 #         # application.
-#         self.manager_screens = MDScreenManager()
-#         
+#         self.manager_screen = MDScreenManager()
+        
 #     def build(self) -> MDScreenManager:
-#         self.generate_application_screens()
-#         return self.manager_screens
-# 
-#     def generate_application_screens(self) -> None:
+#         self.theme_cls.primary_palette = "Blue"
+#         self.list_of_prev_screen = []
+#         Window.bind(on_key_down=self.onBackBtn)
+#         self.generate_application_screen()
+#         return self.manager_screen
+
+#     def generate_application_screen(self) -> None:
 #         """
-#         Creating and adding screens to the screen manager.
+#         Creating and adding screen to the screen manager.
 #         You should not change this cycle unnecessarily. He is self-sufficient.
-# 
-#         If you need to add any screen, open the `View.screens.py` module and
-#         see how new screens are added according to the given application
+
+#         If you need to add any screen, open the `View.screen.py` module and
+#         see how new screen are added according to the given application
 #         architecture.
 #         """
-# 
-#         for i, name_screen in enumerate(screens.keys()):
-#             model = screens[name_screen]["model"]()
-#             controller = screens[name_screen]["controller"](model)
+
+#         for i, name_screen in enumerate(screen.keys()):
+#             model = screen[name_screen]["model"]()
+#             controller = screen[name_screen]["controller"](model)
 #             view = controller.get_view()
-#             view.manager_screens = self.manager_screens
+#             view.manager_screen = self.manager_screen
 #             view.name = name_screen
-#             self.manager_screens.add_widget(view)
-# 
-# 
+#             self.manager_screen.add_widget(view)
+
+#     def onNextScreen(self,btn,next_screen,*args):
+#         print(btn)
+#         self.list_of_prev_screen.append(btn)
+#         self.screen_args = [*args]
+#         print(self.screen_args)
+#         self.manager_screen.current = next_screen
+
+#     def onBackBtnx(self):
+#         if self.list_of_prev_screen:
+#             self.manager_screen.current = self.list_of_prev_screen.pop()
+#             return True
+#         return False
+
+#     def onBackBtn(self,window,key,*args):
+#         if key == 27 :
+#             if self.list_of_prev_screen:
+#                 self.manager_screen.current = self.list_of_prev_screen.pop()
+#                 return True
+#         else:
+#             return False
+    
 # Ecom_Nexus().run()

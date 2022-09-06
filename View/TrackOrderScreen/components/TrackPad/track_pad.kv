@@ -1,0 +1,32 @@
+<TrackPad>:
+    adaptive_height: True
+    # color: app.theme_cls.primary_light
+    text: 'Order Place'
+    secondary_text: 'We have recieved Your Order'
+    tertiary_text: 'on 27-Dec-22'
+    icon: 'point-of-sale'
+    MDBoxLayout:
+        Dot:
+            id: dot_1
+            height: 14
+            width: 14
+            adaptive_height: True
+            md_bg_color: app.theme_cls.primary_light if root.color==None else root.color
+            pos_hint: {'center_x': 0.0,'center_y': 0.5}
+        ThreeLineIconListItem:
+            adaptive_width:True
+            text: root.text
+            secondary_text: root.secondary_text
+            tertiary_text: root.tertiary_text
+            divider: None
+            IconLeftWidget: 
+                icon: root.icon
+                md_bg_color: app.theme_cls.primary_light if root.color==None else root.color
+    MDSeparator:
+        orientation: 'vertical'
+        width: 5
+        size_hint_y: None
+        height: int(root.seprator_height) if root.seprator_height=='0' else root.height+dp(10)
+        pos_hint: {'center_x': 0.02,'center_y': 0.}
+        color:  app.theme_cls.primary_light if root.color==None else root.color
+        
