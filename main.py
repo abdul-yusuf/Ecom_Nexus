@@ -99,18 +99,18 @@
 # After you finish the project, remove the above code and uncomment the below
 # code to test the application normally without hot reloading.
 
-"""
-The entry point to the application.
+# """
+# The entry point to the application.
 
-The application uses the MVC template. Adhering to the principles of clean
-architecture means ensuring that your application is easy to test, maintain,
-and modernize.
+# The application uses the MVC template. Adhering to the principles of clean
+# architecture means ensuring that your application is easy to test, maintain,
+# and modernize.
 
-You can read more about this template at the links below:
+# You can read more about this template at the links below:
 
-https://github.com/HeaTTheatR/LoginAppMVC
-https://en.wikipedia.org/wiki/Model–view–controller
-"""
+# https://github.com/HeaTTheatR/LoginAppMVC
+# https://en.wikipedia.org/wiki/Model–view–controller
+# """
 
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
