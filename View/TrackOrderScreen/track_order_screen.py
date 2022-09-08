@@ -1,5 +1,3 @@
-from cgitb import text
-from curses import panel
 from View.base_screen import BaseScreenView
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 from kivymd.uix.boxlayout import MDBoxLayout
