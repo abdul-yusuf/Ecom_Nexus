@@ -1,5 +1,6 @@
 from View.base_screen import BaseScreenView
 from kivymd.uix.tab import MDTabsBase
+from kivy.uix.scrollview import ScrollView
 
 class OrderHistoryScreenView(BaseScreenView):
     def model_is_changed(self) -> None:
@@ -8,5 +9,5 @@ class OrderHistoryScreenView(BaseScreenView):
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
-class TabsBase(MDTabsBase):
+class TabsBase(ScrollView,MDTabsBase):
     pass

@@ -16,30 +16,45 @@
             tab_hint_x: True
             TabsBase:
                 title: 'In Proces'
-                ScrollView:
-                    size_hint: None, None
-                    height: root.height-top_title.height-dp(45)
-                    width: root.width
-                    pos_hint: {'center_x': 0.0,'center_y': 0.1}
-                    do_scroll_x: False
-                    MDBoxLayout:
-                        padding: 15
-                        size_hint_y: None
-                        adaptive_height: True
-                        orientation: 'vertical'
-                        spacing:20
-                       
-                        CartBoxWithShadow:
-                        CartBoxWithShadow:
-                        CartBoxWithShadow:
+                # size_hint: None, None
+                # height: root.height-top_title.height-dp(45)
+                # width: root.width
+                # pos_hint: {'center_x': 0.0,'center_y': 0.1}
+                do_scroll_x: False
+                MDBoxLayout:
+                    padding: 15
+                    size_hint_y: None
+                    adaptive_height: True
+                    orientation: 'vertical'
+                    spacing:20
+                    
+                    CartBoxWithShadow:
+                    CartBoxWithShadow:
+                    CartBoxWithShadow:
                         
             TabsBase:
                 title: 'Transit'
+                MDBoxLayout:
+                    padding: 15
+                    size_hint_y: None
+                    adaptive_height: True
+                    orientation: 'vertical'
+                    spacing:20
+                    CartBoxWithShadow:
 
             TabsBase:
                 title: 'Complete'
+                MDBoxLayout:
+                    padding: 15
+                    size_hint_y: None
+                    adaptive_height: True
+                    orientation: 'vertical'
+                    spacing:20
+                    
+                    CartBoxWithShadow:
+                    CartBoxWithShadow:
 
-# <TabsBase>:
+# <TabsBase>
 <CartBoxWithShadow@MDBoxLayout>
     adaptive_height: True
     BoxWithShadow:
