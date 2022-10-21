@@ -1,6 +1,7 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
 
+<CustomScroll@MDScrollViewRefreshLayout+RecycleView>
 <HomeScreenView>
     md_bg_color: app.theme_cls.primary_color
     MDBottomNavigation:
@@ -12,10 +13,12 @@
             icon: 'home-outline'
     
             # Add Contents here
-            MDScrollViewRefreshLayout:
+            CustomScroll:
                 id: home_refresh_layout
                 root_layout: root
                 adaptive_height: True
+                scroll_timeout: 250
+
                 MDGridLayout:
                     size_hint_y: None
                     height: self.minimum_height
@@ -73,8 +76,10 @@
                                     orientation: 'horizontal'
                                     adaptive_width: True
                                     spacing: 10
-                                    padding: [5,0,0,0]
+                                    padding: [15,0,0,0]
                                     StoryWithIcon:
+                                    StroyWithImage:
+                                    StroyWithImage:
                                     StroyWithImage:
                                     StroyWithImage:
                                     StroyWithImage:
@@ -88,19 +93,19 @@
                         adaptive_height: True
                         size_hint_y: None
                         height: root.height
-                        RecycleView:
-                            id: view_1
-                            do_scroll_y: False
-                            do_scroll_x: False
-                            RecycleGridLayout:
-                                spacing: 20
-                                padding: 10
-                                size_hint_y: None
-                                default_size: None, None
-                                default_size_hint: .1, None
-                                height: self.minimum_height
-                                cols: 2
-                                md_bg_color: get_color_from_hex(colors['Brown']['400'])
+                        # RecycleView:
+                        #     id: view_1
+                        #     do_scroll_y: False
+                        #     do_scroll_x: False
+                    RecycleGridLayout:
+                        spacing: 20
+                        padding: 10
+                        size_hint_y: None
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        height: self.minimum_height
+                        cols: 2
+                        md_bg_color: get_color_from_hex(colors['Brown']['400'])
         MDBottomNavigationItem:
             name: 'Cart screen'
             icon: 'cart-outline'
@@ -263,7 +268,7 @@
     _txt_bot_pad: "32dp"
 
 
-<Avatar@MDFloatLayout+ButtonBehavior+RoundedRectangularElevationBehavior>
+<Avatar@MDFloatLayout+ButtonBehavior+FakeCircularElevationBehavior>
     size_hint: None, None
     size: 55,55
     elevation:5
@@ -288,7 +293,7 @@
         pos_hint: {'center_x': 0.5, 'center_y': .5}
         text_color: [1,1,1,1]
         md_bg_color: app.theme_cls.primary_dark
-        icon_size: '35sp'
+        icon_size: '28sp'
         on_release: app.onNextScreen('home screen', 'categories screen')
 
     MDLabel:
@@ -323,7 +328,7 @@
         halign: 'center'
         bold: True
 
-<BoxWithShadow@MDBoxLayout+RoundedRectangularElevationBehavior>
+<BoxWithShadow@MDBoxLayout+FakeRectangularElevationBehavior>
     md_bg_color: app.theme_cls.bg_light
-    elevation:5
+    elevation:1
     radius:10

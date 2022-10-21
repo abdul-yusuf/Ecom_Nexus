@@ -1,5 +1,5 @@
 <HomeTile>:
-    elevation: 5
+    elevation: 1
     size_hint_y: None
     height: 260
     orientation: 'vertical'
@@ -10,7 +10,7 @@
     discount_price: "₦2100"
     price: "₦2200"
     slug: ''
-    on_press: app.onNextScreen(root.parent.parent.parent.parent.parent.parent.name, 'item detail screen', root.slug, root.title)
+    on_release: app.onNextScreen(root.parent.parent.parent.parent.parent.parent.name, 'item detail screen', root.slug, root.title)
         
 
         # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)

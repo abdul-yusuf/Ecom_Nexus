@@ -9,6 +9,7 @@
             "type": "python",
             "request": "launch",
             "env": {"DEBUG":"1"},
+            // "sudo": true,
             "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true

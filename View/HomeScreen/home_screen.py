@@ -58,8 +58,8 @@ class HomeScreenView(BaseScreenView):
                         "image": "/media/goat_8w8yMpQ.png"
                     },
                 ]
-        self.ids.view_1.data = data
-        self.ids.view_1.viewclass = HomeTile
+        self.ids.home_refresh_layout.data = data
+        self.ids.home_refresh_layout.viewclass = HomeTile
         
         self.ids.view_2.data = data
         self.ids.view_2.viewclass = CartTile

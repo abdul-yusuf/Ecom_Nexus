@@ -3,7 +3,7 @@
 <CartTile>
     anchor: 'right'
     SwipeLayerBoxShadow:
-        elevation:5
+        elevation:1
         MDRelativeLayout:
             IconRightWidget:
                 icon: 'trash-can'
@@ -62,5 +62,5 @@
                     on_release:
                         qty.text = str(int(qty.text)+1)
 
-<SwipeLayerBoxShadow@MDCardSwipeFrontBox+RoundedRectangularElevationBehavior>
+<SwipeLayerBoxShadow@MDCardSwipeFrontBox+FakeRectangularElevationBehavior>
     md_bg_color: app.theme_cls.bg_darkest
