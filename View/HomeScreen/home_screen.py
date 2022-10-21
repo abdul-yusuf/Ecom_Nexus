@@ -58,14 +58,14 @@ class HomeScreenView(BaseScreenView):
                         "image": "/media/goat_8w8yMpQ.png"
                     },
                 ]
-        self.ids.home_refresh_layout.data = data
-        self.ids.home_refresh_layout.viewclass = HomeTile
+        # self.ids.home_refresh_layout.data = data
+        # self.ids.home_refresh_layout.viewclass = HomeTile
         
-        self.ids.view_2.data = data
-        self.ids.view_2.viewclass = CartTile
+        # self.ids.view_2.data = data
+        # self.ids.view_2.viewclass = CartTile
 
-        self.ids.view_3.data = data
-        self.ids.view_3.viewclass = FavouriteTile
+        # self.ids.view_3.data = data
+        # self.ids.view_3.viewclass = FavouriteTile
         
         # return super().on_enter(*args)
 
