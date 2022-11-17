@@ -18,7 +18,7 @@ class BaseScreenModel:
     def remove_observer(self, observer) -> None:
         self._observers.remove(observer)
 
-    def notify_observers(self, name_screen: str) -> None:
+    def notify_observers(self, name_screen: str, *args, meths=None, **kwargs) -> None:
         """
         Method that will be called by the observer when the model data changes.
 
@@ -26,8 +26,19 @@ class BaseScreenModel:
             name of the view for which the method should be called
             :meth:`model_is_changed`.
         """
-
+        print('passed2')
         for observer in self._observers:
             if observer.name == name_screen:
-                observer.model_is_changed()
+                if meths=='loading':
+                    observer.server_processing(*args)
+                    print('loading sending signal')
+                if meths=='success':
+                    observer.server_success(*args,**kwargs)
+                    print('server success sending signal')
+                if meths=='error':
+                    observer.server_error(*args,**kwargs)
+                    print('server error sending signal')
+                else:
+                    observer.model_is_changed(*args,**kwargs)
+                    print('model is changed sending signal')
                 break

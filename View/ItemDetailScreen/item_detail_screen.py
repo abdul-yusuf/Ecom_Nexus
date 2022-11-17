@@ -1,4 +1,3 @@
-from cgitb import text
 from View.base_screen import BaseScreenView
 from .components import CarouselSlide
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelTwoLine
@@ -6,12 +5,23 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import TwoLineIconListItem, IconLeftWidget
 
 class ItemDetailScreenView(BaseScreenView):
-    def model_is_changed(self) -> None:
+    def model_is_changed(self,*args, **kwargs) -> None:
         """
         Called whenever any change has occurred in the data model.
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
+        print('*'*12,args,'*'*12)
+        data = args[0]
+        self.ids.carousel.source1 = data['images']['image1']
+        self.ids.carousel.source2 = data['images']['image2']
+        self.ids.carousel.source3 = data['images']['image3']
+        self.ids.carousel.source4 = data['images']['image4']
+
+        self.ids.price.text = '₦{}/kg'.format(data['price'])
+        self.ids.title.text = data['title']
+
+
 class Content(MDBoxLayout):
     pass
 # class ExpansionPanel(MDExpansionPanel):

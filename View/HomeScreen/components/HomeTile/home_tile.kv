@@ -1,5 +1,6 @@
 <HomeTile>:
-    elevation: 1
+    # elevation: 1
+    pk: 1
     size_hint_y: None
     height: 260
     orientation: 'vertical'
@@ -7,17 +8,32 @@
     padding: [1,0]
     md_bg_color: app.theme_cls.bg_light
     title: 'Chicken'
-    discount_price: "₦2100"
+    discount_price: "null"
     price: "₦2200"
     slug: ''
-    on_release: app.onNextScreen(root.parent.parent.parent.parent.parent.parent.name, 'item detail screen', root.slug, root.title)
+    rate: 1
+    images: {}
+    on_release: 
+        # print(self.id)
+        app.onNextScreen(
+        root.parent.parent.parent.parent.parent.parent.name, 
+        'item detail screen', 
+        {\
+        'pk': self.pk,\
+        'title': self.title,\
+        'price': self.price,\
+        'discount_price': self.discount_price,\
+        'rate':root.rate,
+        'images': root.images
+        }\
+        )
         
 
         # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)
     RelativeLayout:
         FitImage:
             id: home_tile_image
-            source: 'assets/images/cate-1.jpg'
+            source: 'assets/images/cate-1.jpg' or root.images[0]
             radius: [10,10,15,15]
         MDIconButton:
             icon: "heart-outline"
@@ -25,6 +41,8 @@
             theme_text_color: "Error"
             md_bg_color: get_color_from_hex(colors['Gray']['50'])
             on_release: 
+                print(self.parent.parent.pk)
+
                 self.icon = 'heart' if self.icon == 'heart-outline' else 'heart-outline'
         MDIconButton:
             icon: "cart-plus"
@@ -35,6 +53,7 @@
         size_hint_y: None
         height: self.parent.height/3.8
         MDLabel:
+            id: title
             text: root.title
             font_style: 'H6'
             pos_hint: {'center_x': 0.53,'center_y': 0.83}
@@ -48,11 +67,12 @@
                 MDFloatLayout:
                     adaptive_height: True
                     adaptive_width: True
-                    height: 2.5 if root.discount_price!='null' else 0
+                    height: 0 if root.discount_price=='null' else 2.5
                     width: len(price.text)*7
                     pos_hint: {'top': .35}
                     md_bg_color: get_color_from_hex(colors['Gray']['300'])
         MDLabel:
+            id: discount_price
             text: root.discount_price if root.discount_price!='null' else ''
             font_style: 'Body2'
             theme_text_color: "Error"
@@ -63,7 +83,8 @@
             halign: 'right'
             pos_hint: {'center_x': 0.24,'center_y': 0.23}
         MDLabel:
-            text: "4.5"
+            id: rate
+            text: str(root.rate)
             font_style: "Overline"
             halign: 'right'
             pos_hint: {'center_x': 0.35,'center_y': 0.23}

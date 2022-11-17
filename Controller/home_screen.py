@@ -1,4 +1,6 @@
 import importlib
+from json import dumps
+from kivy.network.urlrequest import UrlRequest
 
 import View.HomeScreen.home_screen
 
@@ -24,3 +26,30 @@ class HomeScreenController:
 
     def get_view(self) -> View.HomeScreen.home_screen:
         return self.view
+
+    def server_request(self, *args, **kwargs):
+        # self.model.notify_observers('login screen', meths='loading')
+       
+        # payload = dumps({
+		# 	"username": kwargs['username'],
+		# 	"password": kwargs['password'],
+		# 	"returnSecureToken": True,
+		# })
+        
+        headers = {
+			'Content-type': 'application/json',
+		}
+        # self.view.app.modal_view(attach_to=self.view)
+        url = self.view.app.request_parm.route('products')
+        print(url)
+        req = UrlRequest(url, 
+                        on_success=self.model.server_success, 
+                        # req_body=payload,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_error
+                        )
+
+    def item_detail_page(self, data):
+        self.get_view.app.onNextScreen(self.view.name, 'item detail screen')
+        self.model.notify_observers('item detail screen', data)

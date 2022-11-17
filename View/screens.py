@@ -33,67 +33,74 @@ from Model.feed_screen import FeedScreenModel
 from Controller.feed_screen import FeedScreenController
 from Model.addresses_screen import AddressesScreenModel
 from Controller.addresses_screen import AddressesScreenController
+from Model.profile_details_screen import ProfileDetailsScreenModel
+from Controller.profile_details_screen import ProfileDetailsScreenController
 
 screen = {
-    
    'home screen': {
         'model': HomeScreenModel,
         'controller': HomeScreenController,
-    },'addresses screen': {
-        'model': AddressesScreenModel,
-        'controller': AddressesScreenController,
-    },
-   'my account screen': {
-        'model': MyAccountScreenModel,
-        'controller': MyAccountScreenController,
-    },
-    'feed screen': {
-        'model': FeedScreenModel,
-        'controller': FeedScreenController,
-    },
-    'login screen': {
-        'model': LoginScreenModel,
-        'controller': LoginScreenController,
-    },
-   'email verification screen': {
-        'model': EmailVerificationScreenModel,
-        'controller': EmailVerificationScreenController,
-    },
-   'q r scan screen': {
-        'model': QRScanScreenModel,
-        'controller': QRScanScreenController,
-    },
-   'forgot password screen': {
-        'model': ForgotPasswordScreenModel,
-        'controller': ForgotPasswordScreenController,
-    },
-    'search page screen': {
-        'model': SearchPageScreenModel,
-        'controller': SearchPageScreenController,
-    },
-    'track order screen': {
-        'model': TrackOrderScreenModel,
-        'controller': TrackOrderScreenController,
-    },
-    'order history screen': {
-        'model': OrderHistoryScreenModel,
-        'controller': OrderHistoryScreenController,
     },
     'sign up screen': {
         'model': SignUpScreenModel,
         'controller': SignUpScreenController,
     },
-    'checkout screen': {
-        'model': CheckoutScreenModel,
-        'controller': CheckoutScreenController,
+   'profile detail screen': {
+        'model': ProfileDetailsScreenModel,
+        'controller': ProfileDetailsScreenController,
+    }, 
+   
+#     'addresses screen': {
+#         'model': AddressesScreenModel,
+#         'controller': AddressesScreenController,
+#     },
+#    'my account screen': {
+#         'model': MyAccountScreenModel,
+#         'controller': MyAccountScreenController,
+    # },
+    'email verification screen': {
+        'model': EmailVerificationScreenModel,
+        'controller': EmailVerificationScreenController,
     },
-    'categories screen': {
-        'model': CategoriesScreenModel,
-        'controller': CategoriesScreenController,
-    },
+#     # 'feed screen': {
+#     #     'model': FeedScreenModel,
+#     #     'controller': FeedScreenController,
+#     # },
+#     'login screen': {
+#         'model': LoginScreenModel,
+#         'controller': LoginScreenController,
+#     },
+#    'q r scan screen': {
+#         'model': QRScanScreenModel,
+#         'controller': QRScanScreenController,
+#     },
+#    'forgot password screen': {
+#         'model': ForgotPasswordScreenModel,
+#         'controller': ForgotPasswordScreenController,
+#     },
+#     'search page screen': {
+#         'model': SearchPageScreenModel,
+#         'controller': SearchPageScreenController,
+#     },
+#     'track order screen': {
+#         'model': TrackOrderScreenModel,
+#         'controller': TrackOrderScreenController,
+#     },
+#     'order history screen': {
+#         'model': OrderHistoryScreenModel,
+#         'controller': OrderHistoryScreenController,
+#     },
+#     'checkout screen': {
+#         'model': CheckoutScreenModel,
+#         'controller': CheckoutScreenController,
+#     },
+#     'categories screen': {
+#         'model': CategoriesScreenModel,
+#         'controller': CategoriesScreenController,
+#     },
     'item detail screen': {
         'model': ItemDetailScreenModel,
         'controller': ItemDetailScreenController,
     },
-
+ 
 }

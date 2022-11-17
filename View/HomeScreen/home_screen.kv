@@ -11,14 +11,20 @@
             name: "home screen"
             text: "Home"
             icon: 'home-outline'
-    
+            on_enter:
+                root.controller.server_request()
+
             # Add Contents here
-            CustomScroll:
+            MDScrollViewRefreshLayout:
                 id: home_refresh_layout
                 root_layout: root
+                # effect_cls: "ScrollEffect"
+                refresh_callback: root.refresh_callback
                 adaptive_height: True
                 scroll_timeout: 250
-
+                do_scroll_x: False
+                do_scroll_y: False
+                
                 MDGridLayout:
                     size_hint_y: None
                     height: self.minimum_height
@@ -30,11 +36,14 @@
                         padding: [10,14,10,4]
                         md_bg_color: app.theme_cls.primary_color
                         Avatar:
+                            on_release:
+                                app.onNextScreen(root.name, 'login screen')
                         MDBoxLayout:
                             padding: 10
                             spacing: 10
                             orientation: 'vertical'
                             MDLabel:
+                                id: username
                                 text: "Hi Hamza Zaid"
                                 font_style: "H6"
                             MDLabel:
@@ -66,7 +75,7 @@
                         padding: [10,0,0,0]
                         adaptive_height: True
                         MDBoxLayout:
-                            height: 90
+                            height: root.height/9.8
                             size_hint_y: None
                             ScrollView:
                                 do_scroll_y: False
@@ -85,7 +94,7 @@
                                     StroyWithImage:
                     MDBoxLayout:
                         size_hint_y: None
-                        height: 190
+                        height: root.height/4
                         padding: 10
                         # md_bg_color: get_color_from_hex(colors['Red']['400'])
                         HomeAds:   
@@ -93,92 +102,110 @@
                         adaptive_height: True
                         size_hint_y: None
                         height: root.height
-                        # RecycleView:
+                        # MDGridLayout:
                         #     id: view_1
-                        #     do_scroll_y: False
-                        #     do_scroll_x: False
-                    RecycleGridLayout:
-                        spacing: 20
-                        padding: 10
-                        size_hint_y: None
-                        default_size: None, None
-                        default_size_hint: .1, None
-                        height: self.minimum_height
-                        cols: 2
-                        md_bg_color: get_color_from_hex(colors['Brown']['400'])
+                        #     spacing: dp(20)
+                        #     padding: dp(10)
+                        #     size_hint_y: None
+                        #     default_size: None, None
+                        #     default_size_hint: .1, None
+                        #     height: self.minimum_height
+                        #     cols: 2
+                        #     md_bg_color: get_color_from_hex(colors['Brown']['400'])
+
+                             
+
+                        CustomScroll:
+                            root_layout: root
+                            refresh_callback: root.refresh_callback
+                            scroll_timeout:25
+                            # do_scroll_y: False
+                            do_scroll_x: False
+                            id: view_1
+
+                            RecycleGridLayout:
+                                spacing: 20
+                                padding: 10
+                                size_hint_y: None
+                                default_size: None, None
+                                default_size_hint: .1, None
+                                height: self.minimum_height
+                                cols: 2
+                                md_bg_color: get_color_from_hex(colors['Brown']['400'])
+
         MDBottomNavigationItem:
             name: 'Cart screen'
             icon: 'cart-outline'
             text: 'Cart'
-            ScrollView:
-                MDBoxLayout:
+            # ScrollView:
+            MDBoxLayout:
+                size_hint_y: None
+                height: root.height - dp(55)
+                padding: 20
+                spacing: 15
+                orientation: 'vertical'
+                MDLabel:
+                    text: "Cart Summary"
+                    halign: 'center'
+                    font_style: 'H5'
+                    adaptive_height:True
+                BoxWithShadow:
                     size_hint_y: None
-                    height: root.height - dp(55)
+                    height: root.height/4
                     padding: 20
-                    spacing: 15
-                    orientation: 'vertical'
-                    MDLabel:
-                        text: "Cart Summary"
-                        halign: 'center'
-                        font_style: 'H5'
-                        adaptive_height:True
-                    BoxWithShadow:
+                    pos_hint: {'top':1}
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "Price(2)"
+                            font_style: 'Body2'
+                            halign: 'left'
+                        MDLabel:
+                            text: "Shipping"
+                            font_style: 'Body2'
+                            halign: 'left'
+                        MDSeparator:
+                        MDLabel:
+                            text: "Total"
+                            font_style: 'H6'
+                            halign: 'left'
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "₦12000.00"
+                            font_style: 'Body2'
+                            halign: 'right'
+                        MDLabel:
+                            text: "FREE"
+                            font_style: 'Body2'
+                            halign: 'right'
+                        MDSeparator:
+                        MDLabel:
+                            text: "₦12000.00"
+                            font_style: 'H6'
+                            halign: 'right'
+                RecycleView:
+                    id: view_2
+                    RecycleGridLayout:
+                        cols:1
+                        spacing: 20
+                        adaptive_height: True
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        padding: 5
                         size_hint_y: None
-                        height: 160
-                        padding: 20
-                        pos_hint: {'top':1}
-                        MDBoxLayout:
-                            orientation: 'vertical'
-                            MDLabel:
-                                text: "Price(2)"
-                                font_style: 'Body2'
-                                halign: 'left'
-                            MDLabel:
-                                text: "Shipping"
-                                font_style: 'Body2'
-                                halign: 'left'
-                            MDSeparator:
-                            MDLabel:
-                                text: "Total"
-                                font_style: 'H6'
-                                halign: 'left'
-                        MDBoxLayout:
-                            orientation: 'vertical'
-                            MDLabel:
-                                text: "₦12000.00"
-                                font_style: 'Body2'
-                                halign: 'right'
-                            MDLabel:
-                                text: "FREE"
-                                font_style: 'Body2'
-                                halign: 'right'
-                            MDSeparator:
-                            MDLabel:
-                                text: "₦12000.00"
-                                font_style: 'H6'
-                                halign: 'right'
-                    RecycleView:
-                        id: view_2
-                        RecycleGridLayout:
-                            cols:1
-                            spacing: 20
-                            adaptive_height: True
-                            default_size: None, None
-                            default_size_hint: .1, None
-                            padding: 5
-                            size_hint_y: None
-                            height: self.minimum_height
-                    MDFillRoundFlatButton:
-                        id: checkout_btn
-                        text: 'Checkout'
-                        font_style: 'Button'
-                        font_size: 20
-                        size_hint: .9, .114
-                        # height: 40
-                        rounded_button: False
-                        pos_hint: {'center_x': 0.5,'center_y': 1}
-                        on_release:
-                            app.onNextScreen(root.name, 'checkout screen')
+                        height: self.minimum_height
+                MDFillRoundFlatButton:
+                    id: checkout_btn
+                    text: 'Checkout'
+                    font_style: 'Button'
+                    font_size: 20
+                    size_hint: .9, .114
+                    # height: 40
+                    rounded_button: False
+                    pos_hint: {'center_x': 0.5,'center_y': 1}
+                    on_release:
+                        app.onNextScreen(root.name, 'checkout screen')
         
         MDBottomNavigationItem:
             name: 'favourites screen'
@@ -256,6 +283,7 @@
 
 
             TwoLineIconListItem:
+                id: user_detail
                 text: 'Hamza Zaid'
                 secondary_text: 'hamza@gmail.com'
                 pos_hint: {'center_x': 0.65,'center_y': 0.77}
@@ -271,7 +299,7 @@
 <Avatar@MDFloatLayout+ButtonBehavior+FakeCircularElevationBehavior>
     size_hint: None, None
     size: 55,55
-    elevation:5
+    # elevation:5
     radius: self.width/2
     md_bg_color: app.theme_cls.primary_light
     source: 'assets/images/man-1.png'
@@ -330,5 +358,5 @@
 
 <BoxWithShadow@MDBoxLayout+FakeRectangularElevationBehavior>
     md_bg_color: app.theme_cls.bg_light
-    elevation:1
+    # elevation:1
     radius:10

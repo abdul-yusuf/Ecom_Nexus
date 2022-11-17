@@ -1,8 +1,12 @@
 <ItemDetailScreenView>
     md_bg_color: app.theme_cls.bg_normal
+    on_enter:
+        root.model.notify_observers(self.name,app.screen_args[0])
+    
     MDBoxLayout:
         orientation: 'vertical'
         CarouselSlide:
+            id: carousel
             size_hint_y: .42
             source1: 'assets/images/cate-12.jpg'
             
@@ -28,9 +32,11 @@
                             text: 'Vendor'
                             font_style: 'Caption'
                     ChipLabel:
+                        id: price
                         text: '₦12000.00/kg'
                         halign: 'right'
                 ChipLabel:
+                    id: title
                     text: 'Chicken'
                     font_style: 'H6'
                     bold: True
@@ -44,6 +50,7 @@
                     adaptive_width: True
                     width: 215
                 ChipLabel:
+                    id: description
                     text: 'Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem'
                     font_style: 'Body2'
                 Widget: 
@@ -95,11 +102,11 @@
 <ChipLabel@MDLabel>
     theme_text_color: 'Primary'
 
-<QtyCard@MDFloatLayout+FakeRectangularElevationBehavior>
+<QtyCard@MDFloatLayout>
     adaptive_size: True
     size_hint: None, None
-    height: 52
-    elevation: 2
+    height: dp(52)
+    # elevation: 2
     md_bg_color: app.theme_cls.bg_light
     radius: 15
     MDLabel

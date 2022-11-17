@@ -9,7 +9,6 @@ importlib.reload(View.EmailVerificationScreen.email_verification_screen)
 
 
 
-
 class EmailVerificationScreenController:
     """
     The `EmailVerificationScreenController` class represents a controller implementation.
@@ -24,3 +23,7 @@ class EmailVerificationScreenController:
 
     def get_view(self) -> View.EmailVerificationScreen.email_verification_screen:
         return self.view
+    
+    def email_confirm(self, value):
+        print(value)
+        self.view.app.onNextScreen(self.view.name, 'profile detail screen')

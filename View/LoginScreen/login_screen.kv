@@ -83,6 +83,8 @@
                 background_color: 0, 0, 0, 0
                 pos_hint: {'center_x': .5, 'center_y': .38}
                 on_release:
+                    root.controller.server_request(username=username.text,password=password.text)
+                    # app.modal_view(massage='loading...', auto_dismiss=False)
                     # app.auth_key = ''
                     # root.controller.on_tap_button_login(username.text, password.text)
                 canvas.before:

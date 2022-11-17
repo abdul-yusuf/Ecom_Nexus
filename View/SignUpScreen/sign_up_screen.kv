@@ -4,7 +4,7 @@
 
 
 <SignupScreenView>
-    username: username
+    email: email
     password: password
     ScrollView:
         MDFloatLayout:
@@ -33,11 +33,32 @@
 
             MDFloatLayout:
                 size_hint: .75, .07
-                pos_hint: {'center_x': .55, 'center_y': .75}
+                pos_hint: {'center_x': .55, 'center_y': .71}
                 TextInput:
-                    id: username
+                    id: phone_no
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .7}
+                    hint_text: "Phone no"
+                    font_size: '18sp'
+                    cursor_width: '1.5sp'
+                    multiline: False
+                    background_color: 1, 1, 1, 0
+                    foreground_color: rgba(0, 0, 59,255)
+                    cursor_color: rgba(0, 0, 59,255)
+                MDFloatLayout:
+                    pos_hint: {'center_x': .45, 'center_y': .0}
+                    size_hint_y: .03
+                    md_bg_color: rgba(178, 178, 178, 255)
+
+            MDFloatLayout:
+                size_hint: .75, .07
+                pos_hint: {'center_x': .55, 'center_y': .61}
+                # pos_hint: {'center_x': .55, 'center_y': .75}
+                TextInput:
+                    id: email
+                    size_hint_y: .75
+                    pos_hint: {"center_x": .5, "top": .7}
+                    # pos_hint: {"center_x": .25, "top": .575}
                     hint_text: "Email"
                     font_size: '18sp'
                     cursor_width: '1.5sp'
@@ -49,65 +70,87 @@
                     pos_hint: {'center_x': .45, 'center_y': .0}
                     size_hint_y: .03
                     md_bg_color: rgba(178, 178, 178, 255)
+            # MDFloatLayout:
+
+            #     size_hint: .75, .07
+            #     pos_hint: {'center_x': .55, 'center_y': .65}
+            #     TextInput:
+            #         id: fullname
+            #         size_hint: .5, .75
+            #         pos_hint: {"center_x": .25, "top": .575}
+            #         hint_text: "Fullname"
+            #         font_size: '18sp'
+            #         cursor_width: '1.5sp'
+            #         multiline: False
+            #         background_color: 1, 1, 1, 0
+            #         foreground_color: rgba(0, 0, 59,255)
+            #         cursor_color: rgba(0, 0, 59,255)
+
+            #     TextInput:
+            #         id: lastname
+            #         size_hint: .5, .75
+            #         pos_hint: {"center_x": .7, "top": .575}
+            #         hint_text: "Lastname"
+            #         font_size: '18sp'
+            #         cursor_width: '1.5sp'
+            #         multiline: False
+            #         background_color: 1, 1, 1, 0
+            #         foreground_color: rgba(0, 0, 59,255)
+            #         cursor_color: rgba(0, 0, 59,255)
+            #     MDFloatLayout:
+            #         pos_hint: {'center_x': .45, 'center_y': .0}
+            #         size_hint_y: .03
+            #         md_bg_color: rgba(178, 178, 178, 255)
 
             MDFloatLayout:
                 size_hint: .75, .07
-                pos_hint: {'center_x': .55, 'center_y': .65}
-                TextInput:
-                    id: fullname
-                    size_hint: .5, .75
-                    pos_hint: {"center_x": .25, "top": .575}
-                    hint_text: "Fullname"
-                    font_size: '18sp'
-                    cursor_width: '1.5sp'
-                    multiline: False
-                    background_color: 1, 1, 1, 0
-                    foreground_color: rgba(0, 0, 59,255)
-                    cursor_color: rgba(0, 0, 59,255)
-
-                TextInput:
-                    id: lastname
-                    size_hint: .5, .75
-                    pos_hint: {"center_x": .7, "top": .575}
-                    hint_text: "Lastname"
-                    font_size: '18sp'
-                    cursor_width: '1.5sp'
-                    multiline: False
-                    background_color: 1, 1, 1, 0
-                    foreground_color: rgba(0, 0, 59,255)
-                    cursor_color: rgba(0, 0, 59,255)
-                MDFloatLayout:
-                    pos_hint: {'center_x': .45, 'center_y': .0}
-                    size_hint_y: .03
-                    md_bg_color: rgba(178, 178, 178, 255)
-
-            MDFloatLayout:
-                size_hint: .75, .07
-                pos_hint: {'center_x': .55, 'center_y': .53}
+                pos_hint: {'center_x': .55, 'center_y': .49}
                 TextInput:
                     id: password
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .575}
                     hint_text: "Password"
                     password: True
+                    required: True
                     font_size: '18sp'
                     cursor_width: '1.5sp'
                     multiline: False
                     background_color: 1, 1, 1, 0
                     foreground_color: rgba(0, 0, 59,255)
                     cursor_color: rgba(0, 0, 59,255)
+                    on_text:
+                        root.password_check()
+                    
+
+                        # line.md_bg_color=rgba(18, 178, 178, 255) if self.text=='' else rgba(178, 178, 178, 255)
+                
                 MDFloatLayout:
+                    id: line
                     pos_hint: {'center_x': .45, 'center_y': .0}
                     size_hint_y: .03
                     md_bg_color: rgba(178, 178, 178, 255)
+                    MDFloatLayout:
+                        id: error_box
+                        size_hint_y: .5
+                        pos_hint: {'center_x': 0.5,'center_y': 0.1}
+
+                
+
+            # MDTextField:
+            #     size_hint: .75,.07
+            #     id: password
+            #     hint: 'Password'
+            #     password: True
+            #     pos_hint: {"center_x": .5, "top": .575}
+            #     required: True
 
             Button:
                 text: 'SIGNUP'
                 size_hint: .66, .065
                 background_color: 0, 0, 0, 0
-                pos_hint: {'center_x': .5, 'center_y': .38}
+                pos_hint: {'center_x': .5, 'center_y': .34}
                 on_release:
-                    on_press: root.controller.on_tap_button_signup(username.text, fullname.text, lastname.text, password.text)
+                    on_press: root.controller.server_request(phone_no.text, email.text, password.text)
                 canvas.before:
                     Color:
                         rgb: rgba(52, 0, 231, 255)
@@ -116,11 +159,11 @@
                         pos: self.pos
                         radius: [7]
 
-            MDTextButton:
-                text: 'Forgot Password?'
-                pos_hint: {'center_x': .5, 'center_y': .31}
-                color: rgba(68, 78, 132, 255)
-                font_size: '15sp'
+            # MDTextButton:
+            #     text: 'Forgot Password?'
+            #     pos_hint: {'center_x': .5, 'center_y': .31}
+            #     color: rgba(68, 78, 132, 255)
+            #     font_size: '15sp'
 
             MDLabel:
                 text: 'or'
@@ -140,7 +183,7 @@
                 pos_hint: {'center_x': .7, 'center_y': .258}
 
             MDLabel:
-                text: 'Social Media Login'
+                text: 'Social Media Signup'
                 font_size: '13sp'
                 halign: 'center'
                 pos_hint: {'center_y': .16}
@@ -163,7 +206,7 @@
                 pos_hint: {'center_x': .68, 'center_y': .04}
                 color: rgba(135, 133, 193, 255)
             MDTextButton:
-                text: "Login up"
+                text: "Login"
                 font_size: '11sp'
                 pos_hint: {'center_x': .72, 'center_y': .04}
                 color: rgba(135, 133, 193, 255)

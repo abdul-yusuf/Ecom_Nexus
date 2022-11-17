@@ -2,6 +2,9 @@
 <CarouselSlide>
     source1: ''
     source2: 'assets/images/cate-1.jpg'
+    source3: ''
+    source4: ''
+
     MDCarousel:
         id: carousel
         loop: True
@@ -10,6 +13,12 @@
             radius: [0,0,20,20]
         FitImage:
             source: root.source2
+            radius: [0,0,20,20]
+        FitImage:
+            source: root.source3
+            radius: [0,0,20,20]
+        FitImage:
+            source: root.source4
             radius: [0,0,20,20]
         
     CountBox:

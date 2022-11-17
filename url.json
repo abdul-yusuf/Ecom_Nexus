@@ -1,0 +1,24 @@
+{
+    "host":"http://127.0.0.1:8000/",
+    "login":{
+        "url":"auth/login/",
+        "method": "POST"
+    },
+    "logout": {
+        "url":"auth/logout/",
+        "method":"POST"
+    },
+    "user_detail":{
+        "url":"auth/user/",
+        "method":"GET"
+    },
+    "register":{
+        "url":"auth/registration/",
+        "method":"POST"
+    },
+    "products":{
+        "url":"store/api/products/",
+        "method":"GET"
+    }
+
+}

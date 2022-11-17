@@ -1,0 +1,108 @@
+<ProfileDetailsScreenView>
+    ScrollView:
+        do_scroll_x:False
+        MDRelativeLayout:
+            size_hint_y: None
+            size_hint_x: .9
+            height: dp(860)
+            Avatar:
+                size: dp(80),dp(80)
+                pos_hint: {'center_x': 0.5,'center_y': 0.87}
+
+            
+            # MDBoxLayout:
+            #     adaptive_height: True
+            #     padding:[dp(40),dp(10)]
+            #     pos_hint: {'right': 0.8,'center_y': 0.0}
+            MDLabel:
+                text: "abdul17yusuf@gmail.com"
+                color:
+                bold: True
+                font_style: 'Body2'
+                # pos_hint_x: .9
+                # size_hint_x: None
+                adaptive_width: True
+                size_hint_x: .8
+                # width: dp(250)
+                # width: self.width
+                pos_hint: {'center_x':.65,'center_y': 0.78}
+
+            MDIconButton:
+                icon: 'arrow-left'
+                pos_hint: {'center_y': .95}
+                user_font_size: '30sp'
+                theme_text_color: 'Custom'
+                text_color: get_color_from_hex(colors['Blue']['800'])
+                on_release:
+                    app.onBackBtnx()
+            
+            MDTextField:
+                hint_text: 'Phone Number'
+                mode : 'rectangle'
+                text: '+234909310975'
+                disabled: 'True'
+                pos_hint: {'center_x': .55, 'center_y': .7}
+
+            MDTextField:
+                hint_text: 'First Name'
+                mode : 'rectangle'
+                requried: True
+                helper_text: 'This field is required'
+                helper_text_mode: 'persistent'
+                pos_hint: {'center_x': .55, 'center_y': .6}
+
+            MDTextField:
+                hint_text: 'Last Name'
+                mode : 'rectangle'
+                pos_hint: {'center_x': .55, 'center_y': .5}
+
+            DropdownTextField:
+                pos_hint: {'center_x': .55, 'center_y': .4}
+
+
+            MDTextField:
+                id: date_field
+                hint_text: 'Birth date'
+                mode : 'rectangle'
+                pos_hint: {'center_x': .55, 'center_y': .3}
+                on_focus:
+                    root.show_date_picker()
+                    self.focus=False
+
+            MDFillRoundFlatButton:
+                id: checkout_btn
+                text: 'Save'
+                font_style: 'Button'
+                font_size: 20
+                size_hint: .9, .08
+                # height: 40
+                rounded_button: False
+                pos_hint: {'center_x': 0.56,'center_y': .15}
+                on_release:
+                    # app.onNextScreen(root.name, 'checkout screen')
+    
+            # MDTextField:
+            #     hint_text: 'First Name'
+            #     mode : 'rectangle'
+            #     pos_hint: {'center_x': .55, 'center_y': .4}
+
+                
+<DropdownTextField@MDRelativeLayout>:
+    size_hint_y: None
+    height: text_inst.height
+
+    MDTextField:
+        id: text_inst
+        hint_text: 'Gender'
+        mode : 'rectangle'
+
+        # icon_left: 'key-variant'
+
+
+    MDIconButton:
+        icon: 'chevron-down'
+        pos_hint: {"center_y": .5}
+        pos: text_inst.width - self.width + dp(8), 0
+        theme_text_color: "Hint"
+        on_release:
+            

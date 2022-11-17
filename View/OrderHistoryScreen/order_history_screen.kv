@@ -1,16 +1,33 @@
 <OrderHistoryScreenView>
     MDBoxLayout:
         orientation: 'vertical'
-        MDBoxLayout:
-            id: top_title
+        # MDBoxLayout:
+        #     id: top_title
+        #     md_bg_color: app.theme_cls.primary_color
+        #     adaptive_height: True
+        #     padding: [0,10]
+            # orientation: 'vertical'
+        MDRelativeLayout:
             md_bg_color: app.theme_cls.primary_color
-            adaptive_height: True
-            padding: [0,10]
+            size_hint_y: None
+                # adaptive_width: True
+                # width: icon.width-dp(40)
+                # height: icon.height
+            MDIconButton: 
+                icon: 'arrow-left'
+                pos_hint: {'center_x': 0.08,'center_y': 0.85}
+                on_release: app.onBackBtnx()
             MDLabel:
-                adaptive_height: True
                 text: "Order History"
-                font_style: 'H4'
+                font_style: 'H5'
                 halign: 'center'
+                bold: True
+                pos_hint: {'center_x': 0.3,'center_y': 0.85}
+            # MDLabel:
+            #     adaptive_height: True
+            #     text: "Order History"
+            #     font_style: 'H4'
+            #     halign: 'center'
         MDTabs:
             md_bg_color: app.theme_cls.bg_dark
             tab_hint_x: True
@@ -29,6 +46,8 @@
                     spacing:20
                     
                     CartBoxWithShadow:
+                        color: '#ef5350'
+                        text: 'Not Paid'
                     CartBoxWithShadow:
                     CartBoxWithShadow:
                         
@@ -56,7 +75,11 @@
 
 # <TabsBase>
 <CartBoxWithShadow@MDBoxLayout>
-    adaptive_height: True
+    # adaptive_height: True
+    size_hint_y: None
+    height: 180
+    text: 'Paid'
+    color: '#66bb6a' # or '#ef5350'
     BoxWithShadow:
         orientation: 'vertical'
         padding: 10
@@ -84,8 +107,10 @@
                 pos_hint: {'center_x': 0.8,'center_y': 0.8}
                 on_release: app.onNextScreen('order history screen','track order screen')
             CustomPaymentChip:
-                text: 'Paid'
+                text: root.text
                 width: 23
+                md_bg_color: root.color
+                bold: True
                 pos_hint: {'center_x': 0.15,'center_y': 0.08}
 
 <CustomPaymentChip@MDBoxLayout>

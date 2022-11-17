@@ -1,4 +1,5 @@
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.behaviors import RoundedRectangularElevationBehavior
-class HomeAds(MDBoxLayout, RoundedRectangularElevationBehavior):
+from kivymd.uix.behaviors import DeclarativeBehavior
+class HomeAds(MDBoxLayout):
     pass
