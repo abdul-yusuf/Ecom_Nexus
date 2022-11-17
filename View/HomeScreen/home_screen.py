@@ -65,14 +65,25 @@ class HomeScreenView(BaseScreenView):
                         "image": "/media/goat_8w8yMpQ.png"
                     },
                 ]
-        self.ids.view_1.data = data
+        # self.ids.view_1.data = data
         self.ids.view_1.viewclass = HomeTile
         
+        # for item in data:
+        #     tile = HomeTile()
+        #     tile.set_data(item)
+        #     self.ids.view_1.add_widget(tile)
+        #     tile.controller = self.controller
+            # print(item)
         self.ids.view_2.data = data
         self.ids.view_2.viewclass = CartTile
+        # self.ids.home_refresh_layout.data = data
+        # self.ids.home_refresh_layout.viewclass = HomeTile
+        
+        # self.ids.view_2.data = data
+        # self.ids.view_2.viewclass = CartTile
 
-        self.ids.view_3.data = data
-        self.ids.view_3.viewclass = FavouriteTile
+        # self.ids.view_3.data = data
+        # self.ids.view_3.viewclass = FavouriteTile
         
         # return super().on_enter(*args)
 

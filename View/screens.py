@@ -50,54 +50,54 @@ screen = {
         'controller': ProfileDetailsScreenController,
     }, 
    
-#     'addresses screen': {
-#         'model': AddressesScreenModel,
-#         'controller': AddressesScreenController,
-#     },
-#    'my account screen': {
-#         'model': MyAccountScreenModel,
-#         'controller': MyAccountScreenController,
-    # },
+    'addresses screen': {
+        'model': AddressesScreenModel,
+        'controller': AddressesScreenController,
+    },
+   'my account screen': {
+        'model': MyAccountScreenModel,
+        'controller': MyAccountScreenController,
+    },
     'email verification screen': {
         'model': EmailVerificationScreenModel,
         'controller': EmailVerificationScreenController,
     },
-#     # 'feed screen': {
-#     #     'model': FeedScreenModel,
-#     #     'controller': FeedScreenController,
-#     # },
-#     'login screen': {
-#         'model': LoginScreenModel,
-#         'controller': LoginScreenController,
-#     },
-#    'q r scan screen': {
-#         'model': QRScanScreenModel,
-#         'controller': QRScanScreenController,
-#     },
-#    'forgot password screen': {
-#         'model': ForgotPasswordScreenModel,
-#         'controller': ForgotPasswordScreenController,
-#     },
-#     'search page screen': {
-#         'model': SearchPageScreenModel,
-#         'controller': SearchPageScreenController,
-#     },
-#     'track order screen': {
-#         'model': TrackOrderScreenModel,
-#         'controller': TrackOrderScreenController,
-#     },
-#     'order history screen': {
-#         'model': OrderHistoryScreenModel,
-#         'controller': OrderHistoryScreenController,
-#     },
-#     'checkout screen': {
-#         'model': CheckoutScreenModel,
-#         'controller': CheckoutScreenController,
-#     },
-#     'categories screen': {
-#         'model': CategoriesScreenModel,
-#         'controller': CategoriesScreenController,
-#     },
+    'feed screen': {
+        'model': FeedScreenModel,
+        'controller': FeedScreenController,
+    },
+    'login screen': {
+        'model': LoginScreenModel,
+        'controller': LoginScreenController,
+    },
+   'q r scan screen': {
+        'model': QRScanScreenModel,
+        'controller': QRScanScreenController,
+    },
+   'forgot password screen': {
+        'model': ForgotPasswordScreenModel,
+        'controller': ForgotPasswordScreenController,
+    },
+    'search page screen': {
+        'model': SearchPageScreenModel,
+        'controller': SearchPageScreenController,
+    },
+    'track order screen': {
+        'model': TrackOrderScreenModel,
+        'controller': TrackOrderScreenController,
+    },
+    'order history screen': {
+        'model': OrderHistoryScreenModel,
+        'controller': OrderHistoryScreenController,
+    },
+    'checkout screen': {
+        'model': CheckoutScreenModel,
+        'controller': CheckoutScreenController,
+    },
+    'categories screen': {
+        'model': CategoriesScreenModel,
+        'controller': CategoriesScreenController,
+    },
     'item detail screen': {
         'model': ItemDetailScreenModel,
         'controller': ItemDetailScreenController,
