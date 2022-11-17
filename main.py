@@ -9,8 +9,8 @@ To run the application in hot boot mode, execute the command in the console:
 DEBUG=1 python main.py
 """
 
-import importlib
-import os
+# import importlib
+# import os
 
 from kivy import Config
 
@@ -18,10 +18,10 @@ from PIL import ImageGrab
 
 # TODO: You may know an easier way to get the size of a computer display.
 resolution = ImageGrab.grab().size
-print(resolution)
+
 # Change the values of the application window size as you need.
-Config.set("graphics", "height", "800")
-Config.set("graphics", "width", "360")
+Config.set("graphics", "height", resolution[1])
+Config.set("graphics", "width", "400")
 
 from kivy.core.window import Window
 
@@ -186,41 +186,24 @@ Ecom_Nexus().run()
 # After you finish the project, remove the above code and uncomment the below
 # code to test the application normally without hot reloading.
 
-"""
-The entry point to the application.
+# """
+# The entry point to the application.
 
-The application uses the MVC template. Adhering to the principles of clean
-architecture means ensuring that your application is easy to test, maintain,
-and modernize.
+# The application uses the MVC template. Adhering to the principles of clean
+# architecture means ensuring that your application is easy to test, maintain,
+# and modernize.
 
-You can read more about this template at the links below:
+# You can read more about this template at the links below:
 
-https://github.com/HeaTTheatR/LoginAppMVC
-https://en.wikipedia.org/wiki/Model–view–controller
-"""
+# https://github.com/HeaTTheatR/LoginAppMVC
+# https://en.wikipedia.org/wiki/Model–view–controller
+# """
 
 # from kivymd.app import MDApp
 # from kivymd.uix.screenmanager import MDScreenManager
 # from kivy.core.window import Window
 # from View.screens import screen
 
-#new imports
-from kivy.uix.modalview import ModalView
-from kivy.uix.label import Label
-from kivy.metrics import dp
-from kivymd.toast.kivytoast import toast 
-from kivymd.uix.spinner.spinner import MDSpinner
-from kivy.storage.jsonstore import JsonStore
-
-class UrlMaker:
-    def __init__(self, dict) -> None:
-        self.dict = dict
-
-    def route(self, route):
-        url = self.dict['host']+self.dict[route]['url']
-        return url
-    def method(self, route):
-        return self.dict[route]['method']
 
 # class Ecom_Nexus(MDApp):
 #     def __init__(self, **kwargs):
@@ -233,15 +216,6 @@ class UrlMaker:
 #     def build(self) -> MDScreenManager:
 #         self.theme_cls.primary_palette = "Blue"
 #         self.list_of_prev_screen = []
-
-        #new variables
-        self.is_modal_open = False
-        self.modal_instance = None
-        self.auth_store = JsonStore('auth.json')
-        self.url_store = JsonStore('url.json')
-        self.request_parm = UrlMaker(self.url_store)
-        self.is_authenticated = False
-
 #         Window.bind(on_key_down=self.onBackBtn)
 #         self.generate_application_screen()
 #         return self.manager_screen
@@ -283,7 +257,6 @@ class UrlMaker:
 #                 self.manager_screen.current = self.list_of_prev_screen.pop()
 #                 return True
 #         else:
-#             self.rebuild()
-#             return True
+#             return False
     
 # Ecom_Nexus().run()

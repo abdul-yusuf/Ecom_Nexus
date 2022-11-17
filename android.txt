@@ -1,0 +1,3 @@
+title = "Title of the application"
+author = "Author of the application"
+orientation = "portrait"
