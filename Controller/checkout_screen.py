@@ -1,4 +1,6 @@
 import importlib
+from json import dumps
+from kivy.network.urlrequest import UrlRequest
 
 import View.CheckoutScreen.checkout_screen
 
@@ -24,3 +26,29 @@ class CheckoutScreenController:
 
     def get_view(self) -> View.CheckoutScreen.checkout_screen:
         return self.view
+
+    def cart_server_request(self):
+        url = self.view.app.request_parm.route('order')
+        method = self.view.app.request_parm.method('order')
+        headers = self.view.app.auth_store['headers']['data']
+        print(url,method,headers)
+        req = UrlRequest(url, on_success=self.model.cart_success, method=method,
+						 on_error=self.model.server_error, 
+                         req_headers=headers, 
+                         on_failure=self.model.server_failed)
+
+    def payment_server_request(self, payment_option:str, ref_code:str):
+        url = self.view.app.request_parm.route('payment')
+        method = self.view.app.request_parm.method('payment')
+        headers = self.view.app.auth_store['headers']['data']
+        payload = dumps({
+            'ref_id': ref_code,
+            'option': payment_option
+        })
+        print(payload)
+        print(url,method,headers)
+        req = UrlRequest(url, on_success=self.model.payment_success, method=method,
+						 on_error=self.model.server_error,
+                         req_body=payload, 
+                         req_headers=headers, 
+                         on_failure=self.model.server_failed)

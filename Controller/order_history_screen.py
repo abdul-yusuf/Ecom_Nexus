@@ -1,4 +1,6 @@
 import importlib
+from json import dumps
+from kivy.network.urlrequest import UrlRequest
 
 import View.OrderHistoryScreen.order_history_screen
 
@@ -24,3 +26,19 @@ class OrderHistoryScreenController:
 
     def get_view(self) -> View.OrderHistoryScreen.order_history_screen:
         return self.view
+
+    def server_request(self):
+        # self.model.notify_observers('home screen', meths='loading')
+
+        url = self.view.app.request_parm.route('ordered_item_list')
+        method = self.view.app.request_parm.method('ordered_item_list')
+        headers = self.view.app.auth_store['headers']['data']
+        print(url,method,headers)
+        req = UrlRequest(
+                        url, 
+                        on_success=self.model.server_success, 
+                        method=method,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed
+                        )

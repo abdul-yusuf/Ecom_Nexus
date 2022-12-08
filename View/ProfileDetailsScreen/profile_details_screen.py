@@ -20,3 +20,9 @@ class ProfileDetailsScreenView(BaseScreenView):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save,on_cancel=self.cancel)
         date_dialog.open()
+
+    def server_error(self, *args, **kwargs):
+        self.app.create_toast(str(args[1]))
+
+    def server_failed(self, *args, **kwargs):
+        self.app.create_toast(str(args[0][1]))

@@ -1,5 +1,6 @@
 {
-    "host":"http://127.0.0.1:8000/",
+    "host1":"http://10.42.0.1:8000/",
+    "host":"https://nexusv2-production.up.railway.app/",
     "login":{
         "url":"auth/login/",
         "method": "POST"
@@ -19,6 +20,44 @@
     "products":{
         "url":"store/api/products/",
         "method":"GET"
+    },
+    "products-order":{
+        "url":"core/api/ordered-item/",
+        "method":"POST"
+    },
+    "order":{
+        "url":"core/api/order/",
+        "method":"GET"
+    }
+    ,
+    "payment":{
+        "url":"core/api/payment/",
+        "method":"POST"
+    }
+    ,
+    "verify-payment":{
+        "url":"core/api/verify/payment/",
+        "method":"POST"
+    }
+    ,
+    "ordered_item_list":{
+        "url":"core/api/order/0/item/",
+        "method":"GET"
+    }
+    ,
+    "media":{
+        "url":"media/",
+        "method":"GET"
+    }
+    ,
+    "item":{
+        "url":"item/",
+        "method":{
+            "GET":"GET",
+            "PATCH":"PATCH",
+            "DELETE":"DELETE"
+        }
     }
 
 }
+

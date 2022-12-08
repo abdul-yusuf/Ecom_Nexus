@@ -29,16 +29,18 @@ class LoginScreenView(BaseScreenView):
         """
         is_loading = True
         try:
-            data = args[0][1]
-            self.app.perform_store_save(data, store_name='auth_store', key='user')
-            self.model.notify_observers('home screen')
-            self.app.onNextScreen(self.name,'home screen')
-        except IndexError as e:
+            # print(args)
+            if self.app.auth_store.get('variable')['is_authenticated']==True:
+                data = args[1]
+                self.app.perform_store_save('auth_store', 'user',data=data)
+                self.model.notify_observers('home screen')
+                self.app.onNextScreen(self.name,'home screen','switch_to','home screen')
+        except IndexError or KeyError as e:
             print(e)
         print(args,'notified')
     
     def server_success(self, *args, **kwargs):
-        self.app.create_toast('Logged in Successfully')
+        self.app.create_toast('Login Successfully')
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
         headers = {
@@ -46,7 +48,8 @@ class LoginScreenView(BaseScreenView):
             'Content-type': 'application/json'
         }
         self.app.is_authenticated = True
-        self.app.perform_store_save(headers, store_name='auth_store', key='headers')
+        self.app.perform_store_save('auth_store', 'variable', is_authenticated=self.app.is_authenticated)
+        self.app.perform_store_save('auth_store', 'headers', data=headers)
         self.controller.fetch_user_data(headers)
         print('from success')
         print(headers)
@@ -55,9 +58,23 @@ class LoginScreenView(BaseScreenView):
     def server_error(self, *args, **kwargs):
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
-        self.app.create_toast('Logged in Error')
+        
+        self.app.perform_store_save('auth_store', 'variable', is_authenticated=False)
+        self.app.create_toast('Network Error')
         print(args, kwargs,'error')
+        self.app.create_toast(str(args[1]))
 
+    def server_failed(self, *args, **kwargs):
+        print(args)
+        # if isinstance(args[1],) 
+        # msg = f'{}'
+        if self.app.is_modal_open:
+            Clock.schedule_once(self.app.modal_instance.dismiss, 1)
+        
+        self.app.create_toast(str(args[0][1]))
+    
     def server_processing(self, *args):
+        self.app.perform_store_save('auth_store', 'variable', is_authenticated=False)
         self.app.modal_view(attach_to=self)
         print(args,'loading..')
+    

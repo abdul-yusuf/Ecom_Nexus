@@ -6,10 +6,11 @@
     tertiary_text: 'on 27-Dec-22'
     icon: 'point-of-sale'
     MDBoxLayout:
+        adaptive_height: True
         Dot:
             id: dot_1
-            height: 14
-            width: 14
+            height: dp(14)
+            width: dp(14)
             adaptive_height: True
             md_bg_color: app.theme_cls.primary_light if root.color==None else root.color
             pos_hint: {'center_x': 0.0,'center_y': 0.5}
@@ -24,9 +25,9 @@
                 md_bg_color: app.theme_cls.primary_light if root.color==None else root.color
     MDSeparator:
         orientation: 'vertical'
-        width: 5
+        width: dp(5)
         size_hint_y: None
         height: int(root.seprator_height) if root.seprator_height=='0' else root.height+dp(10)
-        pos_hint: {'center_x': 0.02,'center_y': 0.}
+        pos_hint: {'center_x': 0.022,'center_y': 0.15}
         color:  app.theme_cls.primary_light if root.color==None else root.color
         

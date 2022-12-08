@@ -29,7 +29,7 @@
 
 <CountBox@MDBoxLayout>
     # md_bg_color: app.theme_cls.primary_dark
-    size: 45,20
+    size: dp(45),dp(20)
     size_hint: None, None
     current: '1'
     total: '2'
@@ -39,4 +39,7 @@
         text: f'{root.current}/{root.total}'
         color: get_color_from_hex('#ffffff')
         halign: 'center'
+        theme_text_color: 'Custom'
+        color: [0,0,0,1]
+
         # theme_text_color: 'Custom'

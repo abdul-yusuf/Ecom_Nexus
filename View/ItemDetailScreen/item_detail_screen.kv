@@ -2,7 +2,6 @@
     md_bg_color: app.theme_cls.bg_normal
     on_enter:
         root.model.notify_observers(self.name,app.screen_args[0])
-    
     MDBoxLayout:
         orientation: 'vertical'
         CarouselSlide:
@@ -24,6 +23,7 @@
                         orientation: 'vertical'
                         adaptive_height: True
                         ChipLabel:
+                            id: vendor
                             adaptive_height: True
                             text: 'Div Farm'
                             font_style: 'Body1'
@@ -42,20 +42,24 @@
                     bold: True
                 Widget: 
                     size_hint_y: None
-                    height: 12
+                    height: dp(12)
+                MDRelativeLayout:
+                    QtyCard:
+                        pos_hint: {'center_x': 0.85,}
+
                 ChipLabel: 
                     text: 'Description'
                     font_style: 'Body1'
                 MDSeparator:
                     adaptive_width: True
-                    width: 215
+                    width: dp(215)
                 ChipLabel:
                     id: description
                     text: 'Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem Lorem ipusm Lorem'
                     font_style: 'Body2'
                 Widget: 
                     size_hint_y: None
-                    height: 12
+                    height: dp(12)
                 ChipLabel:
                     text: 'MORE DETAIL'
                     font_style: 'H6'
@@ -75,22 +79,26 @@
                         md_bg_color: app.theme_cls.primary_light
                         _no_ripple_effect: True
                 # ExpansionPanel:
-                    # panel_cls: MDExpansionPanelOneLine(text='Review')
+                #     panel_cls: MDExpansionPanelOneLine(text='Review')
 
         MDBoxLayout:
             # adaptive_height: True
             size_hint_y: None
-            height: 85
-            padding: 10
-            spacing: 15
-            QtyCard:
+            height: dp(85)
+            padding: dp(10)
+            spacing: dp(15)
             MDFillRoundFlatButton:
                 text: 'Add To Cart'
                 adaptive_size: True
                 rounded_button: False
                 size_hint: .8, None
                 size_hint_y: .8
-                font_style: 'Button'        
+                font_style: 'Button'     
+                on_press: 
+                    root.controller.server_request(app.screen_args[0]['pk'])   
+                    root.show_alert_dialog()
+                    # app.onNextScreen(root.name, 'home screen', 'switch_to', 'Cart screen')
+                    # app.manager_screen.ids.botton_nav.name
     MDIconButton:
         icon: 'arrow-left'
         y: root.height-(self.height+dp(12))
@@ -100,38 +108,59 @@
 
                     
 <ChipLabel@MDLabel>
-    theme_text_color: 'Primary'
+    theme_text_color: 'Custom'
+    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
 
 <QtyCard@MDFloatLayout>
     adaptive_size: True
-    size_hint: None, None
-    height: dp(52)
+    size_hint: .3, None
+    padding: dp(10)
+    height: dp(42)
     # elevation: 2
     md_bg_color: app.theme_cls.bg_light
-    radius: 15
-    MDLabel
-        text: 'Qty'
-        pos_hint: {'center_x': 0.55,'center_y': 0.5}
+    radius: dp(15)
+    # MDLabel
+    #     # adaptive_width: True
+    #     text: 'Qty'
+    #     font_size: '12sp'
+    #     pos_hint: {'center_x': 0.58,'center_y': 0.5}
     Btnqty:
         icon: 'minus'
-        pos_hint: {'center_x': 0.45,'center_y': 0.5}
+        pos_hint: {'center_x': 0.2,'center_y': 0.5}
         on_release: qty.text = str(int(qty.text)-1) if int(qty.text)>1 else qty.text 
     Btnqty:
         icon: 'plus'
-        pos_hint: {'center_x': 0.87,'center_y': 0.5}
+        pos_hint: {'center_x': 0.8,'center_y': 0.5}
         on_release: qty.text = str(int(qty.text)+1) 
-    MDTextField:
+    TextInput:
+        multiline: False
+        background_color: 1, 1, 1, 0
         id: qty
-        adaptive_width: True
-        size_hint_x: .2
+        # adaptive_width: True
+        size_hint_x: .4
+        size_hint_y:.7
         text: '1'
         check_text: int
         max_text_length: 2
-        pos_hint: {'center_x': 0.67,'center_y': 0.55}
-        theme_text_color: 'Primary'
-        color: [0,0,0,0]
+        disabled: 'True'
+        halign:'left'
+        font_size: '12sp' if int(self.text)>9 else '16sp'
+        pos_hint: {'center_x': 0.48,'center_y': 0.46}
+        # opposite_colors: True
+    
+    MDLabel:
+        text: 'kg'
+        font_size: '12sp'
+        pos_hint: {'center_x': 1,'center_y': 0.5}
+        theme_text_color: 'Custom'
+        color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+
+        # theme_text_color: 'Primary'
+        # color: [0,0,0,0]
 <Btnqty@MDIconButton>
-    size_hint: .1,.1
+    size_hint: .3,.4
 
 # <Content>:
 #     adaptive_height: True

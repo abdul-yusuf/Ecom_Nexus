@@ -1,14 +1,17 @@
 <SearchPageScreenView>
-    md_bg_color: app.theme_cls.primary_color
+    md_bg_color: app.theme_cls.bg_normal
     MDScrollViewRefreshLayout:
         id: home_refresh_layout
         root_layout: root
-        adaptive_height: True
-        MDGridLayout:
-            size_hint_y: None
+        # adaptive_height: True
+        MDBoxLayout:
+            adaptive_height: True
+            # size_hint_y: None
             height: self.minimum_height
+            # height: root.height
+            orientation: 'vertical'
             cols:1
-            md_bg_color: app.theme_cls.bg_normal
+            # md_bg_color: app.theme_cls.bg_normal
             MDBoxLayout:
                 adaptive_height: True
                 padding: [20,20,23,20]

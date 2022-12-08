@@ -11,11 +11,12 @@ class LoginScreenModel(BaseScreenModel):
         self.notify_observers('login screen', args, meths='success')
         # print(args,dir(args),kwargs)
 
-    
     def server_error(self, *args, **kwargs):
-        # print(args, kwargs)
         self.notify_observers('login screen', *args, meths='error')
-        # print(args,kwargs)
+        
+    def server_failed(self, *args, **kwargs):
+        self.notify_observers('login screen', args, meths='failed')
 
     def server_success_user(self, *args, **kwargs):
         self.notify_observers('login screen', *args, **kwargs)
+

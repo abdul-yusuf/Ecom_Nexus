@@ -2,17 +2,19 @@
     # elevation: 1
     pk: 1
     size_hint_y: None
-    height: 260
+    height: dp(260)
     orientation: 'vertical'
-    radius: 12
+    radius: dp(12)
     padding: [1,0]
     md_bg_color: app.theme_cls.bg_light
     title: 'Chicken'
-    discount_price: "null"
+    discount_price: 'null'
     price: "₦2200"
     slug: ''
     rate: 1
-    images: {}
+    images: {'image1':''}
+    discount_percent: 34
+    # met:root.remove_widget(percentage_badge) if root.discount_price == 'null' else ''
     on_release: 
         # print(self.id)
         app.onNextScreen(
@@ -31,9 +33,10 @@
 
         # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)
     RelativeLayout:
-        FitImage:
+        AsyncImage:
             id: home_tile_image
-            source: 'assets/images/cate-1.jpg' or root.images[0]
+            source: '{}'.format(app.request_parm.route('media')+root.images['image1'])
+            # source: 'assets/images/cate-1.jpg' or root.images[0]
             radius: [10,10,15,15]
         MDIconButton:
             icon: "heart-outline"
@@ -42,14 +45,40 @@
             md_bg_color: get_color_from_hex(colors['Gray']['50'])
             on_release: 
                 print(self.parent.parent.pk)
-
                 self.icon = 'heart' if self.icon == 'heart-outline' else 'heart-outline'
         MDIconButton:
             icon: "cart-plus"
             pos_hint: {'center_x': 0.82,'center_y': 0.05}
             md_bg_color: app.theme_cls.bg_normal
+            theme_text_color: 'Custom'
+            color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+            on_press: 
+                root.parent.parent.parent.parent.parent.parent.parent.parent.parent.controller.home_add_to_cart(root.pk)
+
+        
+        MDBoxLayout:
+            id: percentage_badge
+            adaptive_size: True
+            size_hint_x: .3
+            # width: dp(len(p_text.text)*2)
+            padding: [dp(5),dp(5),0,dp(5)]
+            md_bg_color: get_color_from_hex(colors['Red']['400'])
+            pos_hint: {'center_x': 0.1,'center_y': 0.89}
+            radius: [dp(4),dp(4),dp(15),0]
+            MDLabel:
+                id: p_text
+                adaptive_size: True
+                text: '{}% off'.format(str(int(root.discount_percent)))
+                font_size: '12sp'
+                color: 1, 1, 1, 1
+                # opposite_color: True
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+
+
     RelativeLayout:
-        padding: 15
+        padding: dp(15)
         size_hint_y: None
         height: self.parent.height/3.8
         MDLabel:
@@ -57,37 +86,60 @@
             text: root.title
             font_style: 'H6'
             pos_hint: {'center_x': 0.53,'center_y': 0.83}
+            theme_text_color: 'Custom'
+            color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
         MDLabel:
             id: price
-            text: root.price
+            text: f'₦{root.price}/kg' if root.discount_price=='null' else f'₦{float(root.price)-(float(root.discount_price))}/kg'
             font_style: 'Body2'
+            # color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+            theme_text_color: "Primary" if root.discount_price=='null' else 'Error'
+            # theme_text_color: 'Custom'
             pos_hint: {'center_x': 0.54,'center_y': 0.5}
-            MDBoxLayout:
-                padding:[10,0]
-                MDFloatLayout:
-                    adaptive_height: True
-                    adaptive_width: True
-                    height: 0 if root.discount_price=='null' else 2.5
-                    width: len(price.text)*7
-                    pos_hint: {'top': .35}
-                    md_bg_color: get_color_from_hex(colors['Gray']['300'])
-        MDLabel:
-            id: discount_price
-            text: root.discount_price if root.discount_price!='null' else ''
-            font_style: 'Body2'
-            theme_text_color: "Error"
-            pos_hint: {'center_x': .955,'center_y': 0.5}
+
+
+            # canvas:
+            #     Color:
+            #         rgba: [1, 0, 0, 1]
+            
+            #     Line:
+            #         points: [10, 150, 20, 150, 30, 150]
+            #         width: dp(len(price.text)*7)
+            # MDBoxLayout:
+            #     padding:[10,0]
+            #     MDFloatLayout:
+            #         adaptive_height: True
+            #         adaptive_width: True
+            #         height: 0 if root.discount_price=='null' else dp(2.5)
+            #         width: dp(len(price.text)*7)
+            #         pos_hint: {'top': .35}
+            #         md_bg_color: get_color_from_hex(colors['Gray']['300'])
+            
+            
+        # MDLabel:
+        #     id: discount_price
+        #     text: f'₦{root.discount_price}/kg' if root.discount_price!='null' else ''
+        #     font_style: 'Body2'
+        #     theme_text_color: "Error"
+        #     pos_hint: {'center_x': .955,'center_y': 0.5}
         MDLabel:
             text: "Rating :"
             font_style: "Overline"
             halign: 'right'
             pos_hint: {'center_x': 0.24,'center_y': 0.23}
+            theme_text_color: 'Custom'
+            color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
         MDLabel:
             id: rate
             text: str(root.rate)
             font_style: "Overline"
             halign: 'right'
             pos_hint: {'center_x': 0.35,'center_y': 0.23}
+            theme_text_color: 'Custom'
+            color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
         MDIconButton:
             icon: 'star'
             icon_size: '12sp'

@@ -53,8 +53,14 @@ class LoginScreenController:
         # self.view.app.modal_view(attach_to=self.view)
         url = self.view.app.request_parm.route('login')
         print(url)
-        req = UrlRequest(url, on_success=self.model.server_success, req_body=payload,
-						 on_error=self.model.server_error, req_headers=headers, on_failure=self.model.server_error)
+        req = UrlRequest(
+                        url, 
+                        on_success=self.model.server_success, 
+                        req_body=payload,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed
+                        )
 
     def fetch_user_data(self, headers):
         """_summary_
@@ -65,6 +71,12 @@ class LoginScreenController:
         url = self.view.app.request_parm.route('user_detail')
         method = self.view.app.request_parm.method('user_detail')
         print(url,method,headers)
-        req = UrlRequest(url, on_success=self.model.server_success_user, method=method,
-						 on_error=self.model.server_error, req_headers=headers, on_failure=self.model.server_error)
+        req = UrlRequest(
+                        url, 
+                        on_success=self.model.server_success_user, 
+                        method=method,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed
+                        )
 

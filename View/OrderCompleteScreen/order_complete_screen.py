@@ -8,3 +8,9 @@ class OrderCompleteScreenView(BaseScreenView):
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
+
+    def server_error(self, *args, **kwargs):
+        self.app.create_toast(str(args[1]))
+
+    def server_failed(self, *args, **kwargs):
+        self.app.create_toast(str(args[0][1]))

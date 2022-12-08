@@ -38,6 +38,15 @@ class BaseScreenModel:
                 if meths=='error':
                     observer.server_error(*args,**kwargs)
                     print('server error sending signal')
+                if meths=='failed':
+                    observer.server_failed(*args,**kwargs)
+                    print('server failed sending signal')
+                if meths=='cart_success':
+                    observer.populate_cart(*args,**kwargs)
+                    print('server cart populate sending signal')
+                if meths=='payment_success':
+                    observer.create_webview(*args,**kwargs)
+                    print('server payment success sending signal')
                 else:
                     observer.model_is_changed(*args,**kwargs)
                     print('model is changed sending signal')

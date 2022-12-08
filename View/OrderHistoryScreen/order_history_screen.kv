@@ -1,4 +1,6 @@
 <OrderHistoryScreenView>
+    on_enter:
+        root.controller.server_request()
     MDBoxLayout:
         orientation: 'vertical'
         # MDBoxLayout:
@@ -9,20 +11,19 @@
             # orientation: 'vertical'
         MDRelativeLayout:
             md_bg_color: app.theme_cls.primary_color
-            size_hint_y: None
-                # adaptive_width: True
-                # width: icon.width-dp(40)
-                # height: icon.height
+            # size_hint_y: None
+            adaptive_height:True
+            size_hint_x: 1
             MDIconButton: 
                 icon: 'arrow-left'
-                pos_hint: {'center_x': 0.08,'center_y': 0.85}
+                pos_hint: {'center_x': 0.1,'center_y':.5}
                 on_release: app.onBackBtnx()
             MDLabel:
                 text: "Order History"
                 font_style: 'H5'
                 halign: 'center'
                 bold: True
-                pos_hint: {'center_x': 0.3,'center_y': 0.85}
+                # pos_hint: {'center_x': 0.5}
             # MDLabel:
             #     adaptive_height: True
             #     text: "Order History"
@@ -38,46 +39,88 @@
                 # width: root.width
                 # pos_hint: {'center_x': 0.0,'center_y': 0.1}
                 do_scroll_x: False
-                MDBoxLayout:
-                    padding: 15
-                    size_hint_y: None
-                    adaptive_height: True
-                    orientation: 'vertical'
-                    spacing:20
+                do_scroll_y: False
+                RecycleView:
+                    id: view_1
+                    do_scroll_x:False
+                    viewclass: 'CartBoxWithShadow'
+                    # padding: 15
+
+                    RecycleGridLayout:
+                        cols:1
+                        spacing: 20
+                        adaptive_height: True
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        padding: dp(15)
+                        spacing: dp(20)
+                        size_hint_y: None
+                        height: self.minimum_height
+                # MDBoxLayout:
+                #     padding: 15
+                #     size_hint_y: None
+                #     adaptive_height: True
+                #     orientation: 'vertical'
+                #     spacing:20
                     
-                    CartBoxWithShadow:
-                        color: '#ef5350'
-                        text: 'Not Paid'
-                    CartBoxWithShadow:
-                    CartBoxWithShadow:
+                #     CartBoxWithShadow:
+                #         color: '#ef5350'
+                #         text: 'Not Paid'
+                #     CartBoxWithShadow:
+                #     CartBoxWithShadow:
                         
             TabsBase:
                 title: 'Transit'
-                MDBoxLayout:
-                    padding: 15
-                    size_hint_y: None
-                    adaptive_height: True
-                    orientation: 'vertical'
-                    spacing:20
-                    CartBoxWithShadow:
+                
+                do_scroll_x: False
+                do_scroll_y: False
+                RecycleView:
+                    id: view_2
+                    do_scroll_x:False
+                    viewclass: 'CartBoxWithShadow'
+                    # padding: 15
+
+                    RecycleGridLayout:
+                        cols:1
+                        spacing: 20
+                        adaptive_height: True
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        padding: dp(15)
+                        spacing: dp(20)
+                        size_hint_y: None
+                        height: self.minimum_height
 
             TabsBase:
                 title: 'Complete'
-                MDBoxLayout:
-                    padding: 15
-                    size_hint_y: None
-                    adaptive_height: True
-                    orientation: 'vertical'
-                    spacing:20
-                    
-                    CartBoxWithShadow:
-                    CartBoxWithShadow:
+                do_scroll_x: False
+                do_scroll_y: False
+                RecycleView:
+                    id: view_3
+                    do_scroll_x:False
+                    viewclass: 'CartBoxWithShadow'
+                    # padding: 15
+
+                    RecycleGridLayout:
+                        cols:1
+                        spacing: 20
+                        adaptive_height: True
+                        default_size: None, None
+                        default_size_hint: .1, None
+                        padding: dp(15)
+                        spacing: dp(20)
+                        size_hint_y: None
+                        height: self.minimum_height
 
 # <TabsBase>
 <CartBoxWithShadow@MDBoxLayout>
     # adaptive_height: True
+    id: 0
+    is_payed: True
+    product: {'images':{'image1':''}}
+    order_set: [{'ref_code':''}]
     size_hint_y: None
-    height: 180
+    height: dp(180)
     text: 'Paid'
     color: '#66bb6a' # or '#ef5350'
     BoxWithShadow:
@@ -85,8 +128,8 @@
         padding: 10
         MDRelativeLayout:
             MDLabel:
-                text: "Order: #23423"
-                font_style: 'H6'
+                text: f"Order: {root.order_set[0]['ref_code']}"
+                font_style: 'Caption'
                 pos_hint: {'center_x': 0.5,'center_y': 0.9} 
             MDLabel:
                 text: "23-Dec-12, 12:04 PM"
@@ -105,11 +148,20 @@
                 rounded_button: False
                 text: 'Track Order'
                 pos_hint: {'center_x': 0.8,'center_y': 0.8}
-                on_release: app.onNextScreen('order history screen','track order screen')
+                on_release: 
+                    print(root.id)
+                    app.onNextScreen('order history screen','track order screen', root.id)
+
+            AsyncImage:
+                source: '{}'.format(app.request_parm.route('media')+root.product['images']['image1'])
+                size_hint: None, None
+                height: dp(45)
+                width: dp(35)
+                pos_hint: {'center_x': 0.8,'center_y': 0.55}
             CustomPaymentChip:
-                text: root.text
+                text: 'Paid' if root.is_payed else 'Not Paid'
                 width: 23
-                md_bg_color: root.color
+                md_bg_color: '#66bb6a' if root.is_payed else '#ef5350'
                 bold: True
                 pos_hint: {'center_x': 0.15,'center_y': 0.08}
 

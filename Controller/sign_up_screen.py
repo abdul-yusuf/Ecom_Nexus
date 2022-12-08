@@ -65,5 +65,11 @@ class SignUpScreenController:
             url = self.view.app.request_parm.route('login')
 
         print(url)
-        req = UrlRequest(url, on_success=self.model.server_success, req_body=payload,
-						 on_error=self.model.server_error, req_headers=headers, on_failure=self.model.server_error)
+        req = UrlRequest(
+                        url, 
+                        on_success=self.model.server_success, 
+                        req_body=payload,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed
+                        )

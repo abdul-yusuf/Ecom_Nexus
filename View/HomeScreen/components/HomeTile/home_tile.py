@@ -13,6 +13,16 @@ class HomeTile(MDCard):
         MDBoxLayout (_type_): _description_
         ButtonBehavior (_type_): _description_
     """
+    
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+    #     self.add_price_stroke()
+
+    # def add_price_stroke(self):
+    #     if self.ids.discount_price == 'null':
+    #         pass
+    #     else:
+
     # _data = DictProperty({})
     # parent = None
     # def set_data(self, data):

@@ -19,13 +19,19 @@
                 text: 'W E L C O M E !'
                 font_size: '26sp'
                 pos_hint: {'center_x': .6, 'center_y': .85}
-                color: rgba(0, 0, 59, 255)
+                # color: rgba(0, 0, 59, 255)
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
 
             MDLabel:
                 text: 'Sign in to continue'
                 font_size: '18sp'
                 pos_hint: {'center_x': .6, 'center_y': .8}
-                color: rgba(127, 127, 127, 255)
+                # color: rgba(127, 127, 127, 255)
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
 
             MDFloatLayout:
                 size_hint: .75, .07
@@ -107,6 +113,9 @@
                 pos_hint: {'center_y': .26}
                 font_size: '15sp'
                 halign: 'center'
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
 
             MDFloatLayout:
                 md_bg_color: rgba(168, 178, 178, 255)
@@ -123,7 +132,10 @@
                 font_size: '13sp'
                 halign: 'center'
                 pos_hint: {'center_y': .16}
-                color: rgba(135, 133, 193, 255)
+                # color: rgba(135, 133, 193, 255)
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
 
             MDBoxLayout:
                 spacing: 10
@@ -141,7 +153,10 @@
                 text: "Don't have an account?"
                 font_size: '11sp'
                 pos_hint: {'center_x': .68, 'center_y': .04}
-                color: rgba(135, 133, 193, 255)
+                # color: rgba(135, 133, 193, 255)
+                theme_text_color: 'Custom'
+                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
             MDTextButton:
                 text: "Sign up"
                 font_size: '11sp'

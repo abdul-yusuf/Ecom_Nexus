@@ -1,14 +1,22 @@
 #:import Animation kivy.animation.Animation
-
 <CartTile>
-    height: 120
+    # id:1
+    quantity: '1'
+    price: '12000'
+    title: 'Chicken'
+    height: dp(120)
     anchor: 'right'
+    images: {'image1':''}
+    trash_btn:trash_btn
     SwipeLayerBoxShadow:
         # elevation:1
         MDRelativeLayout:
             IconRightWidget:
+                id: trash_btn
                 icon: 'trash-can'
                 pos_hint: {'right':1, 'center_y':.5}
+                on_press:
+                    # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.controller.cart_remove_item(args[0][1]['id'],pro['pk'])
 
     MDCardSwipeFrontBox:
         md_bg_color: app.theme_cls.bg_light
@@ -26,39 +34,56 @@
         MDRelativeLayout:
             ImageLeftWidget:
                 size_hint: None, None
-                width: 80
-                radius: 8
+                width: dp(80)
+                radius: dp(8)
                 height: self.parent.height-6
-                source: 'assets/images/cate-1.jpg'                    
+                source: '{}'.format(app.request_parm.route('media')+root.images['image1'])
+                # source: 'assets/images/cate-1.jpg'                    
                 pos_hint: {'center_x': .12,'center_y': 0.5}
             
             MDBoxLayout:
                 adaptive_width:True
-                pos_hint: {'center_x': .42,'center_y': 0.5}
+                width:self.parent.width/2
+                pos_hint: {'center_x': .52,'center_y': 0.5}
                 orientation: 'vertical'
+                # md_bg_color: app.theme_cls.primary_dark
                 MDLabel:
-                    text: "Chicken"
+                    text: root.title
                     shorten: True
-                    shorten_from: 'right'
+                    # shorten_from: 'right'
                     font_style: 'H6'
+                    theme_text_color: 'Custom'
+                    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                 
                 MDLabel:
-                    text: "₦12000.00"
+                    text: f"₦{round(float(root.price)*float(qty.text),2)}/kg"
                     font_style: 'Body2'
+                    theme_text_color: 'Custom'
+                    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                 MDLabel:
                     text: "₦12000.00"
                     font_style: 'Body2'
+                    theme_text_color: 'Custom'
+                    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
             MDBoxLayout:
                 adaptive_width: True
                 pos_hint: {'right': 1,'center_y': 0.5} 
                 IconRightWidget: 
+                    id: minus_btn
                     icon: 'minus'
                     on_release:
                         qty.text = str(int(qty.text)-1) if int(qty.text)>1 else qty.text
                 MDLabel:
                     id: qty
-                    text: "1"
+                    text: root.quantity
+                    theme_text_color: 'Custom'
+                    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                 IconRightWidget:
+                    id: plus_btn
                     icon: 'plus'
                     on_release:
                         qty.text = str(int(qty.text)+1)

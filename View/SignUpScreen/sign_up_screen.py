@@ -23,13 +23,13 @@ class SignUpScreenView(BaseScreenView):
             self.app.onNextScreen(self.name,'email verification screen')
             
 
-        # headers = {
-        #     'Authorization': f"Token {args[0][1]['key']}",
-        #     'Content-type': 'application/json'
-        # }
-        # self.app.is_authenticated = True
-        # self.app.perform_store_save(headers, store_name='auth_store', key='headers')
-        # self.controller.fetch_user_data(headers)
+        headers = {
+            'Authorization': f"Token {args[0][1]['key']}",
+            'Content-type': 'application/json'
+        }
+        self.app.is_authenticated = True
+        self.app.perform_store_save(headers, store_name='auth_store', key='headers')
+        self.controller.fetch_user_data(headers)
         print('from success')
         print(args,kwargs,'success')
 
@@ -44,6 +44,12 @@ class SignUpScreenView(BaseScreenView):
             self.app.onNextScreen(self.name,'email verification screen')
         
 
+    def server_failed(self, *args, **kwargs):
+        if self.app.is_modal_open:
+            Clock.schedule_once(self.app.modal_instance.dismiss, 1)
+        self.app.create_toast('Server Error')
+        
+        print(args, kwargs)
 
     def server_processing(self, *args):
         self.app.modal_view(attach_to=self)

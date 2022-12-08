@@ -1,0 +1,189 @@
+[
+    {
+        "pk": 1,
+        "title": "Chicken",
+        "price": "554.255",
+        "discount_price": "20.0",
+        "discount_percent": "4.0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "foodify.png",
+            "image2": "",
+            "image3": "",
+            "image4": "",
+            "image5": ""
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/1/review/"
+    },
+    {
+        "pk": 2,
+        "title": "string",
+        "price": "0.0",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 3.3,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/2/review/"
+    },
+    {
+        "pk": 3,
+        "title": "string",
+        "price": "0.0",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/3/review/"
+    },
+    {
+        "pk": 4,
+        "title": "sed eu Excepteur",
+        "price": "89001.3",
+        "discount_price": "44000.0",
+        "discount_percent": "49.0",
+        "vendor": "Rice & chicken",
+        "rate": 4.0,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/4/review/"
+    },
+    {
+        "pk": 5,
+        "title": "string",
+        "price": "0.0",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/5/review/"
+    },
+    {
+        "pk": 6,
+        "title": "string",
+        "price": "0.0",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/6/review/"
+    },
+    {
+        "pk": 7,
+        "title": "sed eu Excepteur",
+        "price": "45.0",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 3.3,
+        "images": {
+            "image1": "dolore deserunt consectetur adipisicing",
+            "image2": "dolor cupidatat labore",
+            "image3": "magna Duis cupidatat irure tempor",
+            "image4": "amet ea dolore nisi fugiat",
+            "image5": "in dolor reprehenderit sit"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/7/review/"
+    },
+    {
+        "pk": 8,
+        "title": "sed eu Excepteur",
+        "price": "57.1",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "dolore deserunt consectetur adipisicing",
+            "image2": "dolor cupidatat labore",
+            "image3": "magna Duis cupidatat irure tempor",
+            "image4": "amet ea dolore nisi fugiat",
+            "image5": "in dolor reprehenderit sit"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/8/review/"
+    },
+    {
+        "pk": 9,
+        "title": "string",
+        "price": "23.12",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "string",
+            "image2": "string",
+            "image3": "string",
+            "image4": "string",
+            "image5": "string"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/9/review/"
+    },
+    {
+        "pk": 10,
+        "title": "sed eu Excepteur",
+        "price": "89.32",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "dolore deserunt consectetur adipisicing",
+            "image2": "dolor cupidatat labore",
+            "image3": "magna Duis cupidatat irure tempor",
+            "image4": "amet ea dolore nisi fugiat",
+            "image5": "in dolor reprehenderit sit"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/10/review/"
+    },
+    {
+        "pk": 11,
+        "title": "sed eu Excepteur",
+        "price": "890.32",
+        "discount_price": "null",
+        "discount_percent": "0",
+        "vendor": "Rice & chicken",
+        "rate": 0,
+        "images": {
+            "image1": "dolore deserunt consectetur adipisicing",
+            "image2": "dolor cupidatat labore",
+            "image3": "magna Duis cupidatat irure tempor",
+            "image4": "amet ea dolore nisi fugiat",
+            "image5": "in dolor reprehenderit sit"
+        },
+        "reviews": "http://10.42.0.1:8000/store/api/products/11/review/"
+    }
+]

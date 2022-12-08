@@ -5,12 +5,19 @@
 <HomeScreenView>
     md_bg_color: app.theme_cls.primary_color
     MDBottomNavigation:
+        id: botton_nav
+        # md_bg_color: app.theme_cls.primary_color
+
         # Add a NavigationItem for each Navigation.
         MDBottomNavigationItem:
             md_bg_color: app.theme_cls.primary_color
+
+            # md_bg_color: app.theme_cls.bg_normal
             name: "home screen"
             text: "Home"
             icon: 'home-outline'
+            title: 'home'
+            
             on_enter:
                 root.controller.server_request()
 
@@ -18,9 +25,11 @@
             MDScrollViewRefreshLayout:
                 id: home_refresh_layout
                 root_layout: root
-                # effect_cls: "ScrollEffect"
+                effect_cls: "ScrollEffect"
                 refresh_callback: root.refresh_callback
                 adaptive_height: True
+                always_overscroll: False
+                # smooth_scroll_end:10
                 scroll_timeout: 250
                 do_scroll_x: False
                 do_scroll_y: False
@@ -32,15 +41,15 @@
                     md_bg_color: app.theme_cls.bg_normal
                     MDBoxLayout:
                         adaptive_height: True
-                        spacing: 8
-                        padding: [10,14,10,4]
+                        spacing: dp(8)
+                        padding: [dp(10),dp(14),dp(10),dp(4)]
                         md_bg_color: app.theme_cls.primary_color
                         Avatar:
                             on_release:
                                 app.onNextScreen(root.name, 'login screen')
                         MDBoxLayout:
-                            padding: 10
-                            spacing: 10
+                            padding: dp(10)
+                            spacing: dp(10)
                             orientation: 'vertical'
                             MDLabel:
                                 id: username
@@ -51,13 +60,13 @@
                                 font_style: "Caption"
                         MDIconButton:
                             icon: "moon-waning-crescent" if app.theme_cls.theme_style == 'Light' else 'weather-sunny'
-                            on_release: app.theme_cls.theme_style = 'Dark' if self.icon == "moon-waning-crescent" else 'Light'
+                            on_release: app.change_theme(self.icon)
                     MDBoxLayout:
                         adaptive_height: True
-                        padding: [20,5,23,20]
+                        padding: [dp(20),dp(5),dp(23),dp(20)]
                         size_hint_x: .9
                         pos_hint_y: .8
-                        radius: [0,0,23,23]
+                        radius: [0,0,dp(23),dp(23)]
                         orientation: 'vertical'
                         md_bg_color: app.theme_cls.primary_color
                         MDTextField:
@@ -69,6 +78,7 @@
                             font_size: '18sp'
                             coursor_width: '1.5sp'
                             on_focus: True
+                            background_color: 1, 1, 1, 1
                             # background_color: get_color_from_hex('#ffd747')
                             # foreground_color: get_color_from_hex('#ffd747')
                     MDBoxLayout:
@@ -84,8 +94,8 @@
                                     id: categories_layout
                                     orientation: 'horizontal'
                                     adaptive_width: True
-                                    spacing: 10
-                                    padding: [15,0,0,0]
+                                    spacing: dp(10)
+                                    padding: [dp(15),0,0,0]
                                     StoryWithIcon:
                                     StroyWithImage:
                                     StroyWithImage:
@@ -95,7 +105,7 @@
                     MDBoxLayout:
                         size_hint_y: None
                         height: root.height/4
-                        padding: 10
+                        padding: dp(10)
                         # md_bg_color: get_color_from_hex(colors['Red']['400'])
                         HomeAds:   
                     MDBoxLayout:
@@ -113,36 +123,50 @@
                         #     cols: 2
                         #     md_bg_color: get_color_from_hex(colors['Brown']['400'])
 
-                             
+                            #  (Animation(\
+                            # x=-50,\
+                            # t='out_quad',\
+                            # d=0.02/1,\
+                            # )+\
+                            # Animation(\
+                            # x=0,\   
+                            # t='in_quad',\
+                            # d=0.5/1,\
+                            # )).start(self)
 
                         CustomScroll:
                             root_layout: root
                             refresh_callback: root.refresh_callback
-                            scroll_timeout:25
+                            scroll_timeout:125
                             # do_scroll_y: False
+                            smooth_scroll_end:10
                             do_scroll_x: False
                             id: view_1
-
+                            
                             RecycleGridLayout:
-                                spacing: 20
-                                padding: 10
+                                spacing: dp(20)
+                                padding: dp(10)
                                 size_hint_y: None
                                 default_size: None, None
                                 default_size_hint: .1, None
                                 height: self.minimum_height
                                 cols: 2
-                                md_bg_color: get_color_from_hex(colors['Brown']['400'])
+                                # md_bg_color: get_color_from_hex(colors['Brown']['400'])
 
         MDBottomNavigationItem:
             name: 'Cart screen'
             icon: 'cart-outline'
             text: 'Cart'
-            # ScrollView:
+            on_enter: 
+                view_2.data = []
+                root.controller.cart_server_request()
+
+            # ScrollView:¬
             MDBoxLayout:
                 size_hint_y: None
                 height: root.height - dp(55)
-                padding: 20
-                spacing: 15
+                padding: dp(20)
+                spacing: dp(15)
                 orientation: 'vertical'
                 MDLabel:
                     text: "Cart Summary"
@@ -152,60 +176,95 @@
                 BoxWithShadow:
                     size_hint_y: None
                     height: root.height/4
-                    padding: 20
+                    padding: dp(20)
                     pos_hint: {'top':1}
+                    orientation: 'vertical'
+                    MDLabel:
+                        adaptive_height: True
+                        id: order_ref_code
+                        text: "text"
+                        halign: 'center'
+                        font_style: 'Caption'
+                        theme_text_color: 'Custom'
+                        color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                     MDBoxLayout:
-                        orientation: 'vertical'
-                        MDLabel:
-                            text: "Price(2)"
-                            font_style: 'Body2'
-                            halign: 'left'
-                        MDLabel:
-                            text: "Shipping"
-                            font_style: 'Body2'
-                            halign: 'left'
-                        MDSeparator:
-                        MDLabel:
-                            text: "Total"
-                            font_style: 'H6'
-                            halign: 'left'
-                    MDBoxLayout:
-                        orientation: 'vertical'
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'Body2'
-                            halign: 'right'
-                        MDLabel:
-                            text: "FREE"
-                            font_style: 'Body2'
-                            halign: 'right'
-                        MDSeparator:
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'H6'
-                            halign: 'right'
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            MDLabel:
+                                text: "Price(2)"
+                                font_style: 'Body2'
+                                halign: 'left'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+                            MDLabel:
+                                text: "Shipping"
+                                font_style: 'Body2'
+                                halign: 'left'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+                            MDSeparator:
+                            MDLabel:
+                                text: "Total"
+                                font_style: 'H6'
+                                halign: 'left'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            MDLabel:
+                                id: products_price
+                                text: "₦12000.00"
+                                font_style: 'Body2'
+                                halign: 'right'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+                            MDLabel:
+                                id: shipping_price
+                                text: "FREE"
+                                font_style: 'Body2'
+                                halign: 'right'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
+                            MDSeparator:
+                            MDLabel:
+                                id: total_all
+                                text: "₦12000.00"
+                                font_style: 'H6'
+                                halign: 'right'
+                                theme_text_color: 'Custom'
+                                color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                 RecycleView:
                     id: view_2
+                    do_scroll_x:False
                     RecycleGridLayout:
                         cols:1
-                        spacing: 20
+                        spacing: dp(20)
                         adaptive_height: True
                         default_size: None, None
                         default_size_hint: .1, None
-                        padding: 5
+                        padding: dp(5)
                         size_hint_y: None
                         height: self.minimum_height
                 MDFillRoundFlatButton:
                     id: checkout_btn
                     text: 'Checkout'
                     font_style: 'Button'
-                    font_size: 20
+                    font_size: '20sp'
                     size_hint: .9, .114
                     # height: 40
+                    disabled: 'True' if view_2.data==[] else False
                     rounded_button: False
                     pos_hint: {'center_x': 0.5,'center_y': 1}
                     on_release:
-                        app.onNextScreen(root.name, 'checkout screen')
+                        app.onNextScreen(root.name, 'checkout screen',{'quantity':products_price.text,'price':total_all.text, 'ref_code': order_ref_code.text})
+
         
         MDBottomNavigationItem:
             name: 'favourites screen'
@@ -220,8 +279,12 @@
                     text: "Wishlist"
                     font_style: 'H5'
                     halign: 'center'
+                    theme_text_color: 'Custom'
+                    color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+
                 RecycleView:
                     id: view_3
+                    do_scroll_x: False
                     RecycleGridLayout:
                         cols:1
                         spacing: 20
@@ -276,7 +339,7 @@
                             IconLeftWidget:
                                 icon: 'account-lock'
             Avatar:
-                size: 155,155
+                size: dp(120),dp(120)
                 pos_hint: {'center_x': 0.5,'center_y': 0.9}
                 on_press:
                     app.onNextScreen(root.name, 'login screen')
@@ -296,24 +359,24 @@
     _txt_bot_pad: "32dp"
 
 
-<Avatar@MDFloatLayout+ButtonBehavior+FakeCircularElevationBehavior>
+<Avatar@ButtonBehavior+MDFloatLayout>
     size_hint: None, None
-    size: 55,55
+    size: dp(55),dp(55)
     # elevation:5
-    radius: self.width/2
+    radius: sp(self.width/2)
     md_bg_color: app.theme_cls.primary_light
     source: 'assets/images/man-1.png'
     FitImage:
         size: root.size[0]-3, root.size[1]-3
         size_hint: None, None
         pos_hint: {'center_x': 0.5,'center_y': 0.5}
-        radius: 30
+        radius: dp(30)
         source: root.source
 
 <StoryWithIcon@MDBoxLayout>
     orientation: 'vertical'
     size_hint: None, None
-    width: 60
+    width: dp(60)
     spacing: 5
     MDIconButton:
         icon: 'menu'
@@ -332,31 +395,43 @@
         halign: 'center'
         font_size: 12
         bold: True
+        # parent_background: 0,0,0,0
+        theme_text_color: 'Custom'
+        color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
+        # opposite_colors: True
 
-<StroyWithImage@MDBoxLayout>
+<StroyWithImage@ButtonBehavior+MDBoxLayout>
     orientation: 'vertical'
     size_hint: None, None
     spacing: 5
     width: avatar.width
     source: 'assets/images/cate-5.jpg'
     text: 'Grains'
+    on_release: app.onNextScreen('home screen', 'categories screen')
+
     Avatar: 
         id: avatar
         source: root.source
-        size: 65,65
+        size: dp(50),dp(50)
         pos_hint: {'center_x':.5}
     MDLabel:
         text: root.text
         theme_text_color: 'Primary'
         size_hint_y: None
         size: self.texture_size
-        font_size: 12
+        font_size: '12sp'
         shorten: True
         shorten_from: 'right'
         halign: 'center'
         bold: True
+        color: 1, 1, 1, 1
+        # opposite_color: True
+        theme_text_color: 'Custom'
+        color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
 
-<BoxWithShadow@MDBoxLayout+FakeRectangularElevationBehavior>
+
+# <BoxWithShadow@MDBoxLayout+FakeRectangularElevationBehavior>
+<BoxWithShadow@MDBoxLayout>
     md_bg_color: app.theme_cls.bg_light
     # elevation:1
-    radius:10
+    radius:dp(10)

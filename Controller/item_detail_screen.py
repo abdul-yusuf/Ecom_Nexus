@@ -1,7 +1,7 @@
 import importlib
 
 import View.ItemDetailScreen.item_detail_screen
-
+from kivy.network.urlrequest import UrlRequest
 # We have to manually reload the view module in order to apply the
 # changes made to the code on a subsequent hot reload.
 # If you no longer need a hot reload, you can delete this instruction.
@@ -24,3 +24,15 @@ class ItemDetailScreenController:
 
     def get_view(self) -> View.ItemDetailScreen.item_detail_screen:
         return self.view
+
+    def server_request(self, id):
+        print(id)
+        url = self.view.app.request_parm.route('products-order')+f'{id}/'
+        method = self.view.app.request_parm.method('products-order')
+        headers = self.view.app.auth_store['headers']['data']
+        print(url,method,headers)
+        req = UrlRequest(url, on_success=self.model.product_added, method=method,
+						 on_error=self.model.server_error, 
+                         req_headers=headers, 
+                         on_failure=self.model.server_failed)
+

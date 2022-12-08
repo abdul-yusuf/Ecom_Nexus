@@ -13,16 +13,17 @@ package.domain = dev.div_tech
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,jpeg,ttf,kv,json
+source.include_exts = py,png,jpg,jpeg,ttf,kv,json,gif
 
 # (list) List of inclusions using pattern matching
 # source.include_patterns = assets/*,images/*.png
+# source.include_patterns = venv/*
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests, bin, venv
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
@@ -36,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, kivy==2.1.0, https://github.com/kivymd/KivyMD/archive/master.zip, pillow
+requirements = python3, kivy==2.1.0, kivymd==1.1.1, pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -72,7 +73,7 @@ osx.kivy_version = 2.1.0
 #
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
+fullscreen = 1
 
 # (string) Presplash background color (for android toolchain)
 # Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
@@ -115,7 +116,7 @@ android.permissions = INTERNET
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+#android.sdk_path = '/home/yusuf-abdul/Android'
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =

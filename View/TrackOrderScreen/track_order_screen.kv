@@ -1,107 +1,235 @@
 <TrackOrderScreenView>
+    on_pre_enter:
+        self.controller.server_request(app.screen_args[0])
+    # on_enter:
+    #     if self.being_delivered:\
+        # self.remove_widget(top_box_2)
     ScrollView:
-        MDRelativeLayout:
+        MDBoxLayout:
             size_hint_y: None
+            # md_bg_color: app.theme_cls.primary_light
+            padding: [0,dp(10)]
+            spacing: dp(10)
+            height: self.minimum_height
             orientation: 'vertical'
-            height: dp(680)
-
-            MDRelativeLayout:
-                # padding: [15,25,15,15]
-                # orientation: 'vertical'
+            MDBoxLayout:
                 size_hint_y: None
-                height: dp(340)
-                pos_hint: {'top':1}
-
-                
-                BoxWithShadow:
-                    id: top_box
-                    padding: 15
-                    spacing: 20
-                    size_hint: .9, None
-                    height: dp(184)
-                    pos_hint: {'center_x': 0.5,'center_y': 0.35}
-                    MDRelativeLayout:
-                        MDLabel:
-                            text: "Order: #23421"
-                            font_style: 'Body1'
-                            adaptive_height: True
-                            pos_hint: {'center_x': 0.5,'center_y': 0.92}
-                        MDSeparator:
-                            adaptive_height: True
-                            pos_hint: {'center_x': 0.5,'center_y': 0.86}
-                        MDLabel:
-                            text: "Chiken, Beans, Garlic"
-                            font_style: 'Caption'
-                            bold: True
-                            pos_hint: {'center_x': 0.5,'center_y': 0.56}
-                        MDLabel:
-                            text: "₦12000.00"
-                            font_style: 'Body2'
-                            pos_hint: {'center_x': 0.5,'center_y': 0.36}
-                        RatingBox:
-                            size_hint_x: .6
-                            height: dp(5)
-                            pos_hint: {'center_x': 0.35,'center_y': 0.1}
-                        FitImage:
-                            pos_hint: {'center_x': 0.85,'center_y': .46}
-                            size_hint: .2,.4
-                            radius: 8
-                            source: 'assets/images/cate-5.jpg'
-                
-                BoxWithShadow:
-                    id: top_box
-                    padding: 15
-                    spacing: 20
-                    size_hint: .9, None
-                    height: dp(184)
-                    pos_hint: {'center_x': 0.5,'top': 0}
-                    MDRelativeLayout:
-                        Avatar:
-                            pos_hint: {'center_y': 0.8}
-                        ThreeLineListItem:
-                            text: 'Usman Bolaji'
-                            secondary_text: 'Picking up your Order'
-                            size_hint_x: .8
-                            pos_hint: {'center_x': 0.54,'center_y': 0.88}
-                        
-                        MDFillRoundFlatIconButton:
-                            icon: 'phone'
-                            text:'Call'
-                            rounded_button: False
-                            size_hint: .4, .35
-                            pos_hint: {'center_x': .28,'center_y': 0.28}
-
-                        MDFillRoundFlatIconButton:
-                            icon: 'text'
-                            text:'Massage'
-                            rounded_button: False
-                            size_hint: .4, .35
-                            pos_hint: {'center_x': 0.7,'center_y': 0.28}
-                            md_bg_color: app.theme_cls.primary_light
-                            color: 'Custom'
-                            # theme_text_color: 'Secondary' 
-                        
-                        RatingTag:
-                            pos_hint: {'center_x': 0.9,'center_y': 0.87}
-
-
-                    
+                # md_bg_color: app.theme_cls.bg_dark
+                height: dp(40)
+                padding: [dp(10),dp(30)]
                 MDIconButton: 
+                    adaptive_width: True
                     icon: 'arrow-left'
-                    pos_hint: {'center_x': 0.08,'center_y': 0.85}
+                    pos_hint: {'center_x': 0.08,'center_y': 0.8}
                     on_release: app.onBackBtnx()
 
                 MDLabel:
                     text: "Track Order"
                     font_style: 'H5'
-                    halign: 'center'
+                    # halign: 'center'
                     bold: True
-                    pos_hint: {'center_x': 0.3,'center_y': 0.85}
+                    pos_hint: {'center_x': 0.5,'center_y': 0.8}
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(20)
+
+            BoxWithShadow:
+                id: top_box
+                padding: dp(15)
+                spacing: dp(20)
+                size_hint: .9, None
+                height: dp(184)
+                pos_hint: {'center_x': 0.5,'center_y': 0.35}
+                MDRelativeLayout:
+                    MDLabel:
+                        id: order_ref
+                        text: "Order: #23421"
+                        font_style: 'Body1'
+                        adaptive_height: True
+                        pos_hint: {'center_x': 0.5,'center_y': 0.92}
+                    MDSeparator:
+                        adaptive_height: True
+                        pos_hint: {'center_x': 0.5,'center_y': 0.86}
+                    MDLabel:
+                        id: product_title
+                        text: "Chiken, Beans, Garlic"
+                        font_style: 'Caption'
+                        bold: True
+                        pos_hint: {'center_x': 0.5,'center_y': 0.56}
+                    MDLabel:
+                        id: product_price
+                        text: "₦12000.00"
+                        font_style: 'Body2'
+                        pos_hint: {'center_x': 0.5,'center_y': 0.36}
+                    RatingBox:
+                        size_hint_x: .6
+                        height: dp(5)
+                        pos_hint: {'center_x': 0.35,'center_y': 0.1}
+                    FitImage:
+                        pos_hint: {'center_x': 0.85,'center_y': .46}
+                        size_hint: .2,.4
+                        radius: 8
+                        source: 'assets/images/cate-5.jpg'
+                
             MDBoxLayout:
                 adaptive_height: True
                 id: expansion_box
-                padding: 20
+                padding: [dp(25),0]
                 pos_hint: {'center_x': 0.5,'top': 0.25}
+
+            
+            MDBoxLayout:
+                adaptive_height: True
+                id: courier_parent_box
+                padding: [dp(15),0]
+                # pos_hint: {'center_x': 0.5}
+
+                # pos_hint: {'center_x': 0.5,'top': 0.25}
+
+            # BoxWithShadow:
+                # id: top_box_2
+                # padding: 15
+                # spacing: 20
+                # size_hint: .9, None
+                # height: dp(184)
+                # pos_hint: {'center_x': 0.5}
+                # MDRelativeLayout:
+                #     Avatar:
+                #         pos_hint: {'center_y': 0.8}
+                #     ThreeLineListItem:
+                #         text: 'Usman Bolaji'
+                #         secondary_text: 'Picking up your Order'
+                #         size_hint_x: .8
+                #         pos_hint: {'center_x': 0.54,'center_y': 0.88}
+                    
+                #     MDFillRoundFlatIconButton:
+                #         icon: 'phone'
+                #         text:'Call'
+                #         rounded_button: False
+                #         size_hint: .4, .35
+                #         pos_hint: {'center_x': .28,'center_y': 0.28}
+
+                #     MDFillRoundFlatIconButton:
+                #         icon: 'text'
+                #         text:'Massage'
+                #         rounded_button: False
+                #         size_hint: .4, .35
+                #         pos_hint: {'center_x': 0.7,'center_y': 0.28}
+                #         md_bg_color: app.theme_cls.primary_light
+                #         color: 'Custom'
+                #         # theme_text_color: 'Secondary' 
+                    
+                #     RatingTag:
+                #         pos_hint: {'center_x': 0.9,'center_y': 0.87}
+
+
+        # MDRelativeLayout:
+        # # MDBoxLayout:
+        #     size_hint_y: None
+        #     orientation: 'vertical'
+        #     pos_hint: {'center_x': 0.0,'center_y': 0.0}
+        #     md_bg_color: app.theme_cls.primary_light
+        #     # height: dp(980)
+        #     # height: top_box.height+top_box.height+dp(40)
+
+        #     MDBoxLayout:
+        #         padding: [15,15,5,15]
+        #         orientation: 'vertical'
+        #         # size_hint_y: None
+        #         height: dp(340)
+        #         pos_hint: {'top':1}
+        #         spacing:dp(20)
+
+                
+        #         BoxWithShadow:
+        #             id: top_box
+        #             padding: 15
+        #             spacing: 20
+        #             size_hint: .9, None
+        #             height: dp(184)
+        #             # pos_hint: {'center_x': 0.5,'center_y': 0.35}
+        #             MDRelativeLayout:
+        #                 MDLabel:
+        #                     text: "Order: #23421"
+        #                     font_style: 'Body1'
+        #                     adaptive_height: True
+        #                     pos_hint: {'center_x': 0.5,'center_y': 0.92}
+        #                 MDSeparator:
+        #                     adaptive_height: True
+        #                     pos_hint: {'center_x': 0.5,'center_y': 0.86}
+        #                 MDLabel:
+        #                     text: "Chiken, Beans, Garlic"
+        #                     font_style: 'Caption'
+        #                     bold: True
+        #                     pos_hint: {'center_x': 0.5,'center_y': 0.56}
+        #                 MDLabel:
+        #                     text: "₦12000.00"
+        #                     font_style: 'Body2'
+        #                     pos_hint: {'center_x': 0.5,'center_y': 0.36}
+        #                 RatingBox:
+        #                     size_hint_x: .6
+        #                     height: dp(5)
+        #                     pos_hint: {'center_x': 0.35,'center_y': 0.1}
+        #                 FitImage:
+        #                     pos_hint: {'center_x': 0.85,'center_y': .46}
+        #                     size_hint: .2,.4
+        #                     radius: 8
+        #                     source: 'assets/images/cate-5.jpg'
+                
+        #         BoxWithShadow:
+        #             id: top_box
+        #             padding: 15
+        #             spacing: 20
+        #             size_hint: .9, None
+        #             height: dp(184)
+        #             # pos_hint: {'center_x': 0.5,'top': 0}
+        #             MDRelativeLayout:
+        #                 Avatar:
+        #                     pos_hint: {'center_y': 0.8}
+        #                 ThreeLineListItem:
+        #                     text: 'Usman Bolaji'
+        #                     secondary_text: 'Picking up your Order'
+        #                     size_hint_x: .8
+        #                     pos_hint: {'center_x': 0.54,'center_y': 0.88}
+                        
+        #                 MDFillRoundFlatIconButton:
+        #                     icon: 'phone'
+        #                     text:'Call'
+        #                     rounded_button: False
+        #                     size_hint: .4, .35
+        #                     pos_hint: {'center_x': .28,'center_y': 0.28}
+
+        #                 MDFillRoundFlatIconButton:
+        #                     icon: 'text'
+        #                     text:'Massage'
+        #                     rounded_button: False
+        #                     size_hint: .4, .35
+        #                     pos_hint: {'center_x': 0.7,'center_y': 0.28}
+        #                     md_bg_color: app.theme_cls.primary_light
+        #                     color: 'Custom'
+        #                     # theme_text_color: 'Secondary' 
+                        
+        #                 RatingTag:
+        #                     pos_hint: {'center_x': 0.9,'center_y': 0.87}
+
+
+                    
+        #     MDIconButton: 
+        #         icon: 'arrow-left'
+        #         pos_hint: {'center_x': 0.08,'center_y': 0.8}
+        #         on_release: app.onBackBtnx()
+
+        #     MDLabel:
+        #         text: "Track Order"
+        #         font_style: 'H5'
+        #         halign: 'center'
+        #         bold: True
+        #         pos_hint: {'center_x': 0.35,'center_y': 0.8}
+        #     MDBoxLayout:
+        #         adaptive_height: True
+        #         id: expansion_box
+        #         padding: 20
+        #         pos_hint: {'center_x': 0.5,'top': 0.25}
 
 <RatingTag@MDRelativeLayout>:
     text: '4.5'

@@ -9,14 +9,12 @@ class SignUpScreenModel(BaseScreenModel):
 
     def server_success(self, *args, **kwargs):
         self.notify_observers('sign up screen', args, meths='success')
-        
-        # print(args,dir(args),kwargs)
-
-    
+      
     def server_error(self, *args, **kwargs):
-        # print(args, kwargs)
         self.notify_observers('sign up screen', *args, meths='error')
-        # print(args,kwargs)
+        
+    def server_failed(self, *args, **kwargs):
+        self.notify_observers('sign up screen', args, meths='failed')
 
     def server_success_user(self, *args, **kwargs):
         self.notify_observers('sign up screen', *args, **kwargs)

@@ -1,4 +1,4 @@
 from kivymd.uix.card import MDCardSwipe
-
-class CartTile(MDCardSwipe):
+from kivy.uix.recycleview.views import RecycleKVIDsDataViewBehavior
+class CartTile(RecycleKVIDsDataViewBehavior, MDCardSwipe):
     pass

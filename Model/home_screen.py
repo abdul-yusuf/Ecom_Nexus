@@ -14,12 +14,29 @@ class HomeScreenModel(BaseScreenModel):
         # print(args,dir(args),kwargs)
 
     
-    def server_error(self, *args, **kwargs):
-        # print(args, kwargs)
-        # self.notify_observers('login screen', *args, meths='error')
-        print(args,kwargs)
+    
 
     def server_success_user(self, *args, **kwargs):
         print(args,kwargs)
+
+    def cart_success(self, *args, **kwargs):
+        self.notify_observers('home screen', args, meths='cart_success')
+        print(args, kwargs)
+    
+    # def cart_error(self, *args, **kwargs):
+    #     print(args, kwargs)
+    #     self.notify_observers('home scren', args, meths='error')
+
+    def server_error(self, *args, **kwargs):
+        self.notify_observers('home screen', *args, meths='error')
         
-        #  self.notify_observers('login screen', *args, **kwargs)
+    def server_failed(self, *args, **kwargs):
+        self.notify_observers('home screen', args, meths='failed')
+        
+
+    def product_added(self, *args, **kwargs):
+        print(args,kwargs)
+    
+    # def product_added_error(self, *args, **kwargs):
+    #     print(args,kwargs)
+    
