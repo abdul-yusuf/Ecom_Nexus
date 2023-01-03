@@ -1,4 +1,6 @@
+
 <MyAccountScreenView>
+    on_enter: root.controller.server_request()
     ScrollView:
         do_scroll_x:False
         MDRelativeLayout:
@@ -36,14 +38,14 @@
                 on_release:
                     app.onBackBtnx()
             
-            MDTextField:
+            GenTextField:
                 hint_text: 'Phone Number'
                 mode : 'rectangle'
                 text: '+234909310975'
                 disabled: 'True'
                 pos_hint: {'center_x': .55, 'center_y': .7}
 
-            MDTextField:
+            GenTextField:
                 id: field1
                 hint_text: 'First Name'
                 mode : 'rectangle'
@@ -55,7 +57,7 @@
 
 
 
-            MDTextField:
+            GenTextField:
                 id: field2
                 hint_text: 'Last Name'
                 mode : 'rectangle'
@@ -68,7 +70,7 @@
                 disabled: 'True'
 
 
-            MDTextField:
+            GenTextField:
                 id: date_field
                 hint_text: 'Birth date'
                 mode : 'rectangle'
@@ -76,7 +78,7 @@
                 # disabled: 'False' if root.editing_mode else 'True' 
                 disabled: 'True'
                 on_focus:
-                    # root.show_date_picker()
+                    root.show_date_picker()
                     # self.focus=False
 
             MDFillRoundFlatButton:
@@ -85,16 +87,32 @@
                 font_style: 'Button'
                 font_size: 20
                 size_hint: .9, .07
+                # size_hint: .55, .07
                 # height: 40
                 rounded_button: False
                 pos_hint: {'center_x': 0.56,'center_y': .15}
+                # pos_hint: {'center_x': 0.7,'center_y': .15}
                 on_release:
-                    root.editing_mode=True if root.editing_mode==False else False
                     root.editing_mode_func()
                     print(root.editing_mode)
-                    self.text='Save' if root.editing_mode else 'Edit Details'
+                    # self.text='Save' if root.editing_mode else 'Edit Details'
                     # app.onNextScreen(root.name, 'checkout screen')
-    
+            MDFillRoundFlatButton:
+                id: cancel_btn
+                text: 'X'
+                font_style: 'Button'
+                font_size: 20
+                rounded_button: False
+                size_hint_y: .07 
+                pos_hint: {'center_x': -1.25,'center_y': .15}
+                # pos_hint: {'center_x': 0.25,'center_y': .15}
+                md_bg_color: get_color_from_hex(colors['Red']['500'])
+                on_release: 
+                    # checkout_btn.text='Edit Details'
+                    root.editing_mode_func('cancel')
+                    print(root.editing_mode)
+
+
             # MDTextField:
             #     hint_text: 'First Name'
             #     mode : 'rectangle'

@@ -9,20 +9,23 @@ class OrderHistoryScreenView(BaseScreenView):
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
+        print(args,kwargs)
     def server_success(self, *args, **kwargs):
         data = args[0][1]
         in_process_data = []
         transit_data = []
         complete_data = []
-        for item in data:
-            item['id']=str(item['id'])
-            if item['order_set'][0]['received']==False:
-                in_process_data.append(item)
-            if item['order_set'][0]['received']==False and item['order_set'][0]['being_delivered']:
-                transit_data.append(item)
-            if item['order_set'][0]['received']==True:
-                complete_data.append(item)
-
+        try:
+            for item in data:
+                item['id']=str(item['id'])
+                if item['order_set'][0]['received']==False:
+                    in_process_data.append(item)
+                if item['order_set'][0]['received']==False and item['order_set'][0]['being_delivered']:
+                    transit_data.append(item)
+                if item['order_set'][0]['received']==True:
+                    complete_data.append(item)
+        except KeyError as e:
+            self.app.create_toast(str(e))
 
         self.ids.view_1.data = in_process_data
         self.ids.view_2.data = transit_data

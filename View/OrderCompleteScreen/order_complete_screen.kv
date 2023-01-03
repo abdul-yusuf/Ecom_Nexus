@@ -1,1 +1,22 @@
 <OrderCompleteScreenView>
+    Image:
+        source: "assets/images/img2.jpg"
+        allow_stretch:
+        pos_hint: {'center_x': 0.5,'center_y': 0.7}
+    
+    MDLabel:
+        id: msg
+        text: 'Thank You for completing your Order'
+        font_style: 'Body1'
+        halign: 'center'
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+    MDLabel:
+        id: confirmation_msg
+        text: 'Your Order Payment Failed'
+        halign: 'center'
+        pos_hint: {'center_x': 0.5,'center_y': 0.45}
+
+    MDRaisedButton:
+        text: 'Back to Home'
+        pos_hint: {'center_x': 0.5,'center_y': 0.2}
+        on_release: app.onNextScreen(root.name, 'home screen')

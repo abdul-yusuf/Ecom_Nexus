@@ -1,7 +1,13 @@
 from View.base_screen import BaseScreenView
 
 class SearchPageScreenView(BaseScreenView):
-    def on_enter(self, *args):
+
+    def on_pre_enter(self, *args):
+        try:
+            self.ids.search_field.text = self.app.screen_args[0]
+        except:
+            pass
+        
         data = [
                     {
                         "quantity": "1",
@@ -51,10 +57,7 @@ class SearchPageScreenView(BaseScreenView):
                     },
                 ]
         self.ids.view_1.data = data
-        try:
-            self.ids.search_field.text = self.app.screen_args[0]
-        except:
-            pass
+        
             # print(self.app.screen_args[0])
     def model_is_changed(self) -> None:
         """

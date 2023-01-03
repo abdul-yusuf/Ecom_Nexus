@@ -6,24 +6,25 @@
     source4: ''
 
     MDCarousel:
-        id: carousel
+        id: carousel_head
         loop: True
         FitImage:
-            source: root.source1
+            source: "https://nexusv2-production.up.railway.app/media/cate-1_xulP6l5.jpg"
             radius: [0,0,20,20]
-        FitImage:
-            source: root.source2
-            radius: [0,0,20,20]
-        FitImage:
-            source: root.source3
-            radius: [0,0,20,20]
-        FitImage:
-            source: root.source4
-            radius: [0,0,20,20]
+        # FitImage:
+        #     source: root.source2
+        #     radius: [0,0,20,20]
+        # FitImage:
+        #     source: root.source3
+        #     radius: [0,0,20,20]
+        # FitImage:
+        #     source: root.source4
+        #     radius: [0,0,20,20]
         
     CountBox:
-        current: str(carousel.index+1) 
-        total: str(len(carousel.slides ))
+        id: count_box
+        # current: str(carousel.index+1) if str(carousel.index+1) else '_' 
+        # total: str(len(carousel.slides )) 
         md_bg_color: get_color_from_hex('#1e1e1e')
         pos_hint: {'center_x': 0.85,'center_y': 0.08}
 

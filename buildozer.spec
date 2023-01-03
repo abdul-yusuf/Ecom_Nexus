@@ -20,10 +20,10 @@ source.include_exts = py,png,jpg,jpeg,ttf,kv,json,gif
 # source.include_patterns = venv/*
 
 # (list) Source files to exclude (let empty to not exclude anything)
-#source.exclude_exts = spec
+source.exclude_exts = auth.json
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests, bin, venv, Nexus, kvdroid-master
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, kivy==2.1.0, kivymd==1.1.1, pillow
+requirements = python3, kivy==master, kivymd==1.1.1, kvdroid, pillow, urllib3, chardet, certifi, idna, openssl
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -89,7 +89,7 @@ fullscreen = 1
 #android.presplash_lottie = "42369-weather-wind.json"
 
 # (list) Permissions
-android.permissions = INTERNET
+android.permissions = INTERNET, READ_SMS
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -159,6 +159,14 @@ android.permissions = INTERNET
 
 # (list) Android AAR archives to add
 #android.add_aars =
+
+# (list) Gradle dependencies to add
+android.gradle_dependencies = androidx.appcompat:appcompat:1.2.0, androidx.browser:browser:1.4.0
+
+# (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
+# contains an 'androidx' package, or any package from Kotlin source.
+# android.enable_androidx requires android.api >= 28
+android.enable_androidx = True
 
 # (list) Gradle dependencies to add
 #android.gradle_dependencies =

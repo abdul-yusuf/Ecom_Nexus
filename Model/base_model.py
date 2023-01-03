@@ -30,24 +30,27 @@ class BaseScreenModel:
         for observer in self._observers:
             if observer.name == name_screen:
                 if meths=='loading':
-                    observer.server_processing(*args)
                     print('loading sending signal')
+                    observer.server_processing(*args)
                 if meths=='success':
-                    observer.server_success(*args,**kwargs)
                     print('server success sending signal')
+                    observer.server_success(*args,**kwargs)
                 if meths=='error':
-                    observer.server_error(*args,**kwargs)
                     print('server error sending signal')
+                    observer.server_error(*args,**kwargs)
                 if meths=='failed':
-                    observer.server_failed(*args,**kwargs)
                     print('server failed sending signal')
+                    observer.server_failed(*args,**kwargs)
                 if meths=='cart_success':
-                    observer.populate_cart(*args,**kwargs)
                     print('server cart populate sending signal')
+                    observer.populate_cart(*args,**kwargs)
                 if meths=='payment_success':
-                    observer.create_webview(*args,**kwargs)
                     print('server payment success sending signal')
+                    observer.create_webview(*args,**kwargs)
+                if meths=='categories':
+                    print('categories success sending signal')
+                    observer.populate_categories(*args,**kwargs)
                 else:
-                    observer.model_is_changed(*args,**kwargs)
                     print('model is changed sending signal')
+                    observer.model_is_changed(*args,**kwargs)
                 break

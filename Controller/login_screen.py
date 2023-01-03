@@ -69,7 +69,7 @@ class LoginScreenController:
             headers (_type_): _description_
         """
         url = self.view.app.request_parm.route('user_detail')
-        method = self.view.app.request_parm.method('user_detail')
+        method = self.view.app.request_parm.method('user_detail')['GET']
         print(url,method,headers)
         req = UrlRequest(
                         url, 

@@ -28,11 +28,13 @@ class HomeScreenController:
         return self.view
 
     def server_request(self, *args, **kwargs):
-        headers = {
-			'Content-type': 'application/json',
-		}
+        # headers = {
+		# 	'Content-type': 'application/json',
+		# }
         # self.view.app.modal_view(attach_to=self.view)
         url = self.view.app.request_parm.route('products')
+        headers = self.view.app.auth_store['headers']['data']
+
         print(url)
         req = UrlRequest(url, 
                         on_success=self.model.server_success, 
@@ -134,5 +136,20 @@ class HomeScreenController:
 
     def log_out(self):
         self.app.is_authenticated = False
-        self.app.perform_store_save(self.app.is_authenticated, store_name='auth_store', key='is_authenticated')
+        # self.app.perform_store_save(self.app.is_authenticated, store_name='auth_store', key='is_authenticated')
         self.app.perform_store_save({}, store_name='auth_store', key='headers')
+
+    def server_categories_request(self, *args, **kwargs):
+        headers = {
+			'Content-type': 'application/json',
+		}
+        # self.view.app.modal_view(attach_to=self.view)
+        url = self.view.app.request_parm.route('categories')
+        print(url)
+        req = UrlRequest(url, 
+                        on_success=self.model.categories_success, 
+                        # req_body=payload,
+                        on_error=self.model.server_error, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed
+                        )

@@ -52,3 +52,17 @@ class CheckoutScreenController:
                          req_body=payload, 
                          req_headers=headers, 
                          on_failure=self.model.server_failed)
+
+
+    def payment_verify_server_request(self, ref_code:str):
+        url = self.view.app.request_parm.route('verify-payment')
+        method = self.view.app.request_parm.method('verify-payment')
+        headers = self.view.app.auth_store['headers']['data']
+        
+        print(url,method,headers)
+        req = UrlRequest(url+ref_code+'/', 
+                        on_success=self.model.payment_success, method=method,
+                        on_error=self.model.server_error,
+                        #  req_body=payload, 
+                        req_headers=headers, 
+                        on_failure=self.model.server_failed)

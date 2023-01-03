@@ -15,28 +15,29 @@ class SignUpScreenView(BaseScreenView):
         """
 
     def server_success(self, *args, **kwargs):
+        print(args)
         self.app.create_toast('Signup Successfull')
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
 
-        if self.is_authenticated:
-            self.app.onNextScreen(self.name,'email verification screen')
+        # if self.is_authenticated:
+        self.app.onNextScreen(self.name,'login screen')
             
 
-        headers = {
-            'Authorization': f"Token {args[0][1]['key']}",
-            'Content-type': 'application/json'
-        }
-        self.app.is_authenticated = True
-        self.app.perform_store_save(headers, store_name='auth_store', key='headers')
-        self.controller.fetch_user_data(headers)
-        print('from success')
+        # headers = {
+        #     'Authorization': f"Token {args[0][1]['key']}",
+        #     'Content-type': 'application/json'
+        # }
+        # self.app.is_authenticated = True
+        # self.app.perform_store_save('headers', key=headers)
+        # self.controller.fetch_user_data(headers)
+        # print('from success')
         print(args,kwargs,'success')
 
     def server_error(self, *args, **kwargs):
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
-        self.app.create_toast('Signup in Error')
+        self.app.create_toast(str(args))
         print(args, kwargs,'error')
         print(self.app.is_authenticated,'-----------------------')
         if not self.app.is_authenticated:
@@ -47,7 +48,19 @@ class SignUpScreenView(BaseScreenView):
     def server_failed(self, *args, **kwargs):
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
-        self.app.create_toast('Server Error')
+        msg = args[0][1]
+        print(msg.items())
+        
+        try:
+            msg = args[0][1]
+            initial = 0
+            for xx,yy in msg.items():
+                print(xx,yy)
+                msgg=f'{xx} : {yy}'
+                Clock.schedule_once(lambda x:self.app.create_toast(msgg),initial)
+                initial += 1
+        except:
+            self.app.create_toast(str(args[0][1]))
         
         print(args, kwargs)
 

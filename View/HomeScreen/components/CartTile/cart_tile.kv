@@ -8,8 +8,9 @@
     anchor: 'right'
     images: {'image1':''}
     trash_btn:trash_btn
+    closing_interval: .5
     SwipeLayerBoxShadow:
-        # elevation:1
+        # elevation: dp(1)
         MDRelativeLayout:
             IconRightWidget:
                 id: trash_btn
@@ -29,7 +30,7 @@
             Animation(\
             x=0,\   
             t='in_quad',\
-            d=0.5/1,\
+            d=2.5/1,\
             )).start(self)
         MDRelativeLayout:
             ImageLeftWidget:
@@ -63,7 +64,7 @@
                     color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
 
                 MDLabel:
-                    text: "₦12000.00"
+                    # text: "₦12000.00"
                     font_style: 'Body2'
                     theme_text_color: 'Custom'
                     color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
@@ -88,5 +89,5 @@
                     on_release:
                         qty.text = str(int(qty.text)+1)
 
-<SwipeLayerBoxShadow@MDCardSwipeFrontBox+FakeRectangularElevationBehavior>
+<SwipeLayerBoxShadow@MDCardSwipeFrontBox>
     md_bg_color: app.theme_cls.bg_darkest

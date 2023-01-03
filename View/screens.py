@@ -102,5 +102,9 @@ screen = {
         'model': ItemDetailScreenModel,
         'controller': ItemDetailScreenController,
     },
- 
+    'order complete screen': {
+        'model': OrderCompleteScreenModel,
+        'controller': OrderCompleteScreenController,
+    },
+
 }

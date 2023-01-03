@@ -35,8 +35,8 @@ class LoginScreenView(BaseScreenView):
                 self.app.perform_store_save('auth_store', 'user',data=data)
                 self.model.notify_observers('home screen')
                 self.app.onNextScreen(self.name,'home screen','switch_to','home screen')
-        except IndexError or KeyError as e:
-            print(e)
+        except (IndexError, KeyError) as e:
+            self.app.create_toast(str(e))
         print(args,'notified')
     
     def server_success(self, *args, **kwargs):
@@ -47,6 +47,7 @@ class LoginScreenView(BaseScreenView):
             'Authorization': f"Token {args[0][1]['key']}",
             'Content-type': 'application/json'
         }
+        self.ids.password.text = ''
         self.app.is_authenticated = True
         self.app.perform_store_save('auth_store', 'variable', is_authenticated=self.app.is_authenticated)
         self.app.perform_store_save('auth_store', 'headers', data=headers)
@@ -70,8 +71,12 @@ class LoginScreenView(BaseScreenView):
         # msg = f'{}'
         if self.app.is_modal_open:
             Clock.schedule_once(self.app.modal_instance.dismiss, 1)
-        
-        self.app.create_toast(str(args[0][1]))
+        try:
+            msg = args[0][1]
+            for x in msg.value():
+                self.app.create_toast(str(x))
+        except:
+            self.app.create_toast(str(args[0][1]))
     
     def server_processing(self, *args):
         self.app.perform_store_save('auth_store', 'variable', is_authenticated=False)

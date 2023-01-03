@@ -1,3 +1,4 @@
+#:import ScrollEffect kivy.effects.scroll.ScrollEffect
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
 
@@ -18,21 +19,22 @@
             icon: 'home-outline'
             title: 'home'
             
-            on_enter:
-                root.controller.server_request()
 
             # Add Contents here
             MDScrollViewRefreshLayout:
                 id: home_refresh_layout
                 root_layout: root
-                effect_cls: "ScrollEffect"
+                # effect_cls: "ScrollEffect"
                 refresh_callback: root.refresh_callback
                 adaptive_height: True
-                always_overscroll: False
+                velocity: -0.5
+                # always_overscroll: False
+                # effect_cls: ScrollEffect
+                scroll_distance: dp(1)
                 # smooth_scroll_end:10
-                scroll_timeout: 250
+                scroll_timeout: 55
                 do_scroll_x: False
-                do_scroll_y: False
+                do_scroll_y: True
                 
                 MDGridLayout:
                     size_hint_y: None
@@ -41,23 +43,38 @@
                     md_bg_color: app.theme_cls.bg_normal
                     MDBoxLayout:
                         adaptive_height: True
-                        spacing: dp(8)
-                        padding: [dp(10),dp(14),dp(10),dp(4)]
+                        # spacing: dp(0)
+                        padding: [dp(10),dp(8),dp(0),dp(0)]
                         md_bg_color: app.theme_cls.primary_color
-                        Avatar:
-                            on_release:
-                                app.onNextScreen(root.name, 'login screen')
-                        MDBoxLayout:
-                            padding: dp(10)
-                            spacing: dp(10)
-                            orientation: 'vertical'
-                            MDLabel:
-                                id: username
-                                text: "Hi Hamza Zaid"
-                                font_style: "H6"
-                            MDLabel:
-                                text: "welcome to our store"
-                                font_style: "Caption"
+                        # Avatar:
+                        #     on_release:
+                        #         app.onNextScreen(root.name, 'login screen')
+                        # MDBoxLayout:
+                        #     padding: dp(10)
+                        #     spacing: dp(10)
+                        #     orientation: 'vertical'
+                        #     MDLabel:
+                        #         id: username
+                        #         text: "Hi Hamza Zaid"
+                        #         font_style: "H6"
+                        #     MDLabel:
+                        #         text: "welcome to our store"
+                        #         font_style: "Caption"
+                        # MDBoxLayout:
+                        Label:
+                            adaptive_size: True
+                            text: "NEXUS"
+                            color: get_color_from_hex(colors['Red']['800'])
+                            font_style: 'H1'
+                            font_size: '30sp'
+                            bold: True
+                            halign: 'right'
+                            pos_hint: {'center_x':-0.5,'center_y': 0.5}
+                        Widget:
+                        MDIconButton:
+                            icon: "account-circle-outline"
+                            on_release: app.onNextScreen(root.name, 'login screen')
+                            # on_release: app.change_theme(self.icon)
                         MDIconButton:
                             icon: "moon-waning-crescent" if app.theme_cls.theme_style == 'Light' else 'weather-sunny'
                             on_release: app.change_theme(self.icon)
@@ -69,7 +86,7 @@
                         radius: [0,0,dp(23),dp(23)]
                         orientation: 'vertical'
                         md_bg_color: app.theme_cls.primary_color
-                        MDTextField:
+                        GenTextField:
                             id: search_field
                             mode: "round"
                             icon_left: "magnify"
@@ -89,6 +106,7 @@
                             size_hint_y: None
                             ScrollView:
                                 do_scroll_y: False
+                                effect_cls: ScrollEffect
                                 bar_width: 0
                                 MDBoxLayout:
                                     id: categories_layout
@@ -97,11 +115,7 @@
                                     spacing: dp(10)
                                     padding: [dp(15),0,0,0]
                                     StoryWithIcon:
-                                    StroyWithImage:
-                                    StroyWithImage:
-                                    StroyWithImage:
-                                    StroyWithImage:
-                                    StroyWithImage:
+                                    
                     MDBoxLayout:
                         size_hint_y: None
                         height: root.height/4
@@ -137,15 +151,18 @@
                         CustomScroll:
                             root_layout: root
                             refresh_callback: root.refresh_callback
-                            scroll_timeout:125
+                            # scroll_timeout:125
+                            effect_cls: ScrollEffect
+                            # effect_cls: 'CustomRefreshScrollEffect'
+                            scroll_distance: dp(1)
                             # do_scroll_y: False
-                            smooth_scroll_end:10
+                            # smooth_scroll_end:10
                             do_scroll_x: False
                             id: view_1
                             
                             RecycleGridLayout:
                                 spacing: dp(20)
-                                padding: dp(10)
+                                padding: [dp(15),dp(10),dp(10),dp(10)]
                                 size_hint_y: None
                                 default_size: None, None
                                 default_size_hint: .1, None
@@ -336,6 +353,7 @@
                             text: 'Logout'
                             on_release:
                                 #app.onNextScreen(root.name, '')
+                                root.logout()
                             IconLeftWidget:
                                 icon: 'account-lock'
             Avatar:
@@ -351,6 +369,7 @@
                 secondary_text: 'hamza@gmail.com'
                 pos_hint: {'center_x': 0.65,'center_y': 0.77}
                 divider: None
+                _ripple: False
                 
 
 
@@ -400,14 +419,19 @@
         color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
         # opposite_colors: True
 
-<StroyWithImage@ButtonBehavior+MDBoxLayout>
+[StroyWithImage@ButtonBehavior+MDBoxLayout]:
     orientation: 'vertical'
-    size_hint: None, None
+    # size_hint: .1, .1
     spacing: 5
     width: avatar.width
-    source: 'assets/images/cate-5.jpg'
-    text: 'Grains'
-    on_release: app.onNextScreen('home screen', 'categories screen')
+    source: ctx.source or 'assets/images/cate-5.jpg'
+    adaptive_size: True
+    text: ctx.text or 'Grains'
+    # on_touch_down: app.onNextScreen('home screen', 'categories screen')
+    on_press: 
+        ctx.callback()
+        print(self.text)
+    # md_bg_color: app.theme_cls.primary_light
 
     Avatar: 
         id: avatar
@@ -433,5 +457,5 @@
 # <BoxWithShadow@MDBoxLayout+FakeRectangularElevationBehavior>
 <BoxWithShadow@MDBoxLayout>
     md_bg_color: app.theme_cls.bg_light
-    # elevation:1
+    # elevation:dp(1)
     radius:dp(10)

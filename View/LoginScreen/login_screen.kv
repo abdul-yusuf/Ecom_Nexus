@@ -36,7 +36,7 @@
             MDFloatLayout:
                 size_hint: .75, .07
                 pos_hint: {'center_x': .55, 'center_y': .63}
-                TextInput:
+                SecGenTextInput:
                     id: username
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .7}
@@ -56,7 +56,7 @@
             MDFloatLayout:
                 size_hint: .75, .07
                 pos_hint: {'center_x': .55, 'center_y': .53}
-                TextInput:
+                SecGenTextInput:
                     id: password
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .575}
@@ -90,6 +90,7 @@
                 pos_hint: {'center_x': .5, 'center_y': .38}
                 on_release:
                     root.controller.server_request(username=username.text,password=password.text)
+                    
                     # app.modal_view(massage='loading...', auto_dismiss=False)
                     # app.auth_key = ''
                     # root.controller.on_tap_button_login(username.text, password.text)

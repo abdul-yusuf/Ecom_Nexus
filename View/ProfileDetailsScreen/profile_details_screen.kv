@@ -15,7 +15,7 @@
             #     padding:[dp(40),dp(10)]
             #     pos_hint: {'right': 0.8,'center_y': 0.0}
             MDLabel:
-                text: "abdul17yusuf@gmail.com"
+                text: "--------"
                 color:
                 bold: True
                 font_style: 'Body2'
@@ -36,14 +36,14 @@
                 on_release:
                     app.onBackBtnx()
             
-            MDTextField:
+            GenTextField:
                 hint_text: 'Phone Number'
                 mode : 'rectangle'
                 text: '+234909310975'
                 disabled: 'True'
                 pos_hint: {'center_x': .55, 'center_y': .7}
 
-            MDTextField:
+            GenTextField:
                 hint_text: 'First Name'
                 mode : 'rectangle'
                 requried: True
@@ -51,7 +51,7 @@
                 helper_text_mode: 'persistent'
                 pos_hint: {'center_x': .55, 'center_y': .6}
 
-            MDTextField:
+            GenTextField:
                 hint_text: 'Last Name'
                 mode : 'rectangle'
                 pos_hint: {'center_x': .55, 'center_y': .5}
@@ -60,7 +60,7 @@
                 pos_hint: {'center_x': .55, 'center_y': .4}
 
 
-            MDTextField:
+            GenTextField:
                 id: date_field
                 hint_text: 'Birth date'
                 mode : 'rectangle'
@@ -91,7 +91,7 @@
     size_hint_y: None
     height: text_inst.height
 
-    MDTextField:
+    GenTextField:
         id: text_inst
         hint_text: 'Gender'
         mode : 'rectangle'

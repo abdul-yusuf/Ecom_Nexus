@@ -1,8 +1,11 @@
+#:import ScrollEffect kivy.effects.scroll.ScrollEffect
+
 <SearchPageScreenView>
     md_bg_color: app.theme_cls.bg_normal
     MDScrollViewRefreshLayout:
         id: home_refresh_layout
         root_layout: root
+        effect_cls: ScrollEffect
         # adaptive_height: True
         MDBoxLayout:
             adaptive_height: True
@@ -10,16 +13,22 @@
             height: self.minimum_height
             # height: root.height
             orientation: 'vertical'
-            cols:1
             # md_bg_color: app.theme_cls.bg_normal
             MDBoxLayout:
                 adaptive_height: True
-                padding: [20,20,23,20]
-                size_hint_x: .9
+                padding: [5,10,20,20]
+                # size_hint_x: .9
                 pos_hint_y: .8
                 radius: [0,0,23,23]
-                orientation: 'vertical'
+                spacing: dp(10)
+                # orientation: 'vertical'
                 md_bg_color: app.theme_cls.primary_color
+                MDIconButton: 
+                    adaptive_size: True
+                    # size_hint_x: .08
+                    icon: 'arrow-left'
+                    pos_hint: {'center_x': 0.01,'center_y':.38}
+                    on_release: app.onBackBtnx()
                 MDTextField:
                     id: search_field
                     mode: "round"
@@ -31,7 +40,7 @@
             MDBoxLayout:
                 adaptive_height: True
                 size_hint_y: None
-                height: root.height
+                height: root.height+dp(30)
                 RecycleView:
                     id: view_1
                     do_scroll_y: False
@@ -39,7 +48,7 @@
                     viewclass: 'HomeTile'
                     RecycleGridLayout:
                         spacing: 20
-                        padding: 10
+                        padding: [15,10,10,10]
                         size_hint_y: None
                         default_size: None, None
                         default_size_hint: .1, None

@@ -1,8 +1,4 @@
 <CheckoutScreenView>
-    on_enter:
-        total.text = app.screen_args[0]['price']
-        price.text = app.screen_args[0]['quantity']
-        order_ref_code.text = app.screen_args[0]['ref_code']
     MDBoxLayout:
         orientation: 'vertical'
         padding:dp(20)
@@ -164,7 +160,7 @@
                             size_hint_x: None
                             width: dp(20)
                             group:'payment'
-                            active: False if chk2.active else True
+                                # elif not chk2.active:True
                         MDLabel:
                             text: "Debit Card"
                             font_style: 'Body1'
@@ -207,6 +203,7 @@
                             size_hint_x: None
                             width: dp(20)
                             group:'payment'
+
                         MDLabel:
                             text: "On Delivery"
                             font_style: 'Body1'
@@ -228,10 +225,7 @@
             pos_hint: {'center_x': .5,'center_y': 0.0}
             font_style: 'Button'
             on_press:
-                root.controller.payment_server_request(
-                'O' if chk1.active else 'D',
-                order_ref_code.text
-                )
+                root._check()
                 # root.create_webview('https://checkout.paystack.com/42zetfc284zas9w')
     
     MDIconButton:

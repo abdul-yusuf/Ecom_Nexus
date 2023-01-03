@@ -1,5 +1,5 @@
 <HomeTile>:
-    # elevation: 1
+    # elevation: dp(1)
     pk: 1
     size_hint_y: None
     height: dp(260)
@@ -12,7 +12,7 @@
     price: "₦2200"
     slug: ''
     rate: 1
-    images: {'image1':''}
+    images: {'image1':'cate-7.jpg'}
     discount_percent: 34
     # met:root.remove_widget(percentage_badge) if root.discount_price == 'null' else ''
     on_release: 
@@ -33,19 +33,20 @@
 
         # self.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.checkout_screen_init(root.slug)
     RelativeLayout:
-        AsyncImage:
+        FitImage:
             id: home_tile_image
             source: '{}'.format(app.request_parm.route('media')+root.images['image1'])
             # source: 'assets/images/cate-1.jpg' or root.images[0]
             radius: [10,10,15,15]
         MDIconButton:
-            icon: "heart-outline"
+            icon: "heart-outline" if not root.bookmarked else 'heart'
             pos_hint: {'center_x': 0.82,'center_y': 0.82}
             theme_text_color: "Error"
             md_bg_color: get_color_from_hex(colors['Gray']['50'])
             on_release: 
                 print(self.parent.parent.pk)
                 self.icon = 'heart' if self.icon == 'heart-outline' else 'heart-outline'
+                root.super_parent.checkbox_state(self,root.pk)
         MDIconButton:
             icon: "cart-plus"
             pos_hint: {'center_x': 0.82,'center_y': 0.05}
@@ -53,7 +54,7 @@
             theme_text_color: 'Custom'
             color: [1, 1, 1, 1] if app.theme_cls.theme_style=='Dark' else [0,0,0,1]
             on_press: 
-                root.parent.parent.parent.parent.parent.parent.parent.parent.parent.controller.home_add_to_cart(root.pk)
+                root.super_parent.controller.home_add_to_cart(root.pk)
 
         
         MDBoxLayout:

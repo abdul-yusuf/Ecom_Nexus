@@ -1,6 +1,7 @@
 {
-    "host1":"http://10.42.0.1:8000/",
-    "host":"https://nexusv2-production.up.railway.app/",
+    "host":"http://localhost:8000/",
+    "host11":"http://10.42.0.1:8000/",
+    "host1":"https://nexusv2-production.up.railway.app/",
     "login":{
         "url":"auth/login/",
         "method": "POST"
@@ -11,10 +12,13 @@
     },
     "user_detail":{
         "url":"auth/user/",
-        "method":"GET"
+        "method":{
+            "GET":"GET",
+            "PATCH":"PATCH"
+        }
     },
     "register":{
-        "url":"auth/registration/",
+        "url":"rest-auth/registration/",
         "method":"POST"
     },
     "products":{
@@ -47,6 +51,26 @@
     ,
     "media":{
         "url":"media/",
+        "method":"GET"
+    }
+    ,
+    "categories":{
+        "url":"store/api/categories/",
+        "method":"GET"
+    }
+    ,
+    "categories_products":{
+        "url":"store/api/categories/",
+        "method":"GET"
+    }
+    ,
+    "sub_categories":{
+        "url":"store/api/sub_categories/",
+        "method":"GET"
+    }
+    ,
+    "sub_categories_products":{
+        "url":"store/api/sub_categories/",
         "method":"GET"
     }
     ,

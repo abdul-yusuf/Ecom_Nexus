@@ -37,6 +37,7 @@ class HomeScreenModel(BaseScreenModel):
     def product_added(self, *args, **kwargs):
         print(args,kwargs)
     
-    # def product_added_error(self, *args, **kwargs):
-    #     print(args,kwargs)
+    def categories_success(self, *args, **kwargs):
+        # print(args,kwargs)
+        self.notify_observers('home screen', args, meths='categories')
     

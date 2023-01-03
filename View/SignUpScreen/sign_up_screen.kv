@@ -34,7 +34,7 @@
             MDFloatLayout:
                 size_hint: .75, .07
                 pos_hint: {'center_x': .55, 'center_y': .71}
-                TextInput:
+                SecGenTextInput:
                     id: phone_no
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .7}
@@ -54,7 +54,7 @@
                 size_hint: .75, .07
                 pos_hint: {'center_x': .55, 'center_y': .61}
                 # pos_hint: {'center_x': .55, 'center_y': .75}
-                TextInput:
+                SecGenTextInput:
                     id: email
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .7}
@@ -74,7 +74,7 @@
 
             #     size_hint: .75, .07
             #     pos_hint: {'center_x': .55, 'center_y': .65}
-            #     TextInput:
+            #     SecGenTextInput:
             #         id: fullname
             #         size_hint: .5, .75
             #         pos_hint: {"center_x": .25, "top": .575}
@@ -86,7 +86,7 @@
             #         foreground_color: rgba(0, 0, 59,255)
             #         cursor_color: rgba(0, 0, 59,255)
 
-            #     TextInput:
+            #     SecGenTextInput:
             #         id: lastname
             #         size_hint: .5, .75
             #         pos_hint: {"center_x": .7, "top": .575}
@@ -105,7 +105,7 @@
             MDFloatLayout:
                 size_hint: .75, .07
                 pos_hint: {'center_x': .55, 'center_y': .49}
-                TextInput:
+                SecGenTextInput:
                     id: password
                     size_hint_y: .75
                     pos_hint: {"center_x": .5, "top": .575}
@@ -118,8 +118,8 @@
                     background_color: 1, 1, 1, 0
                     foreground_color: rgba(0, 0, 59,255)
                     cursor_color: rgba(0, 0, 59,255)
-                    on_text:
-                        root.password_check()
+                    # on_text:
+                        # root.password_check()
                     
 
                         # line.md_bg_color=rgba(18, 178, 178, 255) if self.text=='' else rgba(178, 178, 178, 255)

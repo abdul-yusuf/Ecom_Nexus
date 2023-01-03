@@ -206,6 +206,8 @@ You can read more about this template at the links below:
 https://github.com/HeaTTheatR/LoginAppMVC
 https://en.wikipedia.org/wiki/Model–view–controller
 """
+# import certifi
+# import os
 
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
@@ -213,10 +215,10 @@ from kivy.core.window import Window
 from View.screens import screen
 
 #new imports
+from kivy.utils import platform
 from kivy.uix.modalview import ModalView
 from kivy.uix.label import Label
 from kivy.metrics import dp
-from kivymd.toast.kivytoast import toast 
 from kivymd.uix.spinner.spinner import MDSpinner
 from kivy.storage.jsonstore import JsonStore
 from kivy.clock import Clock
@@ -225,6 +227,21 @@ from kivy.lang import Builder
 from Model.home_screen import HomeScreenModel
 from Controller.home_screen import HomeScreenController
 from threading import Thread
+from kivymd.uix.textfield import MDTextField
+from kivy.uix.textinput import TextInput
+
+if platform=='android':
+    from kvdroid.tools import toast
+    from kvdroid import activity
+
+    import ssl
+    ssl._create_default_https_context = ssl._create_unverified_context
+else:
+    from kivymd.toast.kivytoast import toast 
+
+
+
+# os.environ['SSL_CERT_FILE'] = certifi.where()
 
 KV = """
 Screen:
@@ -280,6 +297,11 @@ Screen:
                 pos_hint: {'center_x': 0.5,'center_y': 0.2}
                 size_hint: .8,.06
                 on_release: app.onNextScreen('','home screen')
+
+<GenTextField>:
+
+<SecGenTextInput>:
+
 """
 
 class UrlMaker:
@@ -291,6 +313,34 @@ class UrlMaker:
         return url
     def method(self, route):
         return self.dict[route]['method']
+
+
+class GenTextField(MDTextField):
+    def on_focus(self, *args):
+        if platform=='android':
+            from android.runnable import run_on_ui_thread
+            print(args)
+
+            @run_on_ui_thread
+            def fix():
+                activity.onWindowFocusChanged(False) 
+                activity.onWindowFocusChanged(True) 
+            if not args[1]:
+                fix()
+
+class SecGenTextInput(TextInput):
+    def on_focus(self, *args):
+        if platform=='android':
+            from android.runnable import run_on_ui_thread
+            print(args)
+
+            @run_on_ui_thread
+            def fix():
+                activity.onWindowFocusChanged(False) 
+                activity.onWindowFocusChanged(True) 
+            if not args[1]:
+                fix()
+
 
 class Ecom_Nexus(MDApp):
     def __init__(self, **kwargs):
@@ -306,10 +356,44 @@ class Ecom_Nexus(MDApp):
         # self._trigger_screens = Clock.create_trigger(self.generate_application_screen)
         # Clock.schedule_once(self.generate_application_screen, -1)
 
+    def dark_mode(self):
+        from kvdroid.jclass.android import Configuration
+        Configuration = Configuration()
+
+
+        night_mode_flag = activity.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK
+
+        if night_mode_flag == Configuration.UI_MODE_NIGHT_YES:
+            self.theme_cls.theme_style = 'Dark'
+            print(night_mode_flag)
+        else:
+            print(night_mode_flag)
+            self.theme_cls.theme_style = 'Light' #'Dark'
+
 
     def build(self) -> MDScreenManager:
         print('stated building')
-        self.theme_cls.theme_style = 'Dark'
+        if platform=='android':
+            self.dark_mode()
+            print('checking dark mode')
+
+            # from android.permissions import Permission, request_permissions  # NOQA
+            # request_permissions(
+            #     [
+            #     # Permission.READ_EXTERNAL_STORAGE,
+            #     #  Permission.WRITE_EXTERNAL_STORAGE,
+            #     #  Permission.CALL_PHONE,
+            #     #  Permission.CALL_PRIVILEGED,
+            #     #  Permission.READ_CONTACTS,
+            #     #  Permission.WRITE_CONTACTS,
+            #      Permission.READ_SMS,
+            #     #  Permission.WRITE_CALL_LOG,
+            #     #  Permission.READ_CALL_LOG
+            #      ]
+            # )
+        else:
+            print('Not an Android Device')
+            self.theme_cls.theme_style = 'Light' #'Dark'
         self.theme_cls.primary_palette = "Blue"
         self.list_of_prev_screen = []
         self.on_boarding_screen = Builder.load_string(KV)
@@ -319,6 +403,7 @@ class Ecom_Nexus(MDApp):
 
         #new variables
         self.screen_args = []
+        self.modal_webview = False
         self.is_modal_open = False
         self.modal_instance = None
         self.auth_store = JsonStore('auth.json')
@@ -334,7 +419,8 @@ class Ecom_Nexus(MDApp):
         # view.manager_screen = self.manager_screen
         # view.name = 'home screen'
         # self.manager_screen.add_widget(view)
-        self.manager_screen.add_widget(self.on_boarding_screen)
+        # self.manager_screen.add_widget(self.on_boarding_screen)
+        self.onNextScreen('','home screen')
         
         print('stated binfing')
         # self.generate_application_screen()
@@ -382,7 +468,7 @@ class Ecom_Nexus(MDApp):
         print('*'*30,'end generating','*'*30)
 
         # self.modal_instance.dismiss()
-        Clock.schedule_once(self.modal_instance.dismiss, 5)
+        Clock.schedule_once(self.modal_instance.dismiss, 3)
 
 
     def change_theme(self, icon):
@@ -392,9 +478,11 @@ class Ecom_Nexus(MDApp):
             self.theme_cls.theme_style = 'Light'
 
 
-    def onNextScreen(self,btn,next_screen,*args):
+    def onNextScreen(self,btn:str,next_screen:str,*args):
+                
         print(btn)
-        self.list_of_prev_screen.append(btn)
+        if btn!='':
+            self.list_of_prev_screen.append(btn)
         if next_screen in self.loaded_screens:
             pass
         else:
@@ -406,6 +494,9 @@ class Ecom_Nexus(MDApp):
     def onBackBtnx(self):
         if self.list_of_prev_screen:
             self.manager_screen.current = self.list_of_prev_screen.pop()
+            if self.modal_webview:
+                self.manager_screen.current_screen.model.notify_observers('checkout screen')
+                return True
             return True
         return False
 
@@ -413,7 +504,11 @@ class Ecom_Nexus(MDApp):
         if key == 27 :
             if self.list_of_prev_screen:
                 self.manager_screen.current = self.list_of_prev_screen.pop()
+                if self.modal_webview:
+                    self.manager_screen.current_screen.model.notify_observers('checkout screen')
+                    return True
                 return True
+
             else:
                 return False
         else:
@@ -463,7 +558,7 @@ class Ecom_Nexus(MDApp):
     def perform_store_save(self, *args, **kwargs):
         """_summary_
         Args
-            data(_type_,): data to save
+            data(_type_,): data to save key
         Kwargs
             store_name(str, required):
             key(str, required)

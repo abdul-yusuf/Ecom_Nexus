@@ -17,17 +17,19 @@ class ItemDetailScreenView(BaseScreenView):
         print('*'*12,args,'*'*12)
         try:
             data = args[0]
-            self.ids.carousel.source1 = data['images']['image1']
-            self.ids.carousel.source2 = data['images']['image2']
-            self.ids.carousel.source3 = data['images']['image3']
-            self.ids.carousel.source4 = data['images']['image4']
+            measure_unit = 'kg'
+            slide = CarouselSlide().populate_images(data['images'], self.app)
+            self.ids.carousel.images = data['images']
+            # self.ids.carousel.source2 = data['images']['image2']
+            # self.ids.carousel.source3 = data['images']['image3']
+            # self.ids.carousel.source4 = data['images']['image4']
 
-            self.ids.price.text = '₦{}/kg'.format(data['price'])
+            self.ids.price.text = '₦{}/{}'.format(data['price'],measure_unit)
             self.ids.title.text = data['title']
             self.ids.vendor.text = data['vendor']
-        except KeyError or AttributeError:
+        except (KeyError, AttributeError, TypeError) as e:
             # self.ids.vendor.text = ''
-            pass
+            self.app.create_toast(str(e))
     
     def show_alert_dialog(self):
         self.dialog_open=True

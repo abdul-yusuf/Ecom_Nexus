@@ -1,9 +1,9 @@
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
-# from kivymd.uix.behaviors import RoundedRectangularElevationBehavior, FakeRectangularElevationBehavior
+from kivymd.uix.behaviors import CommonElevationBehavior
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.uix.behaviors import TouchBehavior, focus_behavior
-from kivy.properties import StringProperty, ObjectProperty, DictProperty, NumericProperty, ColorProperty
+from kivy.properties import StringProperty, ObjectProperty, DictProperty, NumericProperty, ColorProperty, BooleanProperty
 
 class HomeTile(MDCard):
     # pass
@@ -13,7 +13,8 @@ class HomeTile(MDCard):
         MDBoxLayout (_type_): _description_
         ButtonBehavior (_type_): _description_
     """
-    
+    bookmarked = BooleanProperty(defualtvalue=True)
+    super_parent = ObjectProperty()
     # def __init__(self, **kwargs):
     #     super().__init__(**kwargs)
     #     self.add_price_stroke()

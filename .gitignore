@@ -162,5 +162,7 @@ cython_debug/
 
 assets/images/
 auth.json
-.buildozer
+.buildozer/
+Nexus
+Kvdroid-master
 bin
